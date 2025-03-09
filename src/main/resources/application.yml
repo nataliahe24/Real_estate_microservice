@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: demo
+    name: realestate
   datasource:
     url: jdbc:mysql://localhost/bootcamp2025
     username: ${user}
