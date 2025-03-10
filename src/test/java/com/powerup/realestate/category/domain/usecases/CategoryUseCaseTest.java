@@ -3,7 +3,6 @@ package com.powerup.realestate.category.domain.usecases;
 import com.powerup.realestate.category.domain.exceptions.CategoryAlreadyExistsException;
 import com.powerup.realestate.category.domain.model.CategoryModel;
 import com.powerup.realestate.category.domain.ports.out.CategoryPersistencePort;
-import io.swagger.v3.oas.annotations.links.Link;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
