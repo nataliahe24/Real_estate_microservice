@@ -16,17 +16,17 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
-    private final CategoryServicePort categoryServicePort;
+    private final CategoryServicePort CategoryServicePort;
     private final CategoryDtoMapper categoryDtoMapper;
 
     @Override
     public SaveCategoryResponse save(SaveCategoryRequest request) {
-        categoryServicePort.save(categoryDtoMapper.requestToModel(request));
+        CategoryServicePort.save(categoryDtoMapper.requestToModel(request));
         return new SaveCategoryResponse(Constants.SAVE_CATEGORY_RESPONSE_MESSAGE, LocalDateTime.now());
     }
 
     @Override
     public List<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc) {
-        return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategories(page, size, orderAsc));
+        return categoryDtoMapper.modelListToResponseList(CategoryServicePort.getCategories(page, size, orderAsc));
     }
 }
