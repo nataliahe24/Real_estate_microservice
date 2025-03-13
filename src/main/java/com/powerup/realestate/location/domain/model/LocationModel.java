@@ -5,17 +5,15 @@ import com.powerup.realestate.category.domain.utils.constants.DomainConstants;
 import com.powerup.realestate.location.domain.exceptions.CityMaxSizeExceededException;
 import com.powerup.realestate.location.domain.exceptions.DepartmentMaxSizeExceededException;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Objects;
 
-@Getter
 public class LocationModel {
-    @Setter
-    private Long id;
-    private String city;
-    private String department;
-    private String description;
+
+    private @Getter Long id;
+    private @Getter String city;
+    private @Getter String department;
+    private @Getter String description;
 
     public LocationModel(Long id, String city, String department, String description) {
         if (city.length() > 50) {
