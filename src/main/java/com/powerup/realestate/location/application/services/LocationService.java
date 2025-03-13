@@ -9,6 +9,4 @@ import com.powerup.realestate.location.application.dto.response.SaveLocationResp
 
 public interface LocationService {
     SaveLocationResponse save(SaveLocationRequest request);
-
-    SaveLocationResponse save(SaveLocationResponse request);
 }
