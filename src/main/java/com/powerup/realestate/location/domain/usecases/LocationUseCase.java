@@ -19,9 +19,4 @@ public class LocationUseCase implements LocationPersistencePort, LocationService
 
         locationPersistencePort.save(locationModel);
     }
-
-    @Override
-    public void save(SaveLocationRequest saveLocationRequest) {
-
-    }
 }
