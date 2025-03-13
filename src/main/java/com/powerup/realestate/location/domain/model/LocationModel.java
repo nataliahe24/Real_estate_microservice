@@ -4,10 +4,14 @@ import com.powerup.realestate.category.domain.exceptions.DescriptionMaxSizeExcee
 import com.powerup.realestate.category.domain.utils.constants.DomainConstants;
 import com.powerup.realestate.location.domain.exceptions.CityMaxSizeExceededException;
 import com.powerup.realestate.location.domain.exceptions.DepartmentMaxSizeExceededException;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter
 public class LocationModel {
+    @Setter
     private Long id;
     private String city;
     private String department;
@@ -26,22 +30,6 @@ public class LocationModel {
         this.description = description;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setDescription(String description) {
         if (description.length() > 90) throw new DescriptionMaxSizeExceededException();
         this.description = Objects.requireNonNull(description,  DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
@@ -56,7 +44,4 @@ public class LocationModel {
         this.city = Objects.requireNonNull(city,  DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 
-    public Long getId() {
-        return id;
-    }
 }

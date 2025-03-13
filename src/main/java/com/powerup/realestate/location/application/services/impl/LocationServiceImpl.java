@@ -22,4 +22,9 @@ public class LocationServiceImpl implements LocationService {
         locationServicePort.save(locationDtoMapper.requestToModel(request));
         return new SaveLocationResponse(Constants.SAVE_LOCATION_RESPONSE_MESSAGE, LocalDateTime.now());
     }
+
+    @Override
+    public SaveLocationResponse save(SaveLocationResponse request) {
+        return null;
+    }
 }

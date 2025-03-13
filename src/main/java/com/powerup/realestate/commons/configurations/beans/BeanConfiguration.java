@@ -6,6 +6,7 @@ import com.powerup.realestate.category.domain.usecases.CategoryUseCase;
 import com.powerup.realestate.category.infrastructure.adapters.persistence.CategoryPersistenceAdapter;
 import com.powerup.realestate.category.infrastructure.mappers.CategoryEntityMapper;
 import com.powerup.realestate.category.infrastructure.repositories.mysql.CategoryRepository;
+import com.powerup.realestate.location.domain.ports.in.LocationServicePort;
 import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
 import com.powerup.realestate.location.domain.usecases.LocationUseCase;
 import com.powerup.realestate.location.infrastructure.adapters.persistence.LocationPersistenceAdapter;
@@ -34,7 +35,8 @@ public class BeanConfiguration {
         return new CategoryPersistenceAdapter(categoryRepository, categoryEntityMapper);
     }
     @Bean
-    public LocationUseCase locationServicePort() {
+    public LocationServicePort locationServicePort() {
+
         return new LocationUseCase(locationPersistencePort());
     }
 

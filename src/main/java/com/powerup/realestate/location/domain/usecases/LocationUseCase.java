@@ -1,12 +1,13 @@
 package com.powerup.realestate.location.domain.usecases;
 
-import com.powerup.realestate.location.domain.exceptions.DeparmentAlreadyExistsException;
+
+import com.powerup.realestate.location.application.dto.request.SaveLocationRequest;
 import com.powerup.realestate.location.domain.model.LocationModel;
+import com.powerup.realestate.location.domain.ports.in.LocationServicePort;
 import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
 
-import java.util.List;
 
-public class LocationUseCase implements LocationPersistencePort {
+public class LocationUseCase implements LocationPersistencePort, LocationServicePort {
     private final LocationPersistencePort locationPersistencePort;
 
     public LocationUseCase(LocationPersistencePort locationPersistencePort) {
@@ -19,4 +20,8 @@ public class LocationUseCase implements LocationPersistencePort {
         locationPersistencePort.save(locationModel);
     }
 
+    @Override
+    public void save(SaveLocationRequest saveLocationRequest) {
+
+    }
 }

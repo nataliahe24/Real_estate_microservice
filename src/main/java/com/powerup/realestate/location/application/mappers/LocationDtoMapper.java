@@ -4,7 +4,6 @@ import com.powerup.realestate.location.application.dto.request.SaveLocationReque
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.List;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
