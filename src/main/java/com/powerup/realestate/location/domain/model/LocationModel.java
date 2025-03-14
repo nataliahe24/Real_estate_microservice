@@ -1,6 +1,6 @@
 package com.powerup.realestate.location.domain.model;
 
-import com.powerup.realestate.category.domain.exceptions.DescriptionMaxSizeExceededException;
+import com.powerup.realestate.location.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.location.domain.exceptions.CityMaxSizeExceededException;
 import com.powerup.realestate.location.domain.exceptions.DepartmentMaxSizeExceededException;
 import com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants;
