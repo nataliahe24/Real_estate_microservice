@@ -4,8 +4,8 @@ import com.powerup.realestate.category.domain.exceptions.CategoryAlreadyExistsEx
 import com.powerup.realestate.category.domain.model.CategoryModel;
 import com.powerup.realestate.category.domain.ports.in.CategoryServicePort;
 import com.powerup.realestate.category.domain.ports.out.CategoryPersistencePort;
+import com.powerup.realestate.category.domain.utils.page.PageResult;
 
-import java.util.List;
 
 public class CategoryUseCase implements CategoryServicePort {
     private final CategoryPersistencePort categoryPersistencePort;
@@ -24,7 +24,7 @@ public class CategoryUseCase implements CategoryServicePort {
     }
 
     @Override
-    public List<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
+    public PageResult<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
         return categoryPersistencePort.getCategories(page, size, orderAsc);
     }
 }
