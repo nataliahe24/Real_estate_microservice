@@ -14,36 +14,44 @@ public class LocationModel {
 
     private @Getter Long id;
     private @Getter String city;
+    private @Getter String descriptionCity;
     private @Getter String department;
-    private @Getter String description;
+    private @Getter String descriptionDepartment;
 
-    public LocationModel(Long id, String city, String department, String description) {
-        if (city.length() > CityMaxSize) {
+    public LocationModel(Long id, String city, String descriptionCity, String department, String descriptionDepartment) {
+        if (city.length() > CITY_MAX_SIZE) {
             throw new CityMaxSizeExceededException();
         }
-        if (department.length() > DepartmentMaxSize) {
+        if (descriptionCity.length() > DESCRIPTION_MAX_SIZE ) {
+            throw new DescriptionMaxSizeExceededException();
+        }
+        if (department.length() > DEPARTMENT_MAX_SIZE) {
             throw new DepartmentMaxSizeExceededException();
         }
-        if (description.length() > DescriptionMaxSize ) {
+        if (descriptionDepartment.length() > DESCRIPTION_MAX_SIZE ) {
             throw new DescriptionMaxSizeExceededException();
        }
 
 
         this.id = id;
         this.city = city;
+        this.descriptionCity = descriptionCity;
         this.department = department;
-        this.description = description;
+        this.descriptionDepartment = descriptionDepartment;
     }
 
-    public void setDescription(String description) {
-        this.description = Objects.requireNonNull(description,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
-   }
     public void setDepartment(String department) {
         this.department = Objects.requireNonNull(department,  LocationDomainConstants.FIELD_DEPARTMENT_NULL_MESSAGE);
     }
 
+    public void setDescriptionDepartment(String descriptionDepartment) {
+        this.descriptionDepartment = Objects.requireNonNull(descriptionDepartment,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
+   }
     public void setCity(String city) {
         this.city = Objects.requireNonNull(city,  LocationDomainConstants.FIELD_CITY_NULL_MESSAGE);
-        }
+    }
+    public void setDescriptionCity(String descriptionCity) {
+        this.descriptionCity = Objects.requireNonNull(descriptionCity,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
+    }
 
     }
