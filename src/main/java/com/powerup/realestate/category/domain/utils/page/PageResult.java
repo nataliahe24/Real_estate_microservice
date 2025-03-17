@@ -6,15 +6,15 @@ public class PageResult <T> {
     private List<T> content;
     private int page;
     private int size;
-    private int totalpages;
-    private int totalelements;
+    private int totalPages;
+    private int totalElements;
 
-    public PageResult(List<T> content, int page, int size, int totalelements) {
+    public PageResult(List<T> content, int page, int size, int totalElements) {
         this.content = content;
         this.page = page;
         this.size = size;
-        this.totalelements = totalelements;
-        this.totalpages = (int) Math.ceil((double) totalelements/size);
+        this.totalElements = totalElements;
+        this.totalPages = (int) Math.ceil((double) totalElements/size);
     }
 
     public List<T> getContent() {
@@ -29,12 +29,12 @@ public class PageResult <T> {
         return size;
     }
 
-    public int getTotalpages() {
-        return totalpages;
+    public int getTotalPages() {
+        return totalPages;
     }
 
-    public int getTotalelements() {
-        return totalelements;
+    public int getTotalElements() {
+        return totalElements;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PageResult <T> {
                 "content=" + content +
                 ", page=" + page +
                 ", size=" + size +
-                ", totalpages=" + totalpages +
+                ", totalPages=" + totalPages +
                 '}';
     }
 }
