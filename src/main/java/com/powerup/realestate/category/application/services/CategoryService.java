@@ -3,10 +3,9 @@ package com.powerup.realestate.category.application.services;
 import com.powerup.realestate.category.application.dto.request.SaveCategoryRequest;
 import com.powerup.realestate.category.application.dto.response.CategoryResponse;
 import com.powerup.realestate.category.application.dto.response.SaveCategoryResponse;
-
-import java.util.List;
+import com.powerup.realestate.category.domain.utils.page.PageResult;
 
 public interface CategoryService {
     SaveCategoryResponse save(SaveCategoryRequest request);
-    List<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc);
+    PageResult<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc);
 }

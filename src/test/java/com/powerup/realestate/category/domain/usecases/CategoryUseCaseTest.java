@@ -3,6 +3,7 @@ package com.powerup.realestate.category.domain.usecases;
 import com.powerup.realestate.category.domain.exceptions.CategoryAlreadyExistsException;
 import com.powerup.realestate.category.domain.model.CategoryModel;
 import com.powerup.realestate.category.domain.ports.out.CategoryPersistencePort;
+import com.powerup.realestate.category.domain.utils.page.PageResult;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -74,15 +75,16 @@ class CategoryUseCaseTest {
 
          Integer page = 1;
          Integer size = 2;
+         Integer totalElements = 3;
          boolean orderAsc = true;
+         List<CategoryModel> categoryPaginationMock = List.of(categoryModel1, categoryModel2);
+         PageResult<CategoryModel> pageResultMock = new PageResult<>(categoryPaginationMock, page, size, totalElements);
 
-         List<CategoryModel> categoryList = List.of(categoryModel1, categoryModel2);
+         when(categoryPersistencePort.getCategories(page, size, orderAsc)).thenReturn(pageResultMock);
 
-         when(categoryPersistencePort.getCategories(page, size, orderAsc)).thenReturn(categoryList);
-
-         List<CategoryModel> paginatedCategoryList = categoryUseCase.getCategories(page, size, orderAsc);
+         PageResult<CategoryModel> paginatedCategoryList = categoryUseCase.getCategories(page, size, orderAsc);
 
          verify(categoryPersistencePort).getCategories(page, size, orderAsc);
-         assertEquals(categoryList, paginatedCategoryList);
+         assertEquals(pageResultMock, paginatedCategoryList);
      }
 }
