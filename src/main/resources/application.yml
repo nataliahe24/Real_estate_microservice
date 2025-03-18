@@ -6,8 +6,8 @@ spring:
     name: realestate
   datasource:
     url: jdbc:mysql://localhost/bootcamp2025
-    username: ${user}
-    password: ${password}
+    username: root
+    password:
   jpa:
     hibernate:
       ddl-auto: update
