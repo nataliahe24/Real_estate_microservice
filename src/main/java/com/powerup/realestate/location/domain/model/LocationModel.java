@@ -40,6 +40,8 @@ public class LocationModel {
         this.descriptionDepartment = descriptionDepartment;
     }
 
+    public void setId(Long id) {this.id = id;}
+
     public void setDepartment(String department) {
         this.department = Objects.requireNonNull(department,  LocationDomainConstants.FIELD_DEPARTMENT_NULL_MESSAGE);
     }
@@ -54,4 +56,4 @@ public class LocationModel {
         this.descriptionCity = Objects.requireNonNull(descriptionCity,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 
-    }
+}
