@@ -1,13 +1,15 @@
 package com.powerup.realestate.location.domain.utils.constants.page;
 
-import java.util.List;
+import lombok.Getter;
 
+import java.util.List;
+@Getter
 public class PageResult<T> {
-    private List<T> content;
-    private int page;
-    private int size;
-    private int totalPages;
-    private int totalElements;
+    final List<T> content;
+    final int page;
+    final int size;
+    final int totalPages;
+    final int totalElements;
 
     public PageResult(List<T> content, int page, int size, int totalElements) {
         this.content = content;
@@ -15,26 +17,6 @@ public class PageResult<T> {
         this.size = size;
         this.totalElements = totalElements;
         this.totalPages = (int) Math.ceil((double) totalElements/size);
-    }
-
-    public List<T> getContent() {
-        return content;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public int getTotalElements() {
-        return totalElements;
     }
 
     @Override
