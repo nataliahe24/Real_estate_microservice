@@ -32,6 +32,7 @@ public class CategoryModel {
     }
 
     public void setName(String name) {
+        if (name.length() > 50) throw new NameMaxSizeExceededException();
         this.name = Objects.requireNonNull(name, CategoryDomainConstants.FIELD_NAME_NULL_MESSAGE);
     }
 
