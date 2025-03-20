@@ -1,7 +1,7 @@
 package com.powerup.realestate.category.domain.utils.constants;
 
-public final class DomainConstants {
-    private DomainConstants() {
+public final class CategoryDomainConstants {
+    private CategoryDomainConstants() {
         throw new IllegalStateException("Utility class");
     }
 
