@@ -5,7 +5,7 @@ spring:
   application:
     name: realestate
   datasource:
-    url: jdbc:mysql://localhost/bootcamp2025
+    url: jdbc:mysql://localhost/realestate
     username: root
     password:
   jpa:
