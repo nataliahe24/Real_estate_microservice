@@ -2,7 +2,7 @@ package com.powerup.realestate.category.domain.model;
 
 import com.powerup.realestate.category.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.category.domain.exceptions.NameMaxSizeExceededException;
-import com.powerup.realestate.category.domain.utils.constants.CategoryDomainConstants;
+import com.powerup.realestate.category.domain.utils.constants.DomainConstants;
 
 import java.util.Objects;
 
@@ -15,8 +15,8 @@ public class CategoryModel {
         if (name.length() > 50) throw new NameMaxSizeExceededException();
         if (description.length() > 90) throw new DescriptionMaxSizeExceededException();
         this.id = id;
-        this.name = Objects.requireNonNull(name, CategoryDomainConstants.FIELD_NAME_NULL_MESSAGE);
-        this.description = Objects.requireNonNull(description,  CategoryDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
+        this.name = Objects.requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
+        this.description = Objects.requireNonNull(description,  DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 
     public Long getId() {
@@ -32,7 +32,8 @@ public class CategoryModel {
     }
 
     public void setName(String name) {
-        this.name = Objects.requireNonNull(name, CategoryDomainConstants.FIELD_NAME_NULL_MESSAGE);
+        if (name.length() > 50) throw new NameMaxSizeExceededException();
+        this.name = Objects.requireNonNull(name, DomainConstants.FIELD_NAME_NULL_MESSAGE);
     }
 
     public String getDescription() {
@@ -41,6 +42,6 @@ public class CategoryModel {
 
     public void setDescription(String description) {
         if (description.length() > 90) throw new DescriptionMaxSizeExceededException();
-        this.description = Objects.requireNonNull(description,  CategoryDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
+        this.description = Objects.requireNonNull(description,  DomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 }

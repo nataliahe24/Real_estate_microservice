@@ -6,12 +6,12 @@ import com.powerup.realestate.category.application.dto.response.SaveCategoryResp
 import com.powerup.realestate.category.application.mappers.CategoryDtoMapper;
 import com.powerup.realestate.category.application.services.CategoryService;
 import com.powerup.realestate.category.domain.ports.in.CategoryServicePort;
-import com.powerup.realestate.category.domain.utils.page.PageResult;
 import com.powerup.realestate.commons.configurations.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public PageResult<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc) {
+    public List<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc) {
         return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategories(page, size, orderAsc));
     }
 }
