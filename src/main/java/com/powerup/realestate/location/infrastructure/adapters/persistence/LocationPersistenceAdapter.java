@@ -29,10 +29,6 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
     public void save(LocationModel locationModel) {
         locationRepository.save(locationEntityMapper.modelToEntity(locationModel));
     }
-    @Override
-    public boolean existsByDepartment(String department) {
-        return locationRepository.existsByDepartment(department);
-    }
 
     @Override
     public PageResult<LocationModel> getLocations(String searchText,Integer page, Integer size, boolean orderAsc) {

@@ -10,7 +10,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface LocationRepository extends JpaRepository<LocationEntity, Long> {
 
-    boolean existsByDepartment(String department);
     @Query("SELECT l FROM LocationEntity l WHERE " +
             "LOWER(l.city) LIKE LOWER(CONCAT('%', :searchText, '%')) " +
             "OR LOWER(l.department) LIKE LOWER(CONCAT('%', :searchText, '%'))")
