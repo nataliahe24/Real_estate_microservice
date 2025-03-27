@@ -54,7 +54,7 @@ class CategoryModelTest {
         );
     }
     @Test
-    void shoulSetNameWithinLimit() {
+    void shouldSetNameWithinLimit() {
         CategoryModel category = new CategoryModel(1L,"ValidName","Valid Description");
         String validName= "n".repeat(50);
 
