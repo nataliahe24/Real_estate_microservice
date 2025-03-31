@@ -5,9 +5,8 @@ public final class CategoryDomainConstants {
         throw new IllegalStateException("Utility class");
     }
 
-    /*
-    Validation messages
-     */
     public static final String FIELD_NAME_NULL_MESSAGE = "Field 'name' can not be null";
     public static final String FIELD_DESCRIPTION_NULL_MESSAGE = "Field 'description' can not be null";
+    public static final int NAME_MAX_CHARACTERS = 50;
+    public static final int DESCRPTION_MAX_CHARACTERS = 90;
 }
