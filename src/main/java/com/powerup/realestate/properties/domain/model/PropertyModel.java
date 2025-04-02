@@ -14,9 +14,8 @@ import java.util.Objects;
 import static com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants.*;
 
 @Getter
-@Setter
 public class PropertyModel {
-
+    @Setter
     private Long id;
     private String name;
     private String description;
