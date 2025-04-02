@@ -1,5 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.entities;
 
+import com.powerup.realestate.properties.domain.utils.PublicationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,8 @@ public class PropertyEntity {
         private BigDecimal price;
         private Long locationId;
         private LocalDate activePublicationDate;
-        private String publicationStatus;
+        @Enumerated(EnumType.STRING)
+        private PublicationStatus publicationStatus;
         private LocalDate publicationDate;
 
     }
