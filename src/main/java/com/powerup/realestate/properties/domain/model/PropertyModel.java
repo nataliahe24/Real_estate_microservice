@@ -4,6 +4,8 @@ import com.powerup.realestate.properties.domain.exceptions.InvalidActivePublicat
 import com.powerup.realestate.properties.domain.exceptions.InvalidBathroomsException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidRoomsException;
 
+import com.powerup.realestate.properties.domain.utils.PublicationStatus;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,24 +16,25 @@ import java.util.Objects;
 import static com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants.*;
 
 @Getter
+@Builder
 public class PropertyModel {
-    @Setter
+
     private Long id;
     private String name;
     private String description;
     private Long categoryId;
-    private int rooms;
-    private int bathrooms;
+    private final int rooms;
+    private final int bathrooms;
     private BigDecimal price;
     private Long locationId;
     private LocalDate activePublicationDate;
-    private String publicationStatus;
+    private PublicationStatus publicationStatus;
     private LocalDate publicationDate;
 
 
     public PropertyModel(Long id, String name, String description, Long categoryId,
                          int rooms, int bathrooms, BigDecimal price, Long locationId,
-                         LocalDate activePublicationDate, String publicationStatus, LocalDate publicationDate) {
+                         LocalDate activePublicationDate, PublicationStatus publicationStatus, LocalDate publicationDate) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -76,7 +79,7 @@ public class PropertyModel {
             this.activePublicationDate = Objects.requireNonNull(activePublicationDate, FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE);
         }
 
-        public void setPublicationStatus(String publicationStatus) {
+        public void setPublicationStatus(PublicationStatus publicationStatus) {
             this.publicationStatus = Objects.requireNonNull(publicationStatus, FIELD_PUBLICATION_STATUS_NULL_MESSAGE);
         }
 
