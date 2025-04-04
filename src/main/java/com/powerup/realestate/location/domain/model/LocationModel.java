@@ -12,18 +12,18 @@ public class LocationModel {
 
     @Setter
     private  Long id;
-    private CityEntity cityId;
+    private CityEntity cityName;
     private  String neighborhood;
 
-    public LocationModel(Long id, CityEntity cityId, String neighborhood) {
+    public LocationModel(Long id, CityEntity cityName, String neighborhood) {
 
         this.id = id;
-        this.cityId = cityId;
+        this.cityName = cityName;
         this.neighborhood = neighborhood;
     }
 
-    public void setCityId(CityEntity cityId) {
-        this.cityId = Objects.requireNonNull(cityId,  LocationDomainConstants.FIELD_CITY_NULL_MESSAGE);
+    public void setCityName(CityEntity cityName) {
+        this.cityName = Objects.requireNonNull(cityName,  LocationDomainConstants.FIELD_CITY_NULL_MESSAGE);
     }
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = Objects.requireNonNull(neighborhood,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);

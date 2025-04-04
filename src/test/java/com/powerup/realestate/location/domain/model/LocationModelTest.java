@@ -1,6 +1,6 @@
 package com.powerup.realestate.location.domain.model;
 
-import com.powerup.realestate.location.domain.exceptions.CityMaxSizeExceededException;
+import com.powerup.realestate.location.domain.exceptions.CityNonExistentException;
 import com.powerup.realestate.location.domain.exceptions.DepartmentMaxSizeExceededException;
 import com.powerup.realestate.location.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants;
@@ -74,7 +74,7 @@ class LocationModelTest {
     void shouldThrowExceptionWhenCityExceeds50Characters() {
         String invalidCity = "C".repeat(51);
 
-        assertThrows(CityMaxSizeExceededException.class, () -> new LocationModel(id, invalidCity,descriptionCity, department, descriptionDepartment));
+        assertThrows(CityNonExistentException.class, () -> new LocationModel(id, invalidCity,descriptionCity, department, descriptionDepartment));
     }
     @Test
     void shouldThrowExceptionWhenDepartmentExceeds50Characters() {

@@ -17,6 +17,6 @@ public class LocationEntity {
 
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
-    private CityEntity cityId;
+    private CityEntity cityName;
 
 }
