@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 public interface LocationRepository extends JpaRepository<LocationEntity, Long> {
 
     @Query("SELECT l FROM LocationEntity l\n" +
-            "JOIN l.cityId c\n" +
+            "JOIN l.cityName c\n" +
             "JOIN c.departmentEntity d\n" +
             "WHERE LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :searchText, '%'))\n" +
             "   OR LOWER(c.name) LIKE LOWER(CONCAT('%', :searchText, '%'))\n" +
