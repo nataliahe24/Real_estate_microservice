@@ -22,7 +22,7 @@ public class CityEntity {
     @ManyToOne(targetEntity = DepartmentEntity.class)
     @JoinColumn(name = "department_id")
     private DepartmentEntity departmentEntity;
-    @OneToMany(mappedBy = "cityId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cityName", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<LocationEntity> locations;
 
 }
