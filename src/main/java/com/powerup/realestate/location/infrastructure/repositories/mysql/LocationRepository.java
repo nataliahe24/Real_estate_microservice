@@ -16,6 +16,6 @@ public interface LocationRepository extends JpaRepository<LocationEntity, Long> 
             "WHERE LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :searchText, '%'))\n" +
             "   OR LOWER(c.name) LIKE LOWER(CONCAT('%', :searchText, '%'))\n" +
             "   OR LOWER(d.name) LIKE LOWER(CONCAT('%', :searchText, '%'))\n" +
-            "ORDER BY c.name ASC, d.name ASC")  // Aquí busca en el departamento
+            "ORDER BY c.name ASC, d.name ASC")
     Page<LocationEntity> findByCityOrDepartment(@Param("searchText") String searchText, Pageable pageable);
 }
