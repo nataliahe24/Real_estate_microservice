@@ -17,7 +17,7 @@ public class CityUseCase implements CityServicePort {
     @Override
     public CityEntity findCityByNameIgnoreCaseAndTrim(String cityName) {
         if (cityName == null || cityName.isEmpty()) {
-            return null; // O lanzar una excepción específica si es necesario
+            return null;
         }
         CityEntity cityEntity = cityPersistencePort.findByNameIgnoreCaseAndTrim(cityName);
         if (cityEntity == null) {
@@ -26,6 +26,5 @@ public class CityUseCase implements CityServicePort {
         return cityEntity;
     }
 
-    // Otros métodos relacionados con la gestión de ciudades podrían ir aquí
 }
 
