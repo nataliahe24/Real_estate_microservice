@@ -1,5 +1,6 @@
 package com.powerup.realestate.location.domain.model;
 
+import com.powerup.realestate.location.domain.exceptions.NeighborhoodNonNullException;
 import com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants;
 import com.powerup.realestate.location.infrastructure.entities.CityEntity;
 import lombok.Getter;
@@ -16,6 +17,9 @@ public class LocationModel {
     private  String neighborhood;
 
     public LocationModel(Long id, CityEntity cityName, String neighborhood) {
+        if (neighborhood == null || neighborhood.trim().isEmpty()) {
+            throw new NeighborhoodNonNullException();
+        }
 
         this.id = id;
         this.cityName = cityName;
@@ -26,6 +30,6 @@ public class LocationModel {
         this.cityName = Objects.requireNonNull(cityName,  LocationDomainConstants.FIELD_CITY_NULL_MESSAGE);
     }
     public void setNeighborhood(String neighborhood) {
-        this.neighborhood = Objects.requireNonNull(neighborhood,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
+        this.neighborhood = Objects.requireNonNull(neighborhood,  LocationDomainConstants.FIELD_NEIGHBORHOOD_NULL_MESSAGE);
     }
 }
