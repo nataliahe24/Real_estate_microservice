@@ -1,5 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.entities;
 
+import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -19,15 +20,20 @@ public class PropertyEntity {
         private Long id;
         private String name;
         private String description;
-        private Long categoryId;
         private int rooms;
         private int bathrooms;
         private BigDecimal price;
-        private Long locationId;
         private LocalDate activePublicationDate;
         @Enumerated(EnumType.STRING)
         private PublicationStatus publicationStatus;
         private LocalDate publicationDate;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "category_id", nullable = false)
+        private CategoryEntity category;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "location_id", nullable = false)
+        private LocationEntity location;
+
 
     }
 
