@@ -1,9 +1,12 @@
 package com.powerup.realestate.location.infrastructure.entities;
 
+import com.powerup.realestate.properties.infrastructure.entities.PropertyEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -18,5 +21,7 @@ public class LocationEntity {
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity cityName;
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PropertyEntity> properties;
 
 }

@@ -1,12 +1,12 @@
 package com.powerup.realestate.properties.infrastructure.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -18,4 +18,6 @@ public class CategoryEntity {
     private Long id;
     private String name;
     private String description;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PropertyEntity> properties;
 }
