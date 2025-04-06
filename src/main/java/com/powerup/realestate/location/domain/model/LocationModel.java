@@ -1,59 +1,35 @@
 package com.powerup.realestate.location.domain.model;
 
-import com.powerup.realestate.location.domain.exceptions.DescriptionMaxSizeExceededException;
-import com.powerup.realestate.location.domain.exceptions.CityMaxSizeExceededException;
-import com.powerup.realestate.location.domain.exceptions.DepartmentMaxSizeExceededException;
+import com.powerup.realestate.location.domain.exceptions.NeighborhoodNonNullException;
 import com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants;
+import com.powerup.realestate.location.infrastructure.entities.CityEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Objects;
 
-import static com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants.*;
 @Getter
 public class LocationModel {
 
     @Setter
     private  Long id;
-    private  String city;
-    private  String descriptionCity;
-    private  String department;
-    private  String descriptionDepartment;
+    private CityEntity cityName;
+    private  String neighborhood;
 
-    public LocationModel(Long id, String city, String descriptionCity, String department, String descriptionDepartment) {
-        if (city.length() > CITY_MAX_SIZE) {
-            throw new CityMaxSizeExceededException();
+    public LocationModel(Long id, CityEntity cityName, String neighborhood) {
+        if (neighborhood == null || neighborhood.trim().isEmpty()) {
+            throw new NeighborhoodNonNullException();
         }
-        if (descriptionCity.length() > DESCRIPTION_MAX_SIZE ) {
-            throw new DescriptionMaxSizeExceededException();
-        }
-        if (department.length() > DEPARTMENT_MAX_SIZE) {
-            throw new DepartmentMaxSizeExceededException();
-        }
-        if (descriptionDepartment.length() > DESCRIPTION_MAX_SIZE ) {
-            throw new DescriptionMaxSizeExceededException();
-       }
-
 
         this.id = id;
-        this.city = city;
-        this.descriptionCity = descriptionCity;
-        this.department = department;
-        this.descriptionDepartment = descriptionDepartment;
+        this.cityName = cityName;
+        this.neighborhood = neighborhood;
     }
 
-    public void setDepartment(String department) {
-        this.department = Objects.requireNonNull(department,  LocationDomainConstants.FIELD_DEPARTMENT_NULL_MESSAGE);
+    public void setCityName(CityEntity cityName) {
+        this.cityName = Objects.requireNonNull(cityName,  LocationDomainConstants.FIELD_CITY_NULL_MESSAGE);
     }
-
-    public void setDescriptionDepartment(String descriptionDepartment) {
-        this.descriptionDepartment = Objects.requireNonNull(descriptionDepartment,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
-   }
-    public void setCity(String city) {
-        this.city = Objects.requireNonNull(city,  LocationDomainConstants.FIELD_CITY_NULL_MESSAGE);
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = Objects.requireNonNull(neighborhood,  LocationDomainConstants.FIELD_NEIGHBORHOOD_NULL_MESSAGE);
     }
-    public void setDescriptionCity(String descriptionCity) {
-        this.descriptionCity = Objects.requireNonNull(descriptionCity,  LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
-    }
-
 }

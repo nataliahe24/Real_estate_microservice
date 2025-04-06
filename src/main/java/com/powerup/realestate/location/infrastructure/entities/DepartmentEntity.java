@@ -5,18 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LocationEntity {
+public class DepartmentEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String neighborhood ;
-
-    @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private CityEntity cityName;
-
+    private String name;
+    private String description;
+    @OneToMany(targetEntity = CityEntity.class, fetch = FetchType.LAZY, mappedBy = "departmentEntity")
+    private List<CityEntity> cityEntity;
 }

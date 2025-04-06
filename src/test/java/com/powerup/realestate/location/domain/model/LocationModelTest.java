@@ -1,129 +1,66 @@
 package com.powerup.realestate.location.domain.model;
 
-import com.powerup.realestate.location.domain.exceptions.CityMaxSizeExceededException;
-import com.powerup.realestate.location.domain.exceptions.DepartmentMaxSizeExceededException;
-import com.powerup.realestate.location.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants;
+import com.powerup.realestate.location.infrastructure.entities.CityEntity;
+import com.powerup.realestate.location.infrastructure.entities.DepartmentEntity;
+import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
 class LocationModelTest {
 
-    private Long id;
-    private String city;
-    private String descriptionCity;
-    private String department;
-    private String descriptionDepartment;
+    private  Long id;
+    private CityEntity cityName;
+    private  String neighborhood;
+    DepartmentEntity department = new DepartmentEntity(1L, "Nombre del Departamento", "Descripción del Departamento", null);
+    List<LocationEntity> locations = new ArrayList<>();
+
+
 
     @BeforeEach
     void setUp() {
         id = 1L;
-        city = "City";
-        descriptionCity = "Description City";
-        department = "Department";
-        descriptionDepartment = "Description Department";
+        cityName = new CityEntity(1L, "Cúcuta", "Ciudad principal", department, locations);
+        neighborhood = "Niza";
+
 
     }
 
 
     @Test
     void shouldCreateLocationSuccessfully() {
-
-        LocationModel location = new LocationModel(id, city, descriptionCity, department, descriptionDepartment);
-
-        assertEquals(id, location.getId());
-        assertEquals(city, location.getCity());
-        assertEquals(descriptionCity, location.getDescriptionCity());
-        assertEquals(department, location.getDepartment());
-        assertEquals(descriptionDepartment, location.getDescriptionDepartment());
-
+        LocationModel location = new LocationModel(1L, cityName, "La Ceiba");
+        assertNotNull(location);
+        assertEquals(1L, location.getId());
+        assertEquals(cityName, location.getCityName());
+        assertEquals("Cúcuta", location.getCityName().getName());
+        assertEquals(department, location.getCityName().getDepartmentEntity());
+        assertEquals("La Ceiba", location.getNeighborhood());
     }
-    @Test
-    void shouldCreateLocationWhenCityHas50CharactersOrLess() {
-        String validCity = "C".repeat(50);
 
-        assertDoesNotThrow( () -> new LocationModel(id, validCity,descriptionCity, department, descriptionDepartment));
-
-    }
-    @Test
-    void shouldCreateLocationWhenDepartmentHas50CharactersOrLess() {
-        String validDepartment = "D".repeat(50);
-
-        assertDoesNotThrow( () -> new LocationModel(id, city,descriptionCity, validDepartment, descriptionDepartment));
-
-    }
-    @Test
-    void shouldCreateLocationWhenDescriptionCityHas120CharactersOrLess() {
-        String validDescriptionCity = "D".repeat(120);
-
-        assertDoesNotThrow( () -> new LocationModel(id, city, validDescriptionCity, department, descriptionDepartment));
-
-    }
-    @Test
-    void shouldCreateLocationWhenDescriptionDepartmentHas120CharactersOrLess() {
-        String validDescriptionDepartment = "D".repeat(120);
-
-        assertDoesNotThrow( () -> new LocationModel(id, city,descriptionCity, department, validDescriptionDepartment));
-
-    }
-    @Test
-    void shouldThrowExceptionWhenCityExceeds50Characters() {
-        String invalidCity = "C".repeat(51);
-
-        assertThrows(CityMaxSizeExceededException.class, () -> new LocationModel(id, invalidCity,descriptionCity, department, descriptionDepartment));
-    }
-    @Test
-    void shouldThrowExceptionWhenDepartmentExceeds50Characters() {
-        String invalidDepartment = "D".repeat(51);
-
-        assertThrows(DepartmentMaxSizeExceededException.class, () -> new LocationModel(id, city,descriptionCity, invalidDepartment, descriptionDepartment));
-    }
-    @Test
-    void shouldThrowExceptionWhenDescriptionCityExceeds120Characters() {
-        String invalidDescriptionCity = "D".repeat(121);
-
-        assertThrows(DescriptionMaxSizeExceededException.class, () -> new LocationModel(id, city,invalidDescriptionCity, department, descriptionDepartment));
-    }
-    @Test
-    void shouldThrowExceptionWhenDescriptionDepartmentExceeds120Characters() {
-        String invalidDescriptionDepartment = "D".repeat(121);
-
-        assertThrows(DescriptionMaxSizeExceededException.class, () -> new LocationModel(id, city,descriptionCity, department, invalidDescriptionDepartment));
-    }
     @Test
     void shouldThrowExceptionWhenCityIsNull() {
-        LocationModel location = new LocationModel(id, city, descriptionCity, department, descriptionDepartment);
+        LocationModel location = new LocationModel(id, cityName, neighborhood);
 
-        NullPointerException exception = assertThrows(NullPointerException.class,() -> location.setCity(null));
+        NullPointerException exception = assertThrows(NullPointerException.class,() -> location.setCityName(null));
 
         assertEquals(LocationDomainConstants.FIELD_CITY_NULL_MESSAGE, exception.getMessage());
     }
+
     @Test
-    void shouldThrowExceptionWhenDepartmentIsNull() {
-        LocationModel location = new LocationModel(id, city, descriptionCity, department, descriptionDepartment);
+    void shouldThrowExceptionWhenDescriptionNeighborhoodIsNull() {
+        LocationModel location = new LocationModel(id, cityName, neighborhood);
 
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> location.setDepartment(null));
+        NullPointerException exception = assertThrows(NullPointerException.class, () -> location.setNeighborhood(null));
 
-        assertEquals(LocationDomainConstants.FIELD_DEPARTMENT_NULL_MESSAGE, exception.getMessage());
+        assertEquals(LocationDomainConstants.FIELD_NEIGHBORHOOD_NULL_MESSAGE, exception.getMessage());
     }
-    @Test
-    void shouldThrowExceptionWhenDescriptionCityIsNull() {
-        LocationModel location = new LocationModel(id, city, descriptionCity, department, descriptionDepartment);
 
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> location.setDescriptionCity(null));
-
-        assertEquals(LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE, exception.getMessage());
-    }
-    @Test
-    void shouldThrowExceptionWhenDescriptionDepartmentIsNull() {
-        LocationModel location = new LocationModel(id, city, descriptionCity, department, descriptionDepartment);
-
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> location.setDescriptionDepartment(null));
-
-        assertEquals(LocationDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE, exception.getMessage());
-    }
 }
