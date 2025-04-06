@@ -56,7 +56,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public LocationServicePort locationServicePort(LocationPersistencePort locationPersistencePort, CityServicePort cityServicePort) {
+    public LocationServicePort locationServicePort(LocationPersistencePort locationPersistencePort, CityServicePort cityServicePort)
+    {
 
         return new LocationUseCase(locationPersistencePort(), cityServicePort(cityPersistencePort()));
     }
