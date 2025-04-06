@@ -22,24 +22,19 @@ public class LocationUseCase implements LocationServicePort {
 
     @Override
     public void save(LocationModel locationModel) {
-        CityEntity cityInfo = locationModel.getCityName(); // Assuming LocationModel has getCityName()
+        CityEntity cityInfo = locationModel.getCityName();
 
         if (cityInfo != null && cityInfo.getName() != null && !cityInfo.getName().isEmpty()) {
-            try {
-                CityEntity cityEntity = cityServicePort.findCityByNameIgnoreCaseAndTrim(cityInfo.getName());
+            CityEntity cityEntity = cityServicePort.findCityByNameIgnoreCaseAndTrim(cityInfo.getName());
 
-                // Create a reference to the CityEntity to establish the relationship
-                CityEntity cityReference = new CityEntity();
-                cityReference.setId(cityEntity.getId());
-                locationModel.setCityName(cityReference); // Assuming LocationModel has setCity(CityEntity)
+            CityEntity cityReference = new CityEntity();
+            cityReference.setId(cityEntity.getId());
+            locationModel.setCityName(cityReference);
 
-                locationPersistencePort.save(locationModel);
+            locationPersistencePort.save(locationModel);
 
-            } catch (CityNonExistentException e) {
-                throw e; // Re-throw the exception for the calling layer to handle
-            }
         } else {
-            throw new IllegalArgumentException("City name cannot be null or empty.");
+            throw new CityNonExistentException();
         }
 
     }
