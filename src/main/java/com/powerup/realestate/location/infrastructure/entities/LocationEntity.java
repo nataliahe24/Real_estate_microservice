@@ -17,11 +17,8 @@ public class LocationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String neighborhood ;
-
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity cityName;
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PropertyEntity> properties;
 
 }

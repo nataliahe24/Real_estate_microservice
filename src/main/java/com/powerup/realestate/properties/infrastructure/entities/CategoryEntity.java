@@ -18,6 +18,5 @@ public class CategoryEntity {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PropertyEntity> properties;
+
 }
