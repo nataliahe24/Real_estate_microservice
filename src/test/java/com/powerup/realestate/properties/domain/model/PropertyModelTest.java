@@ -1,15 +1,22 @@
 package com.powerup.realestate.properties.domain.model;
 
+import com.powerup.realestate.location.infrastructure.entities.CityEntity;
+import com.powerup.realestate.location.infrastructure.entities.DepartmentEntity;
+import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
 import com.powerup.realestate.properties.domain.exceptions.InvalidActivePublicationDateException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidBathroomsException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidRoomsException;
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
 import com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants;
+import com.powerup.realestate.properties.infrastructure.entities.CategoryEntity;
+import com.powerup.realestate.properties.infrastructure.entities.PropertyEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,25 +25,28 @@ class PropertyModelTest {
     private Long id;
     private String name;
     private String description;
-    private Long categoryId;
+    private CategoryEntity categoryId;
     private int rooms;
     private int bathrooms;
     private BigDecimal price;
-    private Long locationId;
+    private LocationEntity locationId;
     private LocalDate activePublicationDate;
     private PublicationStatus publicationStatus;
     private LocalDate publicationDate;
+    DepartmentEntity department = new DepartmentEntity(1L, "Nombre del Departamento", "Descripción del Departamento", null);
+    List<LocationEntity> locations = new ArrayList<>();
+    CityEntity city = new CityEntity(1L, "Cúcuta", "Ciudad principal", department, locations);
 
     @BeforeEach
     void setUp() {
         id = 1L;
         name = "Beautiful House";
         description = "A spacious and modern house";
-        categoryId = 101L;
+        categoryId = new CategoryEntity(1L,"ciudad", "descripcion ciudad");
         rooms = 3;
         bathrooms = 2;
         price = BigDecimal.valueOf(250000);
-        locationId = 1001L;
+        locationId = new LocationEntity(1L,"Ubicacion",city );
         activePublicationDate = LocalDate.now();
         publicationStatus = PublicationStatus.PUBLISHED;
         publicationDate = LocalDate.now();
