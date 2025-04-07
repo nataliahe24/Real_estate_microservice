@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.DESCRPTION_MAX_CHARACTERS;
+import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.DESCRIPTION_MAX_CHARACTERS;
 import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.NAME_MAX_CHARACTERS;
 
 public class CategoryModel {
@@ -18,7 +18,7 @@ public class CategoryModel {
 
     public CategoryModel(Long id, String name, String description) {
         if (name.length() > NAME_MAX_CHARACTERS) throw new NameMaxSizeExceededException();
-        if (description.length() > DESCRPTION_MAX_CHARACTERS) throw new DescriptionMaxSizeExceededException();
+        if (description.length() > DESCRIPTION_MAX_CHARACTERS) throw new DescriptionMaxSizeExceededException();
         this.id = id;
         this.name = Objects.requireNonNull(name, CategoryDomainConstants.FIELD_NAME_NULL_MESSAGE);
         this.description = Objects.requireNonNull(description,  CategoryDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
@@ -42,7 +42,7 @@ public class CategoryModel {
     }
 
     public void setDescription(String description) {
-        if (description.length() > DESCRPTION_MAX_CHARACTERS) throw new DescriptionMaxSizeExceededException();
+        if (description.length() > DESCRIPTION_MAX_CHARACTERS) throw new DescriptionMaxSizeExceededException();
         this.description = Objects.requireNonNull(description,  CategoryDomainConstants.FIELD_DESCRIPTION_NULL_MESSAGE);
     }
 }
