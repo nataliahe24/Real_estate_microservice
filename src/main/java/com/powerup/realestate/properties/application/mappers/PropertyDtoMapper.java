@@ -15,27 +15,27 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PropertyDtoMapper {
 
-    @Mapping(source = "locationId", target = "location", qualifiedByName = "mapLocationIdToEntity")
-    @Mapping(source = "categoryId", target = "category", qualifiedByName = "mapCategoryIdToEntity")
-    PropertyModel requestToModel(SavePropertyRequest savePropertyRequest);
-    @Mapping(source = "location", target = "locationId", qualifiedByName = "mapLocationEntityToId")
-    @Mapping(source = "category", target = "categoryId", qualifiedByName = "mapCategoryEntityToId")
+    @Mapping(source = "locationId", target = "locationId", qualifiedByName = "mapLocationIdToEntity")
+    @Mapping(source = "categoryId", target = "categoryId", qualifiedByName = "mapCategoryIdToEntity")
+    PropertyModel  requestToModel(SavePropertyRequest savePropertyRequest);
+    @Mapping(source = "locationId", target = "locationId", qualifiedByName = "mapLocationEntityToId")
+    @Mapping(source = "categoryId", target = "categoryId", qualifiedByName = "mapCategoryEntityToId")
     PropertyResponse modelToResponse(PropertyModel propertyModel);
 
     @Named("mapCategoryIdToEntity")
     default CategoryEntity mapCategoryIdToEntity(Long id) {
         if (id == null) return null;
-        CategoryEntity category = new CategoryEntity();
-        category.setId(id);
-        return category;
+        CategoryEntity categoryEntity = new CategoryEntity();
+        categoryEntity.setId(id);
+        return categoryEntity;
     }
 
     @Named("mapLocationIdToEntity")
     default LocationEntity mapLocationIdToEntity(Long id) {
         if (id == null) return null;
-        LocationEntity location = new LocationEntity();
-        location.setId(id);
-        return location;
+        LocationEntity locationEntity = new LocationEntity();
+        locationEntity.setId(id);
+        return locationEntity;
     }
 
     @Named("mapCategoryEntityToId")
