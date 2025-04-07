@@ -21,7 +21,7 @@ public class PublicationScheduler {
 
         for (PropertyModel property : pausedProperties) {
             if (property.getActivePublicationDate() != null &&
-                    !property.getActivePublicationDate().isAfter(LocalDate.now())) {
+                    !property.getActivePublicationDate().isAfter(LocalDate.now().plusDays(1))) {
 
                 property.setPublicationStatus(PublicationStatus.PUBLISHED);
                 propertyPersistencePort.update(property);
