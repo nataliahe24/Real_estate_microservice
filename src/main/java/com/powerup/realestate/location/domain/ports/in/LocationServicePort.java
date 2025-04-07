@@ -2,6 +2,7 @@ package com.powerup.realestate.location.domain.ports.in;
 
 import com.powerup.realestate.location.domain.model.LocationModel;
 import com.powerup.realestate.location.domain.utils.constants.page.PageResult;
+import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
 
 
 public interface LocationServicePort {
