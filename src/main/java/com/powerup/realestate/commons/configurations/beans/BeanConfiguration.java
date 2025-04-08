@@ -78,8 +78,10 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public PropertyServicePort propertyServicePort() {
-        return  new PropertyUseCase(propertyPersistencePort());
+    public PropertyServicePort propertyServicePort(PropertyPersistencePort propertyPersistencePort,
+                                                   CategoryPersistencePort categoryPersistencePort,
+                                                   LocationPersistencePort locationPersistencePort) {
+        return new PropertyUseCase(propertyPersistencePort, null, categoryPersistencePort, null, locationPersistencePort);
     }
 
 }
