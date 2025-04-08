@@ -3,13 +3,14 @@ package com.powerup.realestate.properties.domain.model;
 import com.powerup.realestate.properties.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.properties.domain.exceptions.NameMaxSizeExceededException;
 import com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants;
+import lombok.Builder;
 import lombok.Setter;
 
 import java.util.Objects;
 
 import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.DESCRIPTION_MAX_CHARACTERS;
 import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.NAME_MAX_CHARACTERS;
-
+@Builder
 public class CategoryModel {
     @Setter
     private Long id;
