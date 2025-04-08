@@ -35,6 +35,11 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
     }
 
     @Override
+    public CategoryModel getCategoryById(Long categoryId) {
+        return categoryEntityMapper.entityToModel(categoryRepository.findById(categoryId).orElse(null));
+    }
+
+    @Override
     public PageResult<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
         Pageable pagination;
         if (orderAsc) pagination = PageRequest.of(page, size, Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending());

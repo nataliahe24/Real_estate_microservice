@@ -1,6 +1,7 @@
 package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.exceptions.CategoryAlreadyExistsException;
+import com.powerup.realestate.properties.domain.exceptions.CategoryNotFoundException;
 import com.powerup.realestate.properties.domain.model.CategoryModel;
 import com.powerup.realestate.properties.domain.ports.in.CategoryServicePort;
 import com.powerup.realestate.properties.domain.ports.out.CategoryPersistencePort;
@@ -21,6 +22,19 @@ public class CategoryUseCase implements CategoryServicePort {
             throw new CategoryAlreadyExistsException();
         }
         categoryPersistencePort.save(categoryModel);
+    }
+
+    @Override
+    public CategoryModel findByCategoryId(Long categoryId) {
+        if (categoryId == null){
+            return null;
+        }
+        CategoryModel categoryModel = categoryPersistencePort.getCategoryById(categoryId);
+        if (categoryModel == null){
+            throw new CategoryNotFoundException();
+        }
+
+        return categoryModel;
     }
 
     @Override
