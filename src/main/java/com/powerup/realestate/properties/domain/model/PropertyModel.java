@@ -1,15 +1,12 @@
 package com.powerup.realestate.properties.domain.model;
 
-import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
 import com.powerup.realestate.properties.domain.exceptions.InvalidActivePublicationDateException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidBathroomsException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidRoomsException;
-
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
-import com.powerup.realestate.properties.infrastructure.entities.CategoryEntity;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -24,18 +21,18 @@ public class PropertyModel {
     private Long id;
     private String name;
     private String description;
-    private CategoryEntity categoryId;
+    private Long categoryId;
     private final int rooms;
     private final int bathrooms;
     private BigDecimal price;
-    private LocationEntity locationId;
+    private Long locationId;
     private LocalDate activePublicationDate;
     private PublicationStatus publicationStatus;
     private LocalDate publicationDate;
 
 
-    public PropertyModel(Long id, String name, String description, CategoryEntity categoryId,
-                         int rooms, int bathrooms, BigDecimal price, LocationEntity locationId,
+    public PropertyModel(Long id, String name, String description, Long categoryId,
+                         int rooms, int bathrooms, BigDecimal price, Long locationId,
                          LocalDate activePublicationDate, PublicationStatus publicationStatus, LocalDate publicationDate) {
         this.id = id;
         this.name = name;
@@ -64,7 +61,7 @@ public class PropertyModel {
             this.description = Objects.requireNonNull(description, FIELD_DESCRIPTION_NULL_MESSAGE);
         }
 
-        public void setCategoryId(CategoryEntity categoryId) {
+        public void setCategoryId(Long categoryId) {
             this.categoryId = Objects.requireNonNull(categoryId, FIELD_CATEGORY_NULL_MESSAGE);
         }
 
@@ -72,7 +69,7 @@ public class PropertyModel {
             this.price = Objects.requireNonNull(price, FIELD_PRICE_NULL_MESSAGE);
         }
 
-        public void setLocationId(LocationEntity locationId) {
+        public void setLocationId(Long locationId) {
             this.locationId = Objects.requireNonNull(locationId, FIELD_LOCATION_NULL_MESSAGE);
         }
 
