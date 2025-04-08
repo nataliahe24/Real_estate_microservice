@@ -31,6 +31,11 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
     }
 
     @Override
+    public LocationModel findByLocationId(Long locationId) {
+        return locationEntityMapper.entityToModel(locationRepository.findById(locationId).orElse(null));
+    }
+
+    @Override
     public PageResult<LocationModel> getLocations(String searchText,Integer page, Integer size, boolean orderAsc) {
 
         Pageable pagination;

@@ -6,6 +6,7 @@ import com.powerup.realestate.location.domain.utils.constants.page.PageResult;
 
 public interface LocationPersistencePort {
     void save(LocationModel locationModel);
+    LocationModel findByLocationId(Long locationId);
     PageResult<LocationModel> getLocations(String searchText, Integer page, Integer size, boolean orderAsc);
 
 }

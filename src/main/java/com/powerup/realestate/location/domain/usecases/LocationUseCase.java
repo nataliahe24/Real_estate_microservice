@@ -8,6 +8,7 @@ import com.powerup.realestate.location.domain.ports.in.LocationServicePort;
 import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
 import com.powerup.realestate.location.domain.utils.constants.page.PageResult;
 import com.powerup.realestate.location.infrastructure.entities.CityEntity;
+import com.powerup.realestate.properties.domain.exceptions.LocationNotFoundException;
 
 
 public class LocationUseCase implements LocationServicePort {
@@ -38,6 +39,19 @@ public class LocationUseCase implements LocationServicePort {
         }
 
     }
+
+    @Override
+    public LocationModel findByLocationId(Long locationId) {
+        if (locationId == null) {
+            return null;
+        }
+        LocationModel locationModel = locationPersistencePort.findByLocationId(locationId);
+        if (locationModel == null) {
+            throw new LocationNotFoundException();
+        }
+        return locationModel;
+    }
+
     @Override
     public PageResult<LocationModel> getLocations(String searchText, Integer page, Integer size, boolean orderAsc) {
         return locationPersistencePort.getLocations(searchText, page, size, orderAsc);

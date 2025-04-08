@@ -1,14 +1,17 @@
 package com.powerup.realestate.location.infrastructure.repositories.mysql;
 
 import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface LocationRepository extends JpaRepository<LocationEntity, Long> {
+
+    Optional<LocationEntity> findById(Long id);
 
     @Query("SELECT l FROM LocationEntity l\n" +
             "JOIN l.cityName c\n" +
