@@ -2,7 +2,6 @@ package com.powerup.realestate.properties.domain.ports.out;
 
 import com.powerup.realestate.properties.domain.model.PropertyModel;
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
-
 import java.util.List;
 
 
