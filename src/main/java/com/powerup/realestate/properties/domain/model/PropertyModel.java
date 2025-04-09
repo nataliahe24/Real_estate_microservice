@@ -83,5 +83,6 @@ public class PropertyModel {
         }
 
     public void setPublicationStatus(PublicationStatus publicationStatus) {
+        this.publicationStatus = publicationStatus;
     }
 }
