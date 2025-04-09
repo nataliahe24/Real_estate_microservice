@@ -1,6 +1,5 @@
 package com.powerup.realestate.location.domain.model;
 
-import com.powerup.realestate.location.domain.exceptions.NeighborhoodNonNullException;
 import com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants;
 import com.powerup.realestate.location.infrastructure.entities.CityEntity;
 import lombok.Builder;

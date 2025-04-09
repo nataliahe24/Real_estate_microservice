@@ -45,7 +45,7 @@ public class PropertyModel {
         this.price = price;
         this.location = location;
         this.activePublicationDate = activePublicationDate;
-        this.publicationStatus = publicationStatus != null ? publicationStatus : PublicationStatus.PUBLISHING_PAUSED;
+        this.publicationStatus = PublicationStatus.PUBLISHING_PAUSED;
         this.publicationDate = LocalDate.now();
 
 

@@ -1,7 +1,6 @@
 package com.powerup.realestate.location.infrastructure.entities;
 
 import jakarta.persistence.*;
-import jakarta.security.auth.message.MessagePolicy;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

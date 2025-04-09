@@ -1,7 +1,6 @@
 package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.exceptions.CategoryAlreadyExistsException;
-import com.powerup.realestate.properties.domain.exceptions.CategoryNotFoundException;
 import com.powerup.realestate.properties.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.properties.domain.exceptions.NameMaxSizeExceededException;
 import com.powerup.realestate.properties.domain.model.CategoryModel;
