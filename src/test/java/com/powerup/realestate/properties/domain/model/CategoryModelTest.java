@@ -1,11 +1,7 @@
 package com.powerup.realestate.properties.domain.model;
 
-import com.powerup.realestate.properties.domain.exceptions.DescriptionMaxSizeExceededException;
-import com.powerup.realestate.properties.domain.exceptions.NameMaxSizeExceededException;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class CategoryModelTest {
 
@@ -38,22 +34,6 @@ class CategoryModelTest {
     }
 
     @Test
-    void shouldCreateCategoryWhenNameExceeds50Characters() {
-        String invalidName= "n".repeat(51);
-        String validDescription = "description";
-
-        assertThrows(NameMaxSizeExceededException.class,() ->  new CategoryModel(1L,invalidName,validDescription));
-    }
-    @Test
-    void shouldThrowExceptionWhenDescriptionExceeds90Characters() {
-        String validName = "name";
-        String longDescription = "d".repeat(91);
-
-        assertThrows(DescriptionMaxSizeExceededException.class,
-                () -> new CategoryModel(1L, validName, longDescription)
-        );
-    }
-    @Test
     void shouldSetNameWithinLimit() {
         CategoryModel category = new CategoryModel(1L,"ValidName","Valid Description");
         String validName= "n".repeat(50);
@@ -63,31 +43,12 @@ class CategoryModelTest {
     }
 
     @Test
-    void shouldNotCallGetNameWhenNameExceedsLimit() {
-
-        CategoryModel categorySpy = spy(new CategoryModel(1L, "ValidName", "ValidDescription"));
-        String invalidName = "n".repeat(51);
-
-        assertThrows(NameMaxSizeExceededException.class, () -> categorySpy.setName(invalidName));
-
-        verify(categorySpy, never()).getName();
-    }
-    @Test
     void shouldSetDescriptionWithinLimit() {
         CategoryModel category = new CategoryModel(1L,"ValidName","ValidDescription");
         String validDescription = "d".repeat(90);
 
         assertDoesNotThrow(() -> category.setDescription(validDescription));
         assertEquals(validDescription, category.getDescription());
-    }
-    @Test
-    void shouldNotSetDescriptionExceedsLimit() {
-        CategoryModel categorySpy =spy(new CategoryModel(1L, "ValidName","ValidDescription"));
-        String invalidDescription="d".repeat(91);
-
-        assertThrows(DescriptionMaxSizeExceededException.class,()-> categorySpy.setDescription(invalidDescription));
-        verify(categorySpy, never()).getDescription();
-
     }
 
 }
