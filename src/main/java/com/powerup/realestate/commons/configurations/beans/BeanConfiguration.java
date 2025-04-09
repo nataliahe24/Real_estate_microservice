@@ -5,6 +5,7 @@ import com.powerup.realestate.location.domain.ports.out.CityPersistencePort;
 import com.powerup.realestate.location.domain.usecases.CityUseCase;
 import com.powerup.realestate.location.infrastructure.adapters.persistence.CityPersistenceAdapter;
 import com.powerup.realestate.location.infrastructure.repositories.mysql.CityRepository;
+import com.powerup.realestate.properties.application.services.PropertyValidationService;
 import com.powerup.realestate.properties.domain.ports.in.CategoryServicePort;
 import com.powerup.realestate.properties.domain.ports.in.PropertyServicePort;
 import com.powerup.realestate.properties.domain.ports.out.CategoryPersistencePort;
@@ -79,9 +80,8 @@ public class BeanConfiguration {
 
     @Bean
     public PropertyServicePort propertyServicePort(PropertyPersistencePort propertyPersistencePort,
-                                                   CategoryPersistencePort categoryPersistencePort,
-                                                   LocationPersistencePort locationPersistencePort) {
-        return new PropertyUseCase(propertyPersistencePort, null, categoryPersistencePort, null, locationPersistencePort);
+                                                   PropertyValidationService propertyValidationService) {
+        return new PropertyUseCase(propertyPersistencePort, propertyValidationService);
     }
 
 }
