@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface CategoryPersistencePort {
     void save(CategoryModel categoryModel);
     CategoryModel getCategoryByName(String categoryName);
-    CategoryModel getCategoryById(Long categoryId);
+    Optional<CategoryModel> getCategoryById(Long categoryId);
     PageResult<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc);
 }
