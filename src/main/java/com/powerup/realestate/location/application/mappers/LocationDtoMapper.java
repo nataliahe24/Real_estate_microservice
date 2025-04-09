@@ -22,6 +22,17 @@ public interface LocationDtoMapper {
     LocationResponse modelToResponse(LocationModel locationModel);
     PageResult<LocationResponse> modelListToResponseList(PageResult<LocationModel> locations);
 
+    default LocationModel toLocationModel(Long id) {
+        if (id == null) {
+            return null;
+        }
+        return LocationModel.builder().id(id).build();
+    }
+
+    default Long getIdFromLocationModel(LocationModel locationModel) {
+        return locationModel != null ? locationModel.getId() : null;
+    }
+
     @Named("mapCityNameToEntity")
     default CityEntity mapCityNameToEntity(String cityName) {
         if (cityName == null) {
