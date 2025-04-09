@@ -1,10 +1,12 @@
 package com.powerup.realestate.properties.application.dto.request;
+
+import jakarta.validation.constraints.NotBlank;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public record SavePropertyRequest(String name,String description,Long categoryId,Integer rooms, Integer bathrooms,
-                                 BigDecimal price, Long locationId, LocalDate activePublicationDate,
-                                 String publicationStatus, LocalDate publicationDate) {
+public record SavePropertyRequest(@NotBlank String name,@NotBlank String description,@NotBlank Long category,@NotBlank Integer rooms,@NotBlank Integer bathrooms,
+                                  @NotBlank BigDecimal price, @NotBlank Long location,@NotBlank LocalDate activePublicationDate) {
 
 }
 
