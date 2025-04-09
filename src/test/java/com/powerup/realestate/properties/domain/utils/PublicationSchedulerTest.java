@@ -31,7 +31,8 @@ class PublicationSchedulerTest {
 
         publicationScheduler.activatePendingPublications();
 
-        verify(propertyPersistencePort, times(1)).findByPublicationStatus(PublicationStatus.PUBLISHING_PAUSED);
+        verify(propertyPersistencePort, times(1))
+                .findByPublicationStatus(PublicationStatus.PUBLISHING_PAUSED);
         verify(propertyPersistencePort, never()).update(any());
     }
 
