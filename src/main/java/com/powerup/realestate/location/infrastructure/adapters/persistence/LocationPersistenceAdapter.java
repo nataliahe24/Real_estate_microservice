@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -31,8 +32,9 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
     }
 
     @Override
-    public LocationModel findByLocationId(Long locationId) {
-        return locationEntityMapper.entityToModel(locationRepository.findById(locationId).orElse(null));
+    public Optional<LocationModel> findByLocationId(Long locationId) {
+        return locationRepository.findById(locationId)
+                .map(locationEntityMapper::entityToModel);
     }
 
     @Override
