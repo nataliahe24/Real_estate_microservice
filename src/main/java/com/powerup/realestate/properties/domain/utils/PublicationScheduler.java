@@ -17,11 +17,12 @@ public class PublicationScheduler {
 
     @Scheduled(fixedRate = 86400000)
     public void activatePendingPublications() {
-        List<PropertyModel> pausedProperties = propertyPersistencePort.findByPublicationStatus(PublicationStatus.PUBLISHING_PAUSED);
+        List<PropertyModel> pausedProperties = propertyPersistencePort
+                .findByPublicationStatus(PublicationStatus.PUBLISHING_PAUSED);
 
         for (PropertyModel property : pausedProperties) {
             if (property.getActivePublicationDate() != null &&
-                    !property.getActivePublicationDate().isAfter(LocalDate.now().plusDays(1))) {
+                    !property.getActivePublicationDate().isAfter(LocalDate.now())) {
 
                 property.setPublicationStatus(PublicationStatus.PUBLISHED);
                 propertyPersistencePort.update(property);
