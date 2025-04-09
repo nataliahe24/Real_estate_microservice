@@ -18,9 +18,7 @@ public class LocationModel {
     private  String neighborhood;
 
     public LocationModel(Long id, CityEntity cityName, String neighborhood) {
-        if (neighborhood == null || neighborhood.trim().isEmpty()) {
-            throw new NeighborhoodNonNullException();
-        }
+
 
         this.id = id;
         this.cityName = cityName;
