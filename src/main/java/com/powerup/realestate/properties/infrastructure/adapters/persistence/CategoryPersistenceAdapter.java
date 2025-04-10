@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,6 +33,12 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
     @Override
     public CategoryModel getCategoryByName(String categoryName) {
         return categoryEntityMapper.entityToModel(categoryRepository.findByName(categoryName).orElse(null));
+    }
+
+    @Override
+    public Optional<CategoryModel> getCategoryById(Long categoryId) {
+        return categoryRepository.findById(categoryId)
+                .map(categoryEntityMapper::entityToModel);
     }
 
     @Override

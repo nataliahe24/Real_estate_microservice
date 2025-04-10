@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -14,7 +15,6 @@ public class LocationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String neighborhood ;
-
     @ManyToOne
     @JoinColumn(name = "city_id", nullable = false)
     private CityEntity cityName;

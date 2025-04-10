@@ -1,6 +1,5 @@
 package com.powerup.realestate.location.domain.usecases;
 
-import com.powerup.realestate.location.domain.exceptions.CityNonExistentException;
 import com.powerup.realestate.location.domain.model.LocationModel;
 import com.powerup.realestate.location.domain.ports.in.CityServicePort;
 import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;

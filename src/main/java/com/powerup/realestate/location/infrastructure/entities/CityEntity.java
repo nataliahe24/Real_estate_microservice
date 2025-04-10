@@ -1,13 +1,14 @@
 package com.powerup.realestate.location.infrastructure.entities;
 
 import jakarta.persistence.*;
-import jakarta.security.auth.message.MessagePolicy;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Builder
 @Entity
 @Data
 @NoArgsConstructor

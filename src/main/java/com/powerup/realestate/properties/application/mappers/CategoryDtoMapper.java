@@ -13,6 +13,12 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CategoryDtoMapper {
     CategoryModel requestToModel(SaveCategoryRequest saveCategoryRequest);
-    CategoryResponse modelToResponse(CategoryModel categoryModel);
+    default CategoryModel toCategoryModel(Long id) {
+        return id == null ? null : CategoryModel.builder().id(id).build();
+    }
+    default Long toCategoryId(CategoryModel categoryModel) {
+        return categoryModel != null ? categoryModel.getId() : null;
+    }
+
     PageResult<CategoryResponse> modelListToResponseList(PageResult<CategoryModel> categories);
 }

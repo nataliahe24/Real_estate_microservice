@@ -11,4 +11,5 @@ public final class Constants {
 
     public static final String SAVE_CATEGORY_RESPONSE_MESSAGE = "Categoría creada con éxito.";
     public static final String PAGEABLE_FIELD_NAME = "name";
+    public static final String SAVE_PROPERTY_RESPONSE_MESSAGE = "Publicación creada con éxito.";
 }

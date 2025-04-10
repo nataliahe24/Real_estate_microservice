@@ -1,13 +1,13 @@
 package com.powerup.realestate.location.domain.model;
 
-import com.powerup.realestate.location.domain.exceptions.NeighborhoodNonNullException;
 import com.powerup.realestate.location.domain.utils.constants.LocationDomainConstants;
 import com.powerup.realestate.location.infrastructure.entities.CityEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Objects;
-
+@Builder
 @Getter
 public class LocationModel {
 
@@ -17,9 +17,7 @@ public class LocationModel {
     private  String neighborhood;
 
     public LocationModel(Long id, CityEntity cityName, String neighborhood) {
-        if (neighborhood == null || neighborhood.trim().isEmpty()) {
-            throw new NeighborhoodNonNullException();
-        }
+
 
         this.id = id;
         this.cityName = cityName;

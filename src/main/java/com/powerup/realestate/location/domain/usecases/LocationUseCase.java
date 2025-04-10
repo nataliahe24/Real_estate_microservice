@@ -2,12 +2,15 @@ package com.powerup.realestate.location.domain.usecases;
 
 
 import com.powerup.realestate.location.domain.exceptions.CityNonExistentException;
+import com.powerup.realestate.location.domain.exceptions.NeighborhoodNonNullException;
 import com.powerup.realestate.location.domain.model.LocationModel;
 import com.powerup.realestate.location.domain.ports.in.CityServicePort;
 import com.powerup.realestate.location.domain.ports.in.LocationServicePort;
 import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
 import com.powerup.realestate.location.domain.utils.constants.page.PageResult;
 import com.powerup.realestate.location.infrastructure.entities.CityEntity;
+
+import java.util.Optional;
 
 
 public class LocationUseCase implements LocationServicePort {
@@ -23,6 +26,11 @@ public class LocationUseCase implements LocationServicePort {
     @Override
     public void save(LocationModel locationModel) {
         CityEntity cityInfo = locationModel.getCityName();
+        String neighborhood = locationModel.getNeighborhood();
+
+        if (neighborhood == null || neighborhood.trim().isEmpty()) {
+            throw new NeighborhoodNonNullException();
+        }
 
         if (cityInfo != null && cityInfo.getName() != null && !cityInfo.getName().isEmpty()) {
             CityEntity cityEntity = cityServicePort.findCityByNameIgnoreCaseAndTrim(cityInfo.getName());
@@ -38,6 +46,16 @@ public class LocationUseCase implements LocationServicePort {
         }
 
     }
+
+    @Override
+    public Optional<LocationModel> findByLocationId(Long locationId) {
+        if (locationId == null) {
+            return Optional.empty();
+        }
+
+        return locationPersistencePort.findByLocationId(locationId);
+    }
+
     @Override
     public PageResult<LocationModel> getLocations(String searchText, Integer page, Integer size, boolean orderAsc) {
         return locationPersistencePort.getLocations(searchText, page, size, orderAsc);
