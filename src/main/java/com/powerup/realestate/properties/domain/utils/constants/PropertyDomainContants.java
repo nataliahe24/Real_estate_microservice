@@ -3,6 +3,7 @@ package com.powerup.realestate.properties.domain.utils.constants;
 
 public final class PropertyDomainContants {
     public static final String FIELD_NAME_NULL_MESSAGE = "El campo 'nombre' no puede estar vacío.";
+    public static final String FIELD_ADDRESS_NULL_MESSAGE = "El campo 'dirección' no puede estar vacío.";
     public static final String FIELD_DESCRIPTION_NULL_MESSAGE = "El campo 'descripción' no puede estar vacío.";
     public static final String FIELD_CATEGORY_NULL_MESSAGE = "El campo 'Categoría' no puede estar vacío.";
     public static final String FIELD_PRICE_NULL_MESSAGE = "El campo 'Precio' no puede estar vacío.";
