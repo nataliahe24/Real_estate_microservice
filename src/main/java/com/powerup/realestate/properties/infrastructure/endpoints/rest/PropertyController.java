@@ -26,8 +26,8 @@ public class PropertyController {
     @GetMapping("/")
     public ResponseEntity<PageResult<PropertyResponse>> getProperties(@RequestParam(defaultValue = "0") Integer page,
                                                                       @RequestParam Integer size,
-                                                                      @RequestParam(required = false) Long location,
-                                                                      @RequestParam(required = false) Long category,
+                                                                      @RequestParam(required = false) String location,
+                                                                      @RequestParam(required = false) String category,
                                                                       @RequestParam(required = false) Integer rooms,
                                                                       @RequestParam(required = false) Integer bathrooms,
                                                                       @RequestParam(required = false) Double minPrice,

@@ -13,8 +13,8 @@ public interface PropertyService {
     PageResult<PropertyResponse> getPropertiesByFiltersAndOrder(
             Integer page,
             Integer size,
-            Long location,
-            Long category,
+            String location,
+            String category,
             Integer rooms,
             Integer bathrooms,
             Double minPrice,

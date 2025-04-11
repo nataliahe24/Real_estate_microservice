@@ -7,7 +7,7 @@ import com.powerup.realestate.properties.domain.utils.page.PageResult;
 public interface PropertyServicePort {
     void saveProperty(PropertyModel propertyModel);
     PageResult<PropertyModel> getProperties(Integer page, Integer size,
-                                            Long location, Long category,
+                                            String location, String category,
                                             Integer rooms, Integer bathrooms,
                                             Double minPrice, Double maxPrice,
                                             String sortBy, boolean orderAsc);

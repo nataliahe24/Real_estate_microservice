@@ -12,8 +12,8 @@ public interface PropertyPersistencePort {
     PageResult<PropertyModel> getProperties(
             Integer page,
             Integer size,
-            Long location,
-            Long category,
+            String location,
+            String category,
             Integer rooms,
             Integer bathrooms,
             Double minPrice,

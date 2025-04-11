@@ -28,7 +28,7 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PageResult<PropertyResponse> getPropertiesByFiltersAndOrder(Integer page, Integer size, Long location, Long category, Integer rooms, Integer bathrooms, Double minPrice, Double maxPrice, String sortBy, boolean orderAsc) {
+    public PageResult<PropertyResponse> getPropertiesByFiltersAndOrder(Integer page, Integer size, String location, String category, Integer rooms, Integer bathrooms, Double minPrice, Double maxPrice, String sortBy, boolean orderAsc) {
         return propertyDtoMapper.modelListToResponseList(
                 propertyServicePort.getProperties(
                         page,
