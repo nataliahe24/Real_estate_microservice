@@ -5,6 +5,7 @@ import com.powerup.realestate.properties.domain.utils.PublicationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ public class PropertyEntity {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String name;
+        private String address;
         private String description;
         private int rooms;
         private int bathrooms;
