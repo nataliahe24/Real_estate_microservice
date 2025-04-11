@@ -13,32 +13,43 @@ import java.util.List;
 public interface PropertyRepository extends JpaRepository<PropertyEntity, Long> {
     List<PropertyEntity> findAllByPublicationStatus(PublicationStatus status);
 
-    @Query(value = "SELECT p.* FROM property_entity p " +
+    @Query(value = "SELECT p.* " +
+            "FROM property_entity p " +
             "JOIN category_entity c ON p.category_id = c.id " +
             "JOIN location_entity l ON p.location_id = l.id " +
             "JOIN city_entity ci ON l.city_id = ci.id " +
             "JOIN department_entity d ON ci.department_id = d.id " +
-            "WHERE (:location IS NULL OR l.id = :location) " +
-            "AND (:propertyCategory IS NULL OR c.id = :propertyCategory) " +
+            "WHERE p.publication_status = 'PUBLISHED' " +
+            "AND (:location IS NULL OR " +
+            "     LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
+            "     LOWER(ci.name) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
+            "     LOWER(d.name) LIKE LOWER(CONCAT('%', :location, '%'))) " +
+            "AND (:propertyCategory IS NULL OR LOWER(c.name) LIKE LOWER(CONCAT('%', :propertyCategory, '%'))) " +
             "AND (:rooms IS NULL OR p.rooms = :rooms) " +
             "AND (:bathrooms IS NULL OR p.bathrooms = :bathrooms) " +
             "AND (:minPrice IS NULL OR p.price >= :minPrice) " +
             "AND (:maxPrice IS NULL OR p.price <= :maxPrice)",
+
             countQuery = "SELECT COUNT(*) FROM property_entity p " +
                     "JOIN category_entity c ON p.category_id = c.id " +
                     "JOIN location_entity l ON p.location_id = l.id " +
                     "JOIN city_entity ci ON l.city_id = ci.id " +
                     "JOIN department_entity d ON ci.department_id = d.id " +
-                    "WHERE (:location IS NULL OR l.id = :location) " +
-                    "AND (:propertyCategory IS NULL OR c.id = :propertyCategory) " +
+                    "WHERE p.publication_status = 'PUBLISHED' " +
+                    "AND (:location IS NULL OR " +
+                    "     LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
+                    "     LOWER(ci.name) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
+                    "     LOWER(d.name) LIKE LOWER(CONCAT('%', :location, '%'))) " +
+                    "AND (:propertyCategory IS NULL OR LOWER(c.name) LIKE LOWER(CONCAT('%', :propertyCategory, '%'))) " +
                     "AND (:rooms IS NULL OR p.rooms = :rooms) " +
                     "AND (:bathrooms IS NULL OR p.bathrooms = :bathrooms) " +
                     "AND (:minPrice IS NULL OR p.price >= :minPrice) " +
                     "AND (:maxPrice IS NULL OR p.price <= :maxPrice)",
+
             nativeQuery = true)
     Page<PropertyEntity> findPropertiesWithFiltersAndOrder(
-            @Param("location") Long location,
-            @Param("propertyCategory") Long category,
+            @Param("location") String location,
+            @Param("propertyCategory") String category,
             @Param("rooms") Integer rooms,
             @Param("bathrooms") Integer bathrooms,
             @Param("minPrice") Double minPrice,
@@ -47,4 +58,5 @@ public interface PropertyRepository extends JpaRepository<PropertyEntity, Long> 
             @Param("orderAsc") boolean orderAsc,
             Pageable pageable
     );
+
 }
