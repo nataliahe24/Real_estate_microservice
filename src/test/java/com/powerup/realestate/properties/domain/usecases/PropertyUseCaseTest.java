@@ -2,7 +2,6 @@ package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.location.domain.model.LocationModel;
 import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
-import com.powerup.realestate.properties.application.services.PropertyValidationService;
 import com.powerup.realestate.properties.domain.exceptions.CategoryNotFoundException;
 import com.powerup.realestate.properties.domain.exceptions.LocationNotFoundException;
 import com.powerup.realestate.properties.domain.model.CategoryModel;
@@ -35,9 +34,6 @@ class PropertyUseCaseTest {
     @Mock
     private CategoryPersistencePort categoryPersistencePort;
 
-    @Mock
-    private PropertyValidationService propertyValidationService;
-
     @InjectMocks
     private PropertyUseCase propertyUseCase;
     private PropertyModel propertyModel;
@@ -53,7 +49,8 @@ class PropertyUseCaseTest {
         propertyModel = new PropertyModel(
                 1L,
                 "Casa Familiar",
-                "Bonita casa con jardín",
+                "direction",
+                "category",
                 validCategoryModel,
                 3,
                 2,
@@ -65,42 +62,41 @@ class PropertyUseCaseTest {
         );
 
         // Configura el comportamiento del mock locationPersistencePort.
-        when(locationPersistencePort.findByLocationId(validLocationModel.getId())).thenReturn(Optional.ofNullable(validLocationModel));
-        when(categoryPersistencePort.getCategoryById(validCategoryModel.getId())).thenReturn(Optional.ofNullable(validCategoryModel));
-        doNothing().when(propertyPersistencePort).save(any());
-        doNothing().when(propertyValidationService).validate(any());
+        when(locationPersistencePort.findByLocationId(validLocationModel.getId()))
+                .thenReturn(Optional.of(validLocationModel));
+        when(categoryPersistencePort.getCategoryById(validCategoryModel.getId()))
+                .thenReturn(Optional.of(validCategoryModel));
     }
 
     @Test
-    void saveProperty_validInput_callsPersistenceAndValidation() {
-        propertyUseCase.save(propertyModel);
+    void savePropertyProperty_validInput_savesSuccessfully() {
+        // Act
+        propertyUseCase.saveProperty(propertyModel);
 
-        verify(propertyValidationService, times(1)).validate(propertyModel);
+        // Assert
+        verify(locationPersistencePort, times(1)).findByLocationId(propertyModel.getLocation().getId());
+        verify(categoryPersistencePort, times(1)).getCategoryById(propertyModel.getCategory().getId());
         verify(propertyPersistencePort, times(1)).save(propertyModel);
     }
 
     @Test
-    void saveProperty_nonExistingLocation_throwsLocationNotFoundException() {
-        when(locationPersistencePort.findByLocationId(validLocationModel.getId())).thenReturn(null);
-        doThrow(new LocationNotFoundException())
-                .when(propertyValidationService).validate(propertyModel);
+    void savePropertyProperty_nonExistingLocation_throwsLocationNotFoundException() {
+        when(locationPersistencePort.findByLocationId(propertyModel.getLocation().getId()))
+                .thenReturn(Optional.empty());
 
-        assertThrows(LocationNotFoundException.class, () -> propertyUseCase.save(propertyModel));
+        assertThrows(LocationNotFoundException.class, () -> propertyUseCase.saveProperty(propertyModel));
 
         verify(propertyPersistencePort, never()).save(any());
-        verify(propertyValidationService, times(1)).validate(propertyModel);
     }
 
     @Test
-    void saveProperty_nonExistingCategory_throwsCategoryNotFoundException() {
-        when(categoryPersistencePort.getCategoryById(validCategoryModel.getId())).thenReturn(null);
-        doThrow(new CategoryNotFoundException())
-                .when(propertyValidationService).validate(propertyModel);
+    void savePropertyProperty_nonExistingCategory_throwsCategoryNotFoundException() {
+        when(categoryPersistencePort.getCategoryById(propertyModel.getCategory().getId()))
+                .thenReturn(Optional.empty());
 
-        assertThrows(CategoryNotFoundException.class, () -> propertyUseCase.save(propertyModel));
+        assertThrows(CategoryNotFoundException.class, () -> propertyUseCase.saveProperty(propertyModel));
 
         verify(propertyPersistencePort, never()).save(any());
-        verify(propertyValidationService, times(1)).validate(propertyModel);
     }
 }
 
