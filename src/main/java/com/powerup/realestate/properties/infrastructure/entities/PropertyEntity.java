@@ -30,10 +30,10 @@ public class PropertyEntity {
         private PublicationStatus publicationStatus;
         private LocalDate publicationDate;
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "category_id", nullable = false)
+        @JoinColumn(name = "category_id", nullable = false, referencedColumnName = "id")
         private CategoryEntity category;
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "location_id", nullable = false)
+        @JoinColumn(name = "location_id", nullable = false, referencedColumnName = "id")
         private LocationEntity location;
 
 
