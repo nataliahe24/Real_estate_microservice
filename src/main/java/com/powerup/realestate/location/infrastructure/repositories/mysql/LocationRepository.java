@@ -21,4 +21,8 @@ public interface LocationRepository extends JpaRepository<LocationEntity, Long> 
             "   OR LOWER(d.name) LIKE LOWER(CONCAT('%', :searchText, '%'))\n" +
             "ORDER BY c.name ASC, d.name ASC")
     Page<LocationEntity> findByCityOrDepartment(@Param("searchText") String searchText, Pageable pageable);
+
+    @Query("SELECT CASE WHEN COUNT(l) > 0 THEN TRUE ELSE FALSE END " +
+            "FROM LocationEntity l WHERE l.cityName.id = :cityId AND LOWER(l.neighborhood) = LOWER(:neighborhood)")
+    boolean existsByCityName_IdAndNeighborhoodIgnoreCase(@Param("cityId") Long cityId, @Param("neighborhood") String neighborhood);
 }
