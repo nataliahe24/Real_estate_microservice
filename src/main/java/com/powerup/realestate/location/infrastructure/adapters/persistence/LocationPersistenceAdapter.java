@@ -50,4 +50,9 @@ public class LocationPersistenceAdapter implements LocationPersistencePort {
         return new PageResult<>(pageModel, page, size, pageModel.size());
     }
 
+    @Override
+    public boolean existsByCityIdAndNeighborhoodIgnoreCase(Long cityId, String neighborhood) {
+        return locationRepository.existsByCityName_IdAndNeighborhoodIgnoreCase(cityId, neighborhood);
+    }
+
 }
