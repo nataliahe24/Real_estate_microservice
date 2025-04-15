@@ -10,5 +10,5 @@ public interface LocationPersistencePort {
     void save(LocationModel locationModel);
     Optional<LocationModel> findByLocationId(Long locationId);
     PageResult<LocationModel> getLocations(String searchText, Integer page, Integer size, boolean orderAsc);
-
+    boolean existsByCityIdAndNeighborhoodIgnoreCase(Long cityId, String neighborhood);
 }

@@ -8,6 +8,7 @@ import com.powerup.realestate.location.domain.ports.in.CityServicePort;
 import com.powerup.realestate.location.domain.ports.in.LocationServicePort;
 import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
 import com.powerup.realestate.location.domain.utils.constants.page.PageResult;
+import com.powerup.realestate.location.domain.utils.constants.validations.ValidateLocation;
 import com.powerup.realestate.location.infrastructure.entities.CityEntity;
 
 import java.util.Optional;
@@ -38,6 +39,8 @@ public class LocationUseCase implements LocationServicePort {
             CityEntity cityReference = new CityEntity();
             cityReference.setId(cityEntity.getId());
             locationModel.setCityName(cityReference);
+
+            ValidateLocation.validateIfExistLocation(locationModel, locationPersistencePort);
 
             locationPersistencePort.save(locationModel);
 

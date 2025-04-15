@@ -23,21 +23,15 @@ public interface LocationDtoMapper {
     PageResult<LocationResponse> modelListToResponseList(PageResult<LocationModel> locations);
 
     default LocationModel toLocationModel(Long id) {
-        if (id == null) {
-            return null;
-        }
         return LocationModel.builder().id(id).build();
     }
 
     default Long getIdFromLocationModel(LocationModel locationModel) {
-        return locationModel != null ? locationModel.getId() : null;
+        return locationModel.getId();
     }
 
     @Named("mapCityNameToEntity")
     default CityEntity mapCityNameToEntity(String cityName) {
-        if (cityName == null) {
-            return null;
-        }
         CityEntity cityEntity = new CityEntity();
         cityEntity.setName(cityName);
         return cityEntity;
@@ -45,7 +39,7 @@ public interface LocationDtoMapper {
 
     @Named("mapCityEntityToName")
     default String mapCityEntityToName(CityEntity city) {
-        return (city != null) ? city.getName() : null;
+        return city.getName();
     }
 
 }
