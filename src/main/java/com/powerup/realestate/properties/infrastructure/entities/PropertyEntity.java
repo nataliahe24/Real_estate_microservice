@@ -5,6 +5,7 @@ import com.powerup.realestate.properties.domain.utils.PublicationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ public class PropertyEntity {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String name;
+        private String address;
         private String description;
         private int rooms;
         private int bathrooms;
@@ -28,10 +30,10 @@ public class PropertyEntity {
         private PublicationStatus publicationStatus;
         private LocalDate publicationDate;
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "category_id", nullable = false)
+        @JoinColumn(name = "category_id", nullable = false, referencedColumnName = "id")
         private CategoryEntity category;
         @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "location_id", nullable = false)
+        @JoinColumn(name = "location_id", nullable = false, referencedColumnName = "id")
         private LocationEntity location;
 
 

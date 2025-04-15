@@ -22,6 +22,7 @@ class PropertyModelTest {
 
     private Long id;
     private String name;
+    private String address;
     private String description;
     private CategoryModel category;
     private int rooms;
@@ -47,6 +48,7 @@ class PropertyModelTest {
     void setUp() {
         id = 1L;
         name = "Beautiful House";
+        address = "address";
         description = "A spacious and modern house";
         category = CategoryModel.builder()
                 .id(1L)
@@ -69,7 +71,7 @@ class PropertyModelTest {
     @Test
     void shouldCreatePropertySuccessfully() {
         PropertyModel property =
-                new PropertyModel(id, name, description, category, rooms, bathrooms,
+                new PropertyModel(id, name, address, description, category, rooms, bathrooms,
                         price, location, activePublicationDate, publicationStatus, publicationDate);
 
         assertEquals(name, property.getName());
@@ -85,7 +87,7 @@ class PropertyModelTest {
     @Test
     void shouldThrowExceptionWhenRoomsAreNegative() {
         assertThrows(InvalidRoomsException.class, () ->
-                new PropertyModel(id, name, description, category, -1,
+                new PropertyModel(id, name, address, description, category, -1,
                         bathrooms, price, location, activePublicationDate,
                         publicationStatus, publicationDate));
     }
@@ -93,7 +95,7 @@ class PropertyModelTest {
     @Test
     void shouldThrowExceptionWhenBathroomsAreNegative() {
         assertThrows(InvalidBathroomsException.class, () ->
-                new PropertyModel(id, name, description, category, rooms, -1,
+                new PropertyModel(id, name, address, description, category, rooms, -1,
                         price, location, activePublicationDate,
                         publicationStatus, publicationDate));
     }
@@ -102,13 +104,13 @@ class PropertyModelTest {
     void shouldThrowExceptionWhenActivePublicationDateIsTooFarInFuture() {
         LocalDate futureDate = LocalDate.now().plusMonths(2);
         assertThrows(InvalidActivePublicationDateException.class, () ->
-                new PropertyModel(id, name, description, category, rooms, bathrooms, price, location,
+                new PropertyModel(id, name, address, description, category, rooms, bathrooms, price, location,
                         futureDate, publicationStatus, publicationDate));
     }
 
     @Test
     void shouldThrowExceptionWhenNameIsNull() {
-        PropertyModel property = new PropertyModel(id, name, description, category, rooms,
+        PropertyModel property = new PropertyModel(id, name, address,description, category, rooms,
                 bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate);
         NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setName(null));
         assertEquals(PropertyDomainContants.FIELD_NAME_NULL_MESSAGE, exception.getMessage());
@@ -116,7 +118,7 @@ class PropertyModelTest {
 
     @Test
     void shouldThrowExceptionWhenDescriptionIsNull() {
-        PropertyModel property = new PropertyModel(id, name, description, category, rooms,
+        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
                 bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate);
         NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setDescription(null));
         assertEquals(PropertyDomainContants.FIELD_DESCRIPTION_NULL_MESSAGE, exception.getMessage());
@@ -124,7 +126,7 @@ class PropertyModelTest {
 
     @Test
     void shouldThrowExceptionWhenPriceIsNull() {
-        PropertyModel property = new PropertyModel(id, name, description, category, rooms,
+        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
                 bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate);
         NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setPrice(null));
         assertEquals(PropertyDomainContants.FIELD_PRICE_NULL_MESSAGE, exception.getMessage());
@@ -133,7 +135,7 @@ class PropertyModelTest {
 
     @Test
     void shouldThrowExceptionWhenPublicationDateIsNull() {
-        PropertyModel property = new PropertyModel(id, name, description, category, rooms,
+        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
                 bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate);
         NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setPublicationDate(null));
         assertEquals(PropertyDomainContants.FIELD_PUBLICATION_DATE_NULL_MESSAGE, exception.getMessage());

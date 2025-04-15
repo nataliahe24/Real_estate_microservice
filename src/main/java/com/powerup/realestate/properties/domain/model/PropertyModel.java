@@ -22,6 +22,7 @@ public class PropertyModel {
     @Setter
     private Long id;
     private String name;
+    private String address;
     private String description;
     private CategoryModel category;
     private final int rooms;
@@ -33,11 +34,13 @@ public class PropertyModel {
     private LocalDate publicationDate;
 
 
-    public PropertyModel(Long id, String name, String description, CategoryModel category,
+
+    public PropertyModel(Long id, String name, String address, String description, CategoryModel category,
                          int rooms, int bathrooms, BigDecimal price, LocationModel location,
                          LocalDate activePublicationDate, PublicationStatus publicationStatus, LocalDate publicationDate) {
         this.id = id;
         this.name = name;
+        this.address = address;
         this.description = description;
         this.category = category;
         this.rooms = rooms;
@@ -45,7 +48,7 @@ public class PropertyModel {
         this.price = price;
         this.location = location;
         this.activePublicationDate = activePublicationDate;
-        this.publicationStatus = PublicationStatus.PUBLISHING_PAUSED;
+        this.publicationStatus = publicationStatus;
         this.publicationDate = LocalDate.now();
 
 
@@ -60,6 +63,10 @@ public class PropertyModel {
 
         public void setName(String name) {
             this.name = Objects.requireNonNull(name, FIELD_NAME_NULL_MESSAGE);
+        }
+
+        public void setAddress(String address){
+           this.address = Objects.requireNonNull(address,FIELD_ADDRESS_NULL_MESSAGE);
         }
 
         public void setDescription(String description) {
