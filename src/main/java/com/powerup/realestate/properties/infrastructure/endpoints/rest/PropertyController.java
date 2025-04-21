@@ -5,6 +5,8 @@ import com.powerup.realestate.properties.application.dto.response.PropertyRespon
 import com.powerup.realestate.properties.application.dto.response.SavePropertyResponse;
 import com.powerup.realestate.properties.application.services.PropertyService;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,10 @@ public class PropertyController {
     private final PropertyService propertyService;
 
     @PostMapping("/")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     public ResponseEntity<SavePropertyResponse> save(@RequestBody SavePropertyRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(propertyService.save(request));
     }
