@@ -1,6 +1,5 @@
 package com.powerup.realestate.properties.domain.model;
 
-import com.powerup.realestate.location.domain.model.LocationModel;
 import com.powerup.realestate.properties.domain.exceptions.InvalidActivePublicationDateException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidBathroomsException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidRoomsException;

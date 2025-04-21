@@ -1,10 +1,10 @@
 package com.powerup.realestate.commons.configurations.beans;
 
-import com.powerup.realestate.location.domain.ports.in.CityServicePort;
-import com.powerup.realestate.location.domain.ports.out.CityPersistencePort;
-import com.powerup.realestate.location.domain.usecases.CityUseCase;
-import com.powerup.realestate.location.infrastructure.adapters.persistence.CityPersistenceAdapter;
-import com.powerup.realestate.location.infrastructure.repositories.mysql.CityRepository;
+import com.powerup.realestate.properties.domain.ports.in.CityServicePort;
+import com.powerup.realestate.properties.domain.ports.out.CityPersistencePort;
+import com.powerup.realestate.properties.domain.usecases.CityUseCase;
+import com.powerup.realestate.properties.infrastructure.adapters.persistence.CityPersistenceAdapter;
+import com.powerup.realestate.properties.infrastructure.repositories.mysql.CityRepository;
 import com.powerup.realestate.properties.domain.ports.in.CategoryServicePort;
 import com.powerup.realestate.properties.domain.ports.in.PropertyServicePort;
 import com.powerup.realestate.properties.domain.ports.out.CategoryPersistencePort;
@@ -16,12 +16,12 @@ import com.powerup.realestate.properties.infrastructure.adapters.persistence.Pro
 import com.powerup.realestate.properties.infrastructure.mappers.CategoryEntityMapper;
 import com.powerup.realestate.properties.infrastructure.mappers.PropertyEntityMapper;
 import com.powerup.realestate.properties.infrastructure.repositories.mysql.CategoryRepository;
-import com.powerup.realestate.location.domain.ports.in.LocationServicePort;
-import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
-import com.powerup.realestate.location.domain.usecases.LocationUseCase;
-import com.powerup.realestate.location.infrastructure.adapters.persistence.LocationPersistenceAdapter;
-import com.powerup.realestate.location.infrastructure.mappers.LocationEntityMapper;
-import com.powerup.realestate.location.infrastructure.repositories.mysql.LocationRepository;
+import com.powerup.realestate.properties.domain.ports.in.LocationServicePort;
+import com.powerup.realestate.properties.domain.ports.out.LocationPersistencePort;
+import com.powerup.realestate.properties.domain.usecases.LocationUseCase;
+import com.powerup.realestate.properties.infrastructure.adapters.persistence.LocationPersistenceAdapter;
+import com.powerup.realestate.properties.infrastructure.mappers.LocationEntityMapper;
+import com.powerup.realestate.properties.infrastructure.repositories.mysql.LocationRepository;
 import com.powerup.realestate.properties.infrastructure.repositories.mysql.PropertyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

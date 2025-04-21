@@ -1,9 +1,8 @@
 package com.powerup.realestate.properties.domain.model;
 
 
-import com.powerup.realestate.location.domain.model.LocationModel;
-import com.powerup.realestate.location.infrastructure.entities.CityEntity;
-import com.powerup.realestate.location.infrastructure.entities.DepartmentEntity;
+import com.powerup.realestate.properties.infrastructure.entities.CityEntity;
+import com.powerup.realestate.properties.infrastructure.entities.DepartmentEntity;
 import com.powerup.realestate.properties.domain.exceptions.InvalidActivePublicationDateException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidBathroomsException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidRoomsException;

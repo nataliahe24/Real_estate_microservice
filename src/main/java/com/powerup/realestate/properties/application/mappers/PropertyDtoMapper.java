@@ -1,7 +1,6 @@
 package com.powerup.realestate.properties.application.mappers;
 
 
-import com.powerup.realestate.location.application.mappers.LocationDtoMapper;
 import com.powerup.realestate.properties.application.dto.request.SavePropertyRequest;
 import com.powerup.realestate.properties.application.dto.response.PropertyResponse;
 import com.powerup.realestate.properties.domain.model.PropertyModel;
