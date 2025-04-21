@@ -5,6 +5,8 @@ import com.powerup.realestate.properties.application.dto.request.SaveLocationReq
 import com.powerup.realestate.properties.application.dto.response.SaveLocationResponse;
 import com.powerup.realestate.properties.application.services.LocationService;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,10 @@ public class LocationController {
 
 
     @PostMapping("/")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth") // Especifica que este endpoint requiere autenticación JWT
+    )
     public ResponseEntity<SaveLocationResponse> save(@RequestBody SaveLocationRequest saveLocationRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(locationService.save(saveLocationRequest));
     }

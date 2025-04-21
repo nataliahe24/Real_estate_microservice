@@ -5,6 +5,8 @@ import com.powerup.realestate.properties.application.dto.response.CategoryRespon
 import com.powerup.realestate.properties.application.dto.response.SaveCategoryResponse;
 import com.powerup.realestate.properties.application.services.CategoryService;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,10 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping("/")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth") // Especifica que este endpoint requiere autenticación JWT
+    )
     public ResponseEntity<SaveCategoryResponse> save(@RequestBody SaveCategoryRequest saveCategoryRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(saveCategoryRequest));
     }
