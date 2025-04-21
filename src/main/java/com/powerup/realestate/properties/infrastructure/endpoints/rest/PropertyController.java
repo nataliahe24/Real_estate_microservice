@@ -23,7 +23,7 @@ public class PropertyController {
     @PostMapping("/")
     @Operation(
             summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth") // Especifica que este endpoint requiere autenticación JWT
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<SavePropertyResponse> save(@RequestBody SavePropertyRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(propertyService.save(request));

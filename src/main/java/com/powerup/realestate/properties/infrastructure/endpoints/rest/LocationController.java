@@ -29,7 +29,7 @@ public class LocationController {
     @PostMapping("/")
     @Operation(
             summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth") // Especifica que este endpoint requiere autenticación JWT
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<SaveLocationResponse> save(@RequestBody SaveLocationRequest saveLocationRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(locationService.save(saveLocationRequest));

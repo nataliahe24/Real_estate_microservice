@@ -1,7 +1,5 @@
 package com.powerup.realestate.properties.infrastructure.security;
 
-
-
 import com.powerup.realestate.properties.infrastructure.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

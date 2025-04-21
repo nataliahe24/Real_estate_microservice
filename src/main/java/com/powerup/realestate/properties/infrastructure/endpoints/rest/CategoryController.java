@@ -28,14 +28,15 @@ public class CategoryController {
     @PostMapping("/")
     @Operation(
             summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth") // Especifica que este endpoint requiere autenticación JWT
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<SaveCategoryResponse> save(@RequestBody SaveCategoryRequest saveCategoryRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.save(saveCategoryRequest));
     }
 
     @GetMapping("/")
-    public ResponseEntity<PageResult<CategoryResponse>> getAllCategories(@RequestParam Integer page, @RequestParam Integer size,
+    public ResponseEntity<PageResult<CategoryResponse>> getAllCategories(@RequestParam Integer page,
+                                                                         @RequestParam Integer size,
                                                                          @RequestParam boolean orderAsc) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
     }
