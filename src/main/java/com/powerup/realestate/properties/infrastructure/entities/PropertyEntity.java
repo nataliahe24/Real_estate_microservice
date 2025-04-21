@@ -1,6 +1,5 @@
 package com.powerup.realestate.properties.infrastructure.entities;
 
-import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

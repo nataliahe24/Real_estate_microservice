@@ -1,12 +1,13 @@
 package com.powerup.realestate.location.domain.usecases;
 
-import com.powerup.realestate.location.domain.model.LocationModel;
-import com.powerup.realestate.location.domain.ports.in.CityServicePort;
-import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
+import com.powerup.realestate.properties.domain.model.LocationModel;
+import com.powerup.realestate.properties.domain.ports.in.CityServicePort;
+import com.powerup.realestate.properties.domain.ports.out.LocationPersistencePort;
 import com.powerup.realestate.location.domain.utils.constants.page.PageResult;
-import com.powerup.realestate.location.infrastructure.entities.CityEntity;
-import com.powerup.realestate.location.infrastructure.entities.DepartmentEntity;
-import com.powerup.realestate.location.infrastructure.entities.LocationEntity;
+import com.powerup.realestate.properties.infrastructure.entities.CityEntity;
+import com.powerup.realestate.properties.infrastructure.entities.DepartmentEntity;
+import com.powerup.realestate.properties.infrastructure.entities.LocationEntity;
+import com.powerup.realestate.properties.domain.usecases.LocationUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

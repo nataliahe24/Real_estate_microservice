@@ -1,7 +1,7 @@
 package com.powerup.realestate.properties.domain.usecases;
 
-import com.powerup.realestate.location.domain.model.LocationModel;
-import com.powerup.realestate.location.domain.ports.out.LocationPersistencePort;
+import com.powerup.realestate.properties.domain.model.LocationModel;
+import com.powerup.realestate.properties.domain.ports.out.LocationPersistencePort;
 import com.powerup.realestate.properties.domain.exceptions.CategoryNotFoundException;
 import com.powerup.realestate.properties.domain.exceptions.LocationNotFoundException;
 import com.powerup.realestate.properties.domain.model.CategoryModel;

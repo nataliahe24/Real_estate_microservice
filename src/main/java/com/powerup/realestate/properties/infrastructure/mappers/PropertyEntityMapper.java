@@ -1,7 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.mappers;
 
 
-import com.powerup.realestate.location.infrastructure.mappers.LocationEntityMapper;
 import com.powerup.realestate.properties.domain.model.PropertyModel;
 import com.powerup.realestate.properties.infrastructure.entities.PropertyEntity;
 import org.mapstruct.Mapper;
