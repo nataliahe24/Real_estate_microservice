@@ -31,12 +31,14 @@ public class PropertyModel {
     private LocalDate activePublicationDate;
     private PublicationStatus publicationStatus;
     private LocalDate publicationDate;
+    private Long sellerId;
 
 
 
     public PropertyModel(Long id, String name, String address, String description, CategoryModel category,
                          int rooms, int bathrooms, BigDecimal price, LocationModel location,
-                         LocalDate activePublicationDate, PublicationStatus publicationStatus, LocalDate publicationDate) {
+                         LocalDate activePublicationDate, PublicationStatus publicationStatus, 
+                         LocalDate publicationDate, Long sellerId) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -49,6 +51,7 @@ public class PropertyModel {
         this.activePublicationDate = activePublicationDate;
         this.publicationStatus = publicationStatus;
         this.publicationDate = LocalDate.now();
+        this.sellerId = Objects.requireNonNull(sellerId, "El ID del vendedor no puede ser nulo");
 
 
         if (rooms < 0) throw new InvalidRoomsException();
@@ -90,5 +93,9 @@ public class PropertyModel {
 
     public void setPublicationStatus(PublicationStatus publicationStatus) {
         this.publicationStatus = publicationStatus;
+    }
+    
+    public void setSellerId(Long sellerId) {
+        this.sellerId = Objects.requireNonNull(sellerId, "El ID del vendedor no puede ser nulo");
     }
 }

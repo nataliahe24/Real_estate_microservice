@@ -28,6 +28,7 @@ public class PropertyEntity {
         @Enumerated(EnumType.STRING)
         private PublicationStatus publicationStatus;
         private LocalDate publicationDate;
+        private Long sellerId;
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "category_id", nullable = false, referencedColumnName = "id")
         private CategoryEntity category;
