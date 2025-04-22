@@ -38,6 +38,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/location/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/properties/**").hasRole("SELLER")
+                        .requestMatchers("/api/v1/visit-schedules/**").hasRole("SELLER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
