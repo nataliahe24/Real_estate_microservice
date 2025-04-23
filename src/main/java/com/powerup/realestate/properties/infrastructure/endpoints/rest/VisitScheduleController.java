@@ -1,5 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 
+import com.powerup.realestate.properties.application.dto.request.FilterVisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.request.SaveVisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.response.SaveVisitScheduleResponse;
 import com.powerup.realestate.properties.application.dto.response.VisitScheduleResponse;
@@ -8,10 +9,12 @@ import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -48,5 +51,28 @@ public class VisitScheduleController {
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam Integer size) {
         return ResponseEntity.ok(visitScheduleService.getSchedules(page, size));
+    }
+
+    @GetMapping("/filter")
+    @Operation(
+            summary = "Filtrar horarios de visita disponibles",
+    security = @SecurityRequirement(name = "bearerAuth")
+    )
+    public ResponseEntity<PageResult<VisitScheduleResponse>> filterSchedules(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+            @RequestParam(required = false) String location,
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam Integer size) {
+        
+        FilterVisitScheduleRequest request = new FilterVisitScheduleRequest(
+                startDate,
+                endDate,
+                location,
+                page,
+                size
+        );
+        
+        return ResponseEntity.ok(visitScheduleService.getFilteredSchedules(request));
     }
 } 

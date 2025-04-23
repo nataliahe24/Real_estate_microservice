@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -43,6 +44,34 @@ public class VisitSchedulePersistenceAdapter implements VisitSchedulePersistence
     public PageResult<VisitScheduleModel> getSchedules(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<VisitScheduleEntity> entityPage = visitScheduleRepository.findAll(pageable);
+        List<VisitScheduleModel> modelList = visitScheduleEntityMapper.toModelList(entityPage.getContent());
+        
+        return new PageResult<>(
+                modelList,
+                page,
+                size,
+                (int) entityPage.getTotalElements()
+        );
+    }
+
+    @Override
+    public PageResult<VisitScheduleModel> getFilteredSchedules(
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            String location,
+            Integer page,
+            Integer size) {
+        
+        Pageable pageable = PageRequest.of(page, size);
+        
+        Page<VisitScheduleEntity> entityPage = visitScheduleRepository.findFilteredSchedules(
+                startDate,
+                endDate,
+                location,
+                LocalDateTime.now(),
+                pageable
+        );
+        
         List<VisitScheduleModel> modelList = visitScheduleEntityMapper.toModelList(entityPage.getContent());
         
         return new PageResult<>(

@@ -10,6 +10,7 @@ import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,8 +23,7 @@ public class VisitScheduleUseCase {
     public VisitScheduleModel createSchedule(VisitScheduleModel visitSchedule) {
         PropertyModel property = propertyPersistencePort.findById(visitSchedule.getProperty().getId())
                 .orElseThrow(() -> new PropertyNotFoundException("Propiedad no encontrada"));
-        
-        // Validar que el vendedor sea el dueño de la propiedad
+
         validateSellerOwnsProperty(visitSchedule.getSellerId(), property);
         
         visitSchedulePersistencePort.save(visitSchedule);
@@ -46,5 +46,21 @@ public class VisitScheduleUseCase {
     
     public PageResult<VisitScheduleModel> getSchedules(Integer page, Integer size) {
         return visitSchedulePersistencePort.getSchedules(page, size);
+    }
+    
+    public PageResult<VisitScheduleModel> getFilteredSchedules(
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            String location,
+            Integer page,
+            Integer size) {
+        
+        return visitSchedulePersistencePort.getFilteredSchedules(
+                startDate,
+                endDate,
+                location,
+                page,
+                size
+        );
     }
 } 

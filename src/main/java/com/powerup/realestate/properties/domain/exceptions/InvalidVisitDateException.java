@@ -1,7 +1,9 @@
 package com.powerup.realestate.properties.domain.exceptions;
 
+import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.INVALID_FUTURE_DATE_MESSAGE;
+
 public class InvalidVisitDateException extends RuntimeException {
     public InvalidVisitDateException() {
-        super("La fecha de visita debe estar dentro de las próximas 3 semanas");
+        super(INVALID_FUTURE_DATE_MESSAGE);
     }
 } 

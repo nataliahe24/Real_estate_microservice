@@ -11,4 +11,5 @@ public final class PropertyDomainContants {
     public static final String FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE = "El campo 'description' no puede estar vacío.";
     public static final String FIELD_PUBLICATION_STATUS_NULL_MESSAGE = "El campo 'description' no puede estar vacío.";
     public static final String FIELD_PUBLICATION_DATE_NULL_MESSAGE = "El campo 'description' no puede estar vacío.";
+    public static final String FIELD_SELLER_ID_NULL_MESSAGE = "El ID del vendedor no puede ser nulo.";
 }

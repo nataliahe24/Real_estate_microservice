@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.Objects;
+import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.*;
 
 @Getter
 @Builder
@@ -18,24 +19,25 @@ public class VisitScheduleModel {
     private PropertyModel property;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    @Setter
+    private Integer scheduledBuyers;
     
     public VisitScheduleModel(Long id, Long sellerId, PropertyModel property, 
-                             LocalDateTime startDate, LocalDateTime endDate) {
+                             LocalDateTime startDate, LocalDateTime endDate, Integer scheduledBuyers) {
         this.id = id;
-        this.sellerId = Objects.requireNonNull(sellerId, "El ID del vendedor no puede ser nulo");
-        this.property = Objects.requireNonNull(property, "La propiedad no puede ser nula");
-        this.startDate = Objects.requireNonNull(startDate, "La fecha de inicio no puede ser nula");
-        this.endDate = Objects.requireNonNull(endDate, "La fecha de fin no puede ser nula");
+        this.sellerId = Objects.requireNonNull(sellerId, FIELD_SELLER_ID_NULL_MESSAGE);
+        this.property = Objects.requireNonNull(property, FIELD_PROPERTY_NULL_MESSAGE);
+        this.startDate = Objects.requireNonNull(startDate, FIELD_START_DATE_NULL_MESSAGE);
+        this.endDate = Objects.requireNonNull(endDate, FIELD_END_DATE_NULL_MESSAGE);
+        this.scheduledBuyers = scheduledBuyers != null ? scheduledBuyers : 0;
         
-        // Validar que la fecha esté dentro de las próximas 3 semanas
         if (startDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3)) ||
             endDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3))) {
             throw new InvalidVisitDateException();
         }
         
-        // Validar que la fecha de fin sea posterior a la de inicio
         if (endDate.isBefore(startDate)) {
-            throw new IllegalArgumentException("La fecha de fin debe ser posterior a la fecha de inicio");
+            throw new IllegalArgumentException(INVALID_END_DATE_MESSAGE);
         }
     }
     
@@ -43,13 +45,13 @@ public class VisitScheduleModel {
         if (startDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3))) {
             throw new InvalidVisitDateException();
         }
-        this.startDate = Objects.requireNonNull(startDate, "La fecha de inicio no puede ser nula");
+        this.startDate = Objects.requireNonNull(startDate, FIELD_START_DATE_NULL_MESSAGE);
     }
     
     public void setEndDate(LocalDateTime endDate) {
         if (endDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3))) {
             throw new InvalidVisitDateException();
         }
-        this.endDate = Objects.requireNonNull(endDate, "La fecha de fin no puede ser nula");
+        this.endDate = Objects.requireNonNull(endDate, FIELD_END_DATE_NULL_MESSAGE);
     }
 } 
