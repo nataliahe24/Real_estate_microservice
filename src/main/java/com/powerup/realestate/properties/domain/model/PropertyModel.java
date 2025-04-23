@@ -12,6 +12,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
+
 import static com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants.*;
 
 @Getter
@@ -29,15 +30,16 @@ public class PropertyModel {
     private BigDecimal price;
     private LocationModel location;
     private LocalDate activePublicationDate;
+    @Setter
     private PublicationStatus publicationStatus;
+    @Setter
     private LocalDate publicationDate;
     private Long sellerId;
 
 
-
     public PropertyModel(Long id, String name, String address, String description, CategoryModel category,
                          int rooms, int bathrooms, BigDecimal price, LocationModel location,
-                         LocalDate activePublicationDate, PublicationStatus publicationStatus, 
+                         LocalDate activePublicationDate, PublicationStatus publicationStatus,
                          LocalDate publicationDate, Long sellerId) {
         this.id = id;
         this.name = name;
@@ -50,8 +52,8 @@ public class PropertyModel {
         this.location = location;
         this.activePublicationDate = activePublicationDate;
         this.publicationStatus = publicationStatus;
-        this.publicationDate = LocalDate.now();
-        this.sellerId = Objects.requireNonNull(sellerId, "El ID del vendedor no puede ser nulo");
+        this.publicationDate = publicationDate;
+        this.sellerId = Objects.requireNonNull(sellerId, FIELD_SELLER_ID_NULL_MESSAGE);
 
 
         if (rooms < 0) throw new InvalidRoomsException();
@@ -63,39 +65,27 @@ public class PropertyModel {
 
     }
 
-        public void setName(String name) {
-            this.name = Objects.requireNonNull(name, FIELD_NAME_NULL_MESSAGE);
-        }
-
-        public void setAddress(String address){
-           this.address = Objects.requireNonNull(address,FIELD_ADDRESS_NULL_MESSAGE);
-        }
-
-        public void setDescription(String description) {
-            this.description = Objects.requireNonNull(description, FIELD_DESCRIPTION_NULL_MESSAGE);
-        }
-
-        public void setPrice(BigDecimal price) {
-        this.price = Objects.requireNonNull(price, FIELD_PRICE_NULL_MESSAGE);
-        }
-
-        public void setActivePublicationDate(LocalDate activePublicationDate) {
-
-            if (activePublicationDate.isAfter(LocalDate.now().plusMonths(1)))
-                throw new InvalidActivePublicationDateException();
-
-            this.activePublicationDate = Objects.requireNonNull(activePublicationDate, FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE);
-        }
-
-    public void setPublicationDate(LocalDate publicationDate) {
-            this.publicationDate = Objects.requireNonNull(publicationDate, FIELD_PUBLICATION_DATE_NULL_MESSAGE);
-        }
-
-    public void setPublicationStatus(PublicationStatus publicationStatus) {
-        this.publicationStatus = publicationStatus;
+    public void setName(String name) {
+        this.name = Objects.requireNonNull(name, FIELD_NAME_NULL_MESSAGE);
     }
-    
+
+    public void setAddress(String address) {
+        this.address = Objects.requireNonNull(address, FIELD_ADDRESS_NULL_MESSAGE);
+    }
+
+    public void setDescription(String description) {
+        this.description = Objects.requireNonNull(description, FIELD_DESCRIPTION_NULL_MESSAGE);
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = Objects.requireNonNull(price, FIELD_PRICE_NULL_MESSAGE);
+    }
+
+    public void setActivePublicationDate(LocalDate activePublicationDate) {
+        this.activePublicationDate = Objects.requireNonNull(activePublicationDate, FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE);
+    }
+
     public void setSellerId(Long sellerId) {
-        this.sellerId = Objects.requireNonNull(sellerId, "El ID del vendedor no puede ser nulo");
+        this.sellerId = Objects.requireNonNull(sellerId, FIELD_SELLER_ID_NULL_MESSAGE);
     }
 }

@@ -1,6 +1,7 @@
 package com.powerup.realestate.properties.application.services.impl;
 
 import com.powerup.realestate.commons.configurations.utils.Constants;
+import com.powerup.realestate.properties.application.dto.request.FilterVisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.request.SaveVisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.response.SaveVisitScheduleResponse;
 import com.powerup.realestate.properties.application.dto.response.VisitScheduleResponse;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.SAVE_VISIT_SCHEDULE_RESPONSE_MESSAGE;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +39,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         visitScheduleUseCase.createSchedule(visitSchedule);
         
         return new SaveVisitScheduleResponse(
-                "Horario de visita creado exitosamente",
+                SAVE_VISIT_SCHEDULE_RESPONSE_MESSAGE,
                 LocalDateTime.now()
         );
     }
@@ -61,6 +63,28 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
     @Override
     public PageResult<VisitScheduleResponse> getSchedules(Integer page, Integer size) {
         PageResult<VisitScheduleModel> pageResult = visitScheduleUseCase.getSchedules(page, size);
+        
+        List<VisitScheduleResponse> responseList = pageResult.getContent().stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+        
+        return new PageResult<>(
+                responseList,
+                pageResult.getPage(),
+                pageResult.getSize(),
+                pageResult.getTotalElements()
+        );
+    }
+    
+    @Override
+    public PageResult<VisitScheduleResponse> getFilteredSchedules(FilterVisitScheduleRequest request) {
+        PageResult<VisitScheduleModel> pageResult = visitScheduleUseCase.getFilteredSchedules(
+                request.startDate(),
+                request.endDate(),
+                request.location(),
+                request.page(),
+                request.size()
+        );
         
         List<VisitScheduleResponse> responseList = pageResult.getContent().stream()
                 .map(this::mapToResponse)

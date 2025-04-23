@@ -2,6 +2,7 @@ package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.ports.out.LocationPersistencePort;
 import com.powerup.realestate.properties.domain.exceptions.CategoryNotFoundException;
+import com.powerup.realestate.properties.domain.exceptions.InvalidActivePublicationDateException;
 import com.powerup.realestate.properties.domain.exceptions.LocationNotFoundException;
 import com.powerup.realestate.properties.domain.model.PropertyModel;
 import com.powerup.realestate.properties.domain.ports.in.PropertyServicePort;
@@ -14,6 +15,7 @@ import com.powerup.realestate.properties.domain.exceptions.PropertyNotFoundExcep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -25,14 +27,25 @@ public class PropertyUseCase implements PropertyServicePort {
 
     @Override
     public void saveProperty(PropertyModel propertyModel) throws LocationNotFoundException, CategoryNotFoundException {
+        
+        validateActivePublicationDate(propertyModel.getActivePublicationDate());
+        
         PropertyValidation.validatePropertyLocationAndCategory(
                 propertyModel,
                 locationPersistencePort,
                 categoryPersistencePort
         );
+        
         propertyModel.setPublicationStatus(PublicationStatus.PUBLISHING_PAUSED);
+        propertyModel.setPublicationDate(LocalDate.now());
 
         propertyPersistencePort.save(propertyModel);
+    }
+
+    private void validateActivePublicationDate(LocalDate activePublicationDate) {
+        if (activePublicationDate != null && activePublicationDate.isAfter(LocalDate.now().plusMonths(1))) {
+            throw new InvalidActivePublicationDateException();
+        }
     }
 
     @Override

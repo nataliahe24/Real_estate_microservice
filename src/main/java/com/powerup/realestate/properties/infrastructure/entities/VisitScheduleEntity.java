@@ -18,6 +18,7 @@ public class VisitScheduleEntity {
     private Long sellerId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private Integer scheduledBuyers = 0;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "property_id", nullable = false, referencedColumnName = "id")
