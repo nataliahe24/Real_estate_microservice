@@ -59,4 +59,5 @@ public interface PropertyRepository extends JpaRepository<PropertyEntity, Long> 
             Pageable pageable
     );
 
+    List<PropertyEntity> findAllBySellerId(Long sellerId);
 }

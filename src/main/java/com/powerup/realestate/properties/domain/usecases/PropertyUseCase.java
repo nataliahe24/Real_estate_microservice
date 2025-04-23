@@ -10,21 +10,19 @@ import com.powerup.realestate.properties.domain.ports.out.PropertyPersistencePor
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import com.powerup.realestate.properties.domain.utils.validation.PropertyValidation;
+import com.powerup.realestate.properties.domain.exceptions.PropertyNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 
+@Component
+@RequiredArgsConstructor
 public class PropertyUseCase implements PropertyServicePort {
     private final PropertyPersistencePort propertyPersistencePort;
     private final LocationPersistencePort locationPersistencePort;
     private final CategoryPersistencePort categoryPersistencePort;
 
-
-    public PropertyUseCase(PropertyPersistencePort propertyPersistencePort,
-                           LocationPersistencePort locationPersistencePort,
-                           CategoryPersistencePort categoryPersistencePort) {
-        this.propertyPersistencePort = propertyPersistencePort;
-        this.locationPersistencePort = locationPersistencePort;
-        this.categoryPersistencePort = categoryPersistencePort;
-    }
     @Override
     public void saveProperty(PropertyModel propertyModel) throws LocationNotFoundException, CategoryNotFoundException {
         PropertyValidation.validatePropertyLocationAndCategory(
@@ -54,4 +52,12 @@ public class PropertyUseCase implements PropertyServicePort {
                 orderAsc);
     }
 
+    public PropertyModel getPropertyById(Long id) {
+        return propertyPersistencePort.findById(id)
+                .orElseThrow(() -> new PropertyNotFoundException("Propiedad no encontrada con ID: " + id));
+    }
+    
+    public List<PropertyModel> getPropertiesBySellerId(Long sellerId) {
+        return propertyPersistencePort.findBySellerId(sellerId);
+    }
 }

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -70,5 +71,19 @@ public class PropertyPersistenceAdapter implements PropertyPersistencePort {
     public void update(PropertyModel property) {
         PropertyEntity entity = propertyEntityMapper.modelToEntity(property);
         propertyRepository.save(entity);
+    }
+
+    @Override
+    public Optional<PropertyModel> findById(Long id) {
+        return propertyRepository.findById(id)
+                .map(propertyEntityMapper::entityToModel);
+    }
+
+    @Override
+    public List<PropertyModel> findBySellerId(Long sellerId) {
+        List<PropertyEntity> entities = propertyRepository.findAllBySellerId(sellerId);
+        return entities.stream()
+                .map(propertyEntityMapper::entityToModel)
+                .toList();
     }
 }
