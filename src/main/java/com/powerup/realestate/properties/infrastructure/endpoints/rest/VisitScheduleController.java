@@ -32,12 +32,16 @@ public class VisitScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(visitScheduleService.save(request));
     }
 
-    @GetMapping("/property/{propertyId}")
+    @GetMapping("/property")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     public ResponseEntity<List<VisitScheduleResponse>> getSchedulesByPropertyId(@PathVariable Long propertyId) {
         return ResponseEntity.ok(visitScheduleService.getSchedulesByPropertyId(propertyId));
     }
 
-    @GetMapping("/seller/{sellerId}")
+    @GetMapping("/seller")
     @Operation(
             summary = "Endpoint protegido",
             security = @SecurityRequirement(name = "bearerAuth")
@@ -46,17 +50,21 @@ public class VisitScheduleController {
         return ResponseEntity.ok(visitScheduleService.getSchedulesBySellerId(sellerId));
     }
 
-    @GetMapping("/")
+    @GetMapping("/visit")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     public ResponseEntity<PageResult<VisitScheduleResponse>> getSchedules(
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam Integer size) {
         return ResponseEntity.ok(visitScheduleService.getSchedules(page, size));
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/")
     @Operation(
             summary = "Filtrar horarios de visita disponibles",
-    security = @SecurityRequirement(name = "bearerAuth")
+            security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<PageResult<VisitScheduleResponse>> filterSchedules(
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
