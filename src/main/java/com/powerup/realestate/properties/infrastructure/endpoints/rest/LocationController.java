@@ -36,6 +36,10 @@ public class LocationController {
     }
 
     @GetMapping("/")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     public ResponseEntity<PageResult<LocationResponse>> getLocationsPage(@RequestParam (required = false) String searchText,
                                                                          @RequestParam Integer page,
                                                                          @RequestParam Integer size,

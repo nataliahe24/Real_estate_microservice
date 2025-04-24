@@ -50,32 +50,32 @@ class PropertyUseCaseTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         
-        // Crear CategoryModel usando constructor directo
+
         validCategoryModel = new CategoryModel(20L, "Casa", "Casa familiar");
         
-        // Crear CityEntity mock
+
         CityEntity cityMock = Mockito.mock(CityEntity.class);
         when(cityMock.getId()).thenReturn(1L);
         when(cityMock.getName()).thenReturn("TestCity");
         
-        // Crear LocationModel usando constructor directo
+
         validLocationModel = new LocationModel(10L, cityMock, "Centro");
 
         // Crear PropertyModel con todos los parámetros requeridos, incluyendo sellerId
         propertyModel = new PropertyModel(
-                1L,                        // id
-                "Casa Familiar",           // name
-                "Calle Principal 123",     // address
-                "Hermosa casa con jardín", // description
-                validCategoryModel,        // category
-                3,                         // rooms
-                2,                         // bathrooms
-                new BigDecimal("250000"),  // price
-                validLocationModel,        // location
-                LocalDate.of(2025, 4, 7),  // activePublicationDate
+                1L,
+                "Casa Familiar",
+                "Calle Principal 123",
+                "Hermosa casa con jardín",
+                validCategoryModel,
+                3,
+                2,
+                new BigDecimal("250000"),
+                validLocationModel,
+                LocalDate.of(2025, 4, 7),
                 PublicationStatus.PUBLISHED, // publicationStatus
-                LocalDate.of(2025, 4, 8),  // publicationDate
-                sellerId                   // sellerId - parámetro que faltaba
+                LocalDate.of(2025, 4, 8),
+                sellerId
         );
 
         // Configurar comportamiento de mocks
