@@ -14,15 +14,18 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.PROPERTY_NOT_FOUND_MESSAGE;
+import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.UNAUTHORIZED_SELLER_MESSAGE;
+
 @Component
 @RequiredArgsConstructor
 public class VisitScheduleUseCase {
     private final VisitSchedulePersistencePort visitSchedulePersistencePort;
     private final PropertyPersistencePort propertyPersistencePort;
-    
+
     public VisitScheduleModel createSchedule(VisitScheduleModel visitSchedule) {
         PropertyModel property = propertyPersistencePort.findById(visitSchedule.getProperty().getId())
-                .orElseThrow(() -> new PropertyNotFoundException("Propiedad no encontrada"));
+                .orElseThrow(() -> new PropertyNotFoundException(PROPERTY_NOT_FOUND_MESSAGE));
 
         validateSellerOwnsProperty(visitSchedule.getSellerId(), property);
         
@@ -32,7 +35,7 @@ public class VisitScheduleUseCase {
     
     private void validateSellerOwnsProperty(Long sellerId, PropertyModel property) {
         if (!Objects.equals(sellerId, property.getSellerId())) {
-            throw new UnauthorizedSellerException("El vendedor no es propietario de esta propiedad");
+            throw new UnauthorizedSellerException(UNAUTHORIZED_SELLER_MESSAGE);
         }
     }
     

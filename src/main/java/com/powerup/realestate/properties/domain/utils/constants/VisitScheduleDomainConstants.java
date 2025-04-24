@@ -9,4 +9,5 @@ public final class VisitScheduleDomainConstants {
     public static final String INVALID_END_DATE_MESSAGE = "La fecha de fin debe ser posterior a la fecha de inicio.";
     public static final String SAVE_VISIT_SCHEDULE_RESPONSE_MESSAGE = "Horario de visita creado exitosamente.";
     public static final String UNAUTHORIZED_SELLER_MESSAGE = "El vendedor no es propietario de esta propiedad.";
+    public static final String PROPERTY_NOT_FOUND_MESSAGE = "Propiedad no encontrada";
 } 

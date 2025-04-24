@@ -1,14 +1,17 @@
 package com.powerup.realestate.properties.domain.usecases;
 
+import com.powerup.realestate.properties.domain.exceptions.InvalidVisitScheduleException;
 import com.powerup.realestate.properties.domain.exceptions.PropertyNotFoundException;
 import com.powerup.realestate.properties.domain.model.BuyerVisitModel;
 import com.powerup.realestate.properties.domain.ports.in.BuyerVisitServicePort;
 import com.powerup.realestate.properties.domain.ports.out.BuyerVisitPersistencePort;
 import com.powerup.realestate.properties.domain.ports.out.VisitSchedulePersistencePort;
+import com.powerup.realestate.properties.domain.utils.validation.VisitScheduleValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 import static com.powerup.realestate.properties.domain.utils.constants.BuyerVisitDomainConstants.*;
 
@@ -27,20 +30,31 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
     
     @Override
     public void scheduleBuyerVisit(BuyerVisitModel buyerVisit) {
+        Long scheduleId = buyerVisit.getVisitScheduleId();
+
         // Verificar que el horario existe
-        if (!visitSchedulePersistencePort.existsById(buyerVisit.getVisitScheduleId())) {
+        if (!visitSchedulePersistencePort.existsById(scheduleId)) {
             throw new PropertyNotFoundException(SCHEDULE_NOT_FOUND);
         }
         
+        // Verificar que el horario no haya pasado ya
+        visitSchedulePersistencePort.findById(scheduleId)
+            .ifPresent(schedule -> {
+                LocalDateTime now = LocalDateTime.now();
+                if (schedule.getStartDate().isBefore(now)) {
+                    throw new InvalidVisitScheduleException(PAST_SCHEDULE_ERROR);
+                }
+            });
+        
         // Verificar que no se exceda el límite de 2 compradores por horario
-        int visitsCount = buyerVisitPersistencePort.countByVisitScheduleId(buyerVisit.getVisitScheduleId());
+        int visitsCount = buyerVisitPersistencePort.countByVisitScheduleId(scheduleId);
         if (visitsCount >= 2) {
             throw new IllegalStateException(MAX_VISITORS_EXCEEDED);
         }
         
         // Verificar que el comprador no tenga ya una visita agendada en el mismo horario
         if (buyerVisitPersistencePort.findByBuyerEmailAndVisitScheduleId(
-                buyerVisit.getBuyerEmail(), buyerVisit.getVisitScheduleId()).isPresent()) {
+                buyerVisit.getBuyerEmail(), scheduleId).isPresent()) {
             throw new IllegalStateException(BUYER_ALREADY_SCHEDULED);
         }
         
@@ -48,7 +62,7 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
         buyerVisitPersistencePort.save(buyerVisit);
         
         // Sincronizar el contador de compradores agendados
-        syncScheduledBuyersCounter(buyerVisit.getVisitScheduleId());
+        syncScheduledBuyersCounter(scheduleId);
     }
     
     @Override

@@ -6,4 +6,5 @@ public class BuyerVisitDomainConstants {
     public static final String MAX_VISITORS_EXCEEDED = "Este horario ya tiene el máximo de 2 compradores agendados";
     public static final String BUYER_ALREADY_SCHEDULED = "Este comprador ya tiene una visita agendada para este horario";
     public static final String SCHEDULE_NOT_FOUND = "El horario de visita no existe";
+    public static final String PAST_SCHEDULE_ERROR = "No se puede agendar una visita en un horario que ya pasó";
 } 
