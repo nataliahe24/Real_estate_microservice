@@ -1,0 +1,19 @@
+package com.powerup.realestate.properties.infrastructure.exceptionshandler;
+
+public class BuyerVisitExceptionConstants {
+    private BuyerVisitExceptionConstants() {
+        throw new IllegalStateException("Utility class");
+    }
+    
+    public static final String MAX_VISITORS_EXCEEDED_EXCEPTION = "Este horario ya tiene el máximo de 2 compradores agendados";
+    public static final String BUYER_ALREADY_SCHEDULED_EXCEPTION = "Este comprador ya tiene una visita agendada para este horario";
+    public static final String VISIT_SCHEDULE_NOT_FOUND_EXCEPTION = "El horario de visita no existe";
+    public static final String PAST_SCHEDULE_ERROR_EXCEPTION = "No se puede agendar una visita en un horario que ya pasó";
+    public static final String BUYER_VISIT_NOT_FOUND_EXCEPTION = "La visita agendada no existe";
+    public static final String INVALID_BUYER_EMAIL_EXCEPTION = "El formato del email del comprador no es válido";
+    public static final String INVALID_JSON_FORMAT_EXCEPTION = "Formato JSON inválido. Por favor, revisa la estructura de tu solicitud.";
+    
+    // Nuevas constantes para las excepciones de campos nulos
+    public static final String BUYER_EMAIL_NULL_EXCEPTION = "El email del comprador no puede ser nulo o vacío";
+    public static final String SCHEDULE_ID_NULL_EXCEPTION = "El ID del horario de visita no puede ser nulo";
+} 
