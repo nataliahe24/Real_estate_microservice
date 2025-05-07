@@ -86,4 +86,22 @@ public class PropertyPersistenceAdapter implements PropertyPersistencePort {
                 .map(propertyEntityMapper::entityToModel)
                 .toList();
     }
+
+    @Override
+    public PageResult<PropertyModel> getAllProperties(Integer page, Integer size, String location, String category, boolean orderAsc) {
+        Pageable pagination = PageRequest.of(page, size);
+
+        Page<PropertyEntity> propertyEntityPage = propertyRepository.findAllProperties(
+                location,
+                category,
+                orderAsc,
+                pagination
+        );
+
+        List<PropertyModel> pageModel = propertyEntityMapper.entityListToModelList(propertyEntityPage.getContent());
+
+
+        return new PageResult<>(pageModel, page, size, pageModel.size()
+        );
+    }
 }

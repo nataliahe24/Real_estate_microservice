@@ -3,6 +3,7 @@ package com.powerup.realestate.properties.infrastructure.security;
 import com.powerup.realestate.properties.infrastructure.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,6 +27,7 @@ public class SecurityConfig {
 
 
         http
+                .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**","/swagger-ui.html",
@@ -37,8 +39,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/category/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/location/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/properties/**").hasRole("SELLER")
-                        .requestMatchers("/api/v1/visit-schedules/**").hasRole("SELLER")
+                        .requestMatchers("/api/v1/properties/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/visit-schedules/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/visit-schedules/filter").permitAll()
                         .anyRequest().authenticated()
                 )

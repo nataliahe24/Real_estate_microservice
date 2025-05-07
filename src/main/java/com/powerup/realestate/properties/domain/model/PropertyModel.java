@@ -53,7 +53,7 @@ public class PropertyModel {
         this.activePublicationDate = activePublicationDate;
         this.publicationStatus = publicationStatus;
         this.publicationDate = publicationDate;
-        this.sellerId = Objects.requireNonNull(sellerId, FIELD_SELLER_ID_NULL_MESSAGE);
+        this.sellerId = sellerId;
 
 
         if (rooms < 0) throw new InvalidRoomsException();

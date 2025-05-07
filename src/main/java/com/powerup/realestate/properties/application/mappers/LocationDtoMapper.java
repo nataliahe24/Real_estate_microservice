@@ -18,6 +18,7 @@ public interface LocationDtoMapper {
     @Mapping(source = "cityName", target = "cityName", qualifiedByName = "mapCityNameToEntity")
     LocationModel requestToModel(SaveLocationRequest saveLocationRequest);
 
+    @Mapping(source = "cityName.departmentEntity.name", target = "department")
     @Mapping(source = "cityName", target = "cityName", qualifiedByName = "mapCityEntityToName")
     LocationResponse modelToResponse(LocationModel locationModel);
     PageResult<LocationResponse> modelListToResponseList(PageResult<LocationModel> locations);

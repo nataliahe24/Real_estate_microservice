@@ -1,5 +1,6 @@
 package com.powerup.realestate.properties.domain.usecases;
 
+import com.powerup.realestate.properties.application.dto.response.CategoryNamesResponse;
 import com.powerup.realestate.properties.domain.exceptions.CategoryAlreadyExistsException;
 import com.powerup.realestate.properties.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.properties.domain.exceptions.NameMaxSizeExceededException;
@@ -8,6 +9,7 @@ import com.powerup.realestate.properties.domain.ports.in.CategoryServicePort;
 import com.powerup.realestate.properties.domain.ports.out.CategoryPersistencePort;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.DESCRIPTION_MAX_CHARACTERS;
@@ -47,5 +49,10 @@ public class CategoryUseCase implements CategoryServicePort {
     @Override
     public PageResult<CategoryModel> getCategories(Integer page, Integer size, boolean orderAsc) {
         return categoryPersistencePort.getCategories(page, size, orderAsc);
+    }
+
+    @Override
+    public List<CategoryNamesResponse> getCategoriesByNames(boolean orderAsc) {
+        return categoryPersistencePort.getCategoriesByNames(orderAsc);
     }
 }

@@ -65,6 +65,16 @@ public class PropertyUseCase implements PropertyServicePort {
                 orderAsc);
     }
 
+    @Override
+    public PageResult<PropertyModel> getAllProperties(Integer page, Integer size, String location, String category, boolean orderAsc) {
+        return propertyPersistencePort.getAllProperties(
+                page,
+                size,
+                location,
+                category,
+                orderAsc);
+    }
+
     public PropertyModel getPropertyById(Long id) {
         return propertyPersistencePort.findById(id)
                 .orElseThrow(() -> new PropertyNotFoundException("Propiedad no encontrada con ID: " + id));

@@ -43,4 +43,15 @@ public class PropertyServiceImpl implements PropertyService {
                         orderAsc)
         );
     }
+
+    @Override
+    public PageResult<PropertyResponse> getProperties(Integer page, Integer size, String location, String category, boolean orderAsc) {
+        return  propertyDtoMapper.modelListToResponseList(
+                propertyServicePort.getAllProperties(page,
+                        size,
+                        location,
+                        category,
+                        orderAsc)
+        );
+    }
 }

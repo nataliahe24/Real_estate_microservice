@@ -1,6 +1,7 @@
 package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 
 import com.powerup.realestate.properties.application.dto.request.SaveCategoryRequest;
+import com.powerup.realestate.properties.application.dto.response.CategoryNamesResponse;
 import com.powerup.realestate.properties.application.dto.response.CategoryResponse;
 import com.powerup.realestate.properties.application.dto.response.SaveCategoryResponse;
 import com.powerup.realestate.properties.application.services.CategoryService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
 
 @RestController
@@ -35,9 +37,22 @@ public class CategoryController {
     }
 
     @GetMapping("/")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     public ResponseEntity<PageResult<CategoryResponse>> getAllCategories(@RequestParam Integer page,
                                                                          @RequestParam Integer size,
                                                                          @RequestParam boolean orderAsc) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
+    }
+
+    @GetMapping("/list")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
+    public ResponseEntity<List<CategoryNamesResponse>> getCategoryNames(@RequestParam boolean orderAsc) {
+        return ResponseEntity.ok(categoryService.getCategoriesByNames(orderAsc));
     }
 }

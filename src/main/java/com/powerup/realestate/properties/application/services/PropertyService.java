@@ -22,6 +22,15 @@ public interface PropertyService {
             String sortBy,
             boolean orderAsc
 
+
+    );
+
+    PageResult<PropertyResponse> getProperties(
+            Integer page,
+            Integer size,
+            String location,
+            String category,
+            boolean orderAsc
     );
 }
 

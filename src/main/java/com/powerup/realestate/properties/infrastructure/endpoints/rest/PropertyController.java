@@ -30,6 +30,10 @@ public class PropertyController {
     }
 
     @GetMapping("/")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
     public ResponseEntity<PageResult<PropertyResponse>> getProperties(@RequestParam(defaultValue = "0") Integer page,
                                                                       @RequestParam Integer size,
                                                                       @RequestParam(required = false) String location,
@@ -52,6 +56,28 @@ public class PropertyController {
                         minPrice,
                         maxPrice,
                         sortBy,
+                        orderAsc
+                )
+        );
+    }
+
+    @GetMapping("/list")
+    @Operation(
+            summary = "Endpoint protegido",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
+    public ResponseEntity<PageResult<PropertyResponse>> getAllProperties(@RequestParam(defaultValue = "0") Integer page,
+                                                                      @RequestParam Integer size,
+                                                                      @RequestParam(required = false) String location,
+                                                                      @RequestParam(required = false) String category,
+                                                                      @RequestParam boolean orderAsc) {
+
+        return ResponseEntity.ok(
+                propertyService.getProperties(
+                        page,
+                        size,
+                        location,
+                        category,
                         orderAsc
                 )
         );
