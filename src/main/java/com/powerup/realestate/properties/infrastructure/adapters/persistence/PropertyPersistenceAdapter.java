@@ -54,7 +54,7 @@ public class PropertyPersistenceAdapter implements PropertyPersistencePort {
         List<PropertyModel> pageModel = propertyEntityMapper.entityListToModelList(propertyEntityPage.getContent());
 
 
-        return new PageResult<>(pageModel, page, size, pageModel.size()
+        return new PageResult<>(pageModel, page, size, (int) propertyEntityPage.getTotalElements()
         );
     }
 
@@ -91,17 +91,17 @@ public class PropertyPersistenceAdapter implements PropertyPersistencePort {
     public PageResult<PropertyModel> getAllProperties(Integer page, Integer size, String location, String category, boolean orderAsc) {
         Pageable pagination = PageRequest.of(page, size);
 
-        Page<PropertyEntity> propertyEntityPage = propertyRepository.findAllProperties(
+        Page<PropertyEntity> pageProperty = propertyRepository.findAllProperties(
                 location,
                 category,
                 orderAsc,
                 pagination
         );
 
-        List<PropertyModel> pageModel = propertyEntityMapper.entityListToModelList(propertyEntityPage.getContent());
+        List<PropertyModel> pageModel = propertyEntityMapper.entityListToModelList(pageProperty.getContent());
 
 
-        return new PageResult<>(pageModel, page, size, pageModel.size()
+        return new PageResult<>(pageModel, page, size, (int)  pageProperty.getTotalElements()
         );
     }
 }
