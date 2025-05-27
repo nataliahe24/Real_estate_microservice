@@ -11,5 +11,4 @@ import java.util.List;
 public interface CategoryService {
     SaveCategoryResponse save(SaveCategoryRequest request);
     PageResult<CategoryResponse> getCategories(Integer page, Integer size, boolean orderAsc);
-    List<CategoryNamesResponse> getCategoriesByNames( boolean orderAsc);
 }

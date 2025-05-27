@@ -13,9 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -34,10 +33,4 @@ public class CategoryServiceImpl implements CategoryService {
         return categoryDtoMapper.modelListToResponseList(categoryServicePort.getCategories(page, size, orderAsc));
     }
 
-    @Override
-    public List<CategoryNamesResponse> getCategoriesByNames(boolean orderAsc) {
-        return categoryDtoMapper.modelListToResponseList(
-                categoryServicePort.getCategoriesByNames(orderAsc)
-        );
-    }
 }

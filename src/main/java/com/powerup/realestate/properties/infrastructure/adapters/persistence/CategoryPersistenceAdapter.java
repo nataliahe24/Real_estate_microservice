@@ -54,13 +54,4 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
 
     }
 
-    @Override
-    public List<CategoryNamesResponse> getCategoriesByNames(boolean orderAsc) {
-        Sort sort = orderAsc
-                ? Sort.by(Constants.PAGEABLE_FIELD_NAME).ascending()
-                : Sort.by(Constants.PAGEABLE_FIELD_NAME).descending();
-
-        List<CategoryEntity> categoryEntities = categoryRepository.findAll(sort);
-        return categoryEntityMapper.findAllCategoryNames(categoryEntities);
-    }
 }

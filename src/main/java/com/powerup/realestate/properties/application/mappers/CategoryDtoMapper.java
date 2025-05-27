@@ -16,10 +16,7 @@ import java.util.List;
 public interface CategoryDtoMapper {
     CategoryModel requestToModel(SaveCategoryRequest saveCategoryRequest);
 
-    List<CategoryNamesResponse> modelListToResponseList (List<CategoryNamesResponse> categories);
-
-    default CategoryModel toCategoryModel(Long id) {
-        return CategoryModel.builder().id(id).build();
+    default CategoryModel toCategoryModel(Long id) {return CategoryModel.builder().id(id).build();
     }
     default Long toCategoryId(CategoryModel categoryModel) {
         return categoryModel.getId();

@@ -46,13 +46,4 @@ public class CategoryController {
                                                                          @RequestParam boolean orderAsc) {
         return ResponseEntity.ok(categoryService.getCategories(page, size, orderAsc));
     }
-
-    @GetMapping("/list")
-    @Operation(
-            summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    public ResponseEntity<List<CategoryNamesResponse>> getCategoryNames(@RequestParam boolean orderAsc) {
-        return ResponseEntity.ok(categoryService.getCategoriesByNames(orderAsc));
-    }
 }

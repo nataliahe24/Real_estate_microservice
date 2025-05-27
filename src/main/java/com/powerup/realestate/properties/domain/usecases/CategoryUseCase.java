@@ -51,8 +51,4 @@ public class CategoryUseCase implements CategoryServicePort {
         return categoryPersistencePort.getCategories(page, size, orderAsc);
     }
 
-    @Override
-    public List<CategoryNamesResponse> getCategoriesByNames(boolean orderAsc) {
-        return categoryPersistencePort.getCategoriesByNames(orderAsc);
-    }
 }

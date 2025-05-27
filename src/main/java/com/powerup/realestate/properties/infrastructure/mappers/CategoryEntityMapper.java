@@ -12,5 +12,4 @@ public interface CategoryEntityMapper {
     CategoryEntity modelToEntity(CategoryModel categoryModel);
     CategoryModel entityToModel(CategoryEntity categoryEntity);
     List<CategoryModel> entityListToModelList(List<CategoryEntity> categories);
-    List<CategoryNamesResponse> findAllCategoryNames(List<CategoryEntity> categoryEntities);
 }
