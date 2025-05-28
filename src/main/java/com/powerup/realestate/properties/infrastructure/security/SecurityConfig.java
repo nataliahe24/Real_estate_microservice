@@ -3,6 +3,7 @@ package com.powerup.realestate.properties.infrastructure.security;
 import com.powerup.realestate.properties.infrastructure.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
@@ -36,12 +40,17 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**"
                         ).permitAll()
-                        .requestMatchers("/api/v1/category/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/location/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/users/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/properties/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/visit-schedules/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/visit-schedules/filter").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/category/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/category/**").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/api/v1/location/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/location/**").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/api/v1/properties/**").hasRole("SELLER")
+                        .requestMatchers(HttpMethod.GET,"/api/v1/properties/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET,"/api/v1/visit/").permitAll()
+                        .requestMatchers("/api/v1/visit/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
