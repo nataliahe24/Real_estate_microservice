@@ -149,4 +149,9 @@ public class VisitSchedulePersistenceAdapter implements VisitSchedulePersistence
                 (int) entityPage.getTotalElements()
         );
     }
+
+    @Override
+    public boolean existsByPropertyAndScheduleOverlap(Long propertyId, LocalDateTime startDate, LocalDateTime endDate) {
+        return visitScheduleRepository.existsByPropertyAndScheduleOverlap(propertyId , startDate, endDate);
+    }
 } 

@@ -2,6 +2,7 @@ package com.powerup.realestate.properties.infrastructure.exceptionshandler;
 
 import com.powerup.realestate.properties.domain.exceptions.InvalidVisitDateException;
 import com.powerup.realestate.properties.domain.exceptions.PropertyNotFoundException;
+import com.powerup.realestate.properties.domain.exceptions.ScheduleConflictException;
 import com.powerup.realestate.properties.domain.exceptions.UnauthorizedSellerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,14 @@ public class VisitScheduleControllerAdvisor {
                 .badRequest()
                 .body(new VisitScheduleExceptionResponse(
                         VisitScheduleExceptionConstants.INVALID_VISIT_DATE_EXCEPTION,
+                        LocalDateTime.now()));
+    }
+    @ExceptionHandler (ScheduleConflictException.class)
+    public ResponseEntity<VisitScheduleExceptionResponse> handleInvalidSchedule(ScheduleConflictException exception) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new VisitScheduleExceptionResponse(
+                        VisitScheduleExceptionConstants.SCHEDULE_EXIST,
                         LocalDateTime.now()));
     }
     

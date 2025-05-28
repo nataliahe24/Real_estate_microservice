@@ -32,4 +32,6 @@ public interface VisitSchedulePersistencePort {
                                                         String location,
                                                         Integer page,
                                                         Integer size);
+
+    boolean existsByPropertyAndScheduleOverlap(Long id, LocalDateTime startDate, LocalDateTime endDate);
 }

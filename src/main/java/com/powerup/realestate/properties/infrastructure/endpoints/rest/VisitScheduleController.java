@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/visit-schedules")
+@RequestMapping("/api/v1/visit")
 @RequiredArgsConstructor
 public class VisitScheduleController {
     private final VisitScheduleService visitScheduleService;
@@ -37,7 +37,7 @@ public class VisitScheduleController {
             summary = "Endpoint protegido",
             security = @SecurityRequirement(name = "bearerAuth")
     )
-    public ResponseEntity<List<VisitScheduleResponse>> getSchedulesByPropertyId(@PathVariable Long propertyId) {
+    public ResponseEntity<List<VisitScheduleResponse>> getSchedulesByPropertyId(@RequestParam Long propertyId) {
         return ResponseEntity.ok(visitScheduleService.getSchedulesByPropertyId(propertyId));
     }
 
@@ -46,7 +46,7 @@ public class VisitScheduleController {
             summary = "Endpoint protegido",
             security = @SecurityRequirement(name = "bearerAuth")
     )
-    public ResponseEntity<List<VisitScheduleResponse>> getSchedulesBySellerId(@PathVariable Long sellerId) {
+    public ResponseEntity<List<VisitScheduleResponse>> getSchedulesBySellerId(@RequestParam Long sellerId) {
         return ResponseEntity.ok(visitScheduleService.getSchedulesBySellerId(sellerId));
     }
 

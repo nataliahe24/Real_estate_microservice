@@ -10,4 +10,5 @@ public final class VisitScheduleDomainConstants {
     public static final String SAVE_VISIT_SCHEDULE_RESPONSE_MESSAGE = "Horario de visita creado exitosamente.";
     public static final String UNAUTHORIZED_SELLER_MESSAGE = "El vendedor no es propietario de esta propiedad.";
     public static final String PROPERTY_NOT_FOUND_MESSAGE = "Propiedad no encontrada";
+    public static final String SCHEDULE_ALL_EXIST = "Ya existe una visita agendada en ese rango de fechas y horas.";
 } 

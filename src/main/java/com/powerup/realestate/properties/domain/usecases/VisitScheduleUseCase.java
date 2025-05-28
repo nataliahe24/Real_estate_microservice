@@ -1,6 +1,7 @@
 package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.exceptions.PropertyNotFoundException;
+import com.powerup.realestate.properties.domain.exceptions.ScheduleConflictException;
 import com.powerup.realestate.properties.domain.exceptions.UnauthorizedSellerException;
 import com.powerup.realestate.properties.domain.model.PropertyModel;
 import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
@@ -14,8 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.PROPERTY_NOT_FOUND_MESSAGE;
-import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.UNAUTHORIZED_SELLER_MESSAGE;
+import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.*;
 
 @Component
 @RequiredArgsConstructor
@@ -28,6 +28,8 @@ public class VisitScheduleUseCase {
                 .orElseThrow(() -> new PropertyNotFoundException(PROPERTY_NOT_FOUND_MESSAGE));
 
         validateSellerOwnsProperty(visitSchedule.getSellerId(), property);
+
+        validateSchedule(property,visitSchedule.getStartDate(),visitSchedule.getEndDate() );
         
         visitSchedulePersistencePort.save(visitSchedule);
         return visitSchedule;
@@ -38,8 +40,18 @@ public class VisitScheduleUseCase {
             throw new UnauthorizedSellerException(UNAUTHORIZED_SELLER_MESSAGE);
         }
     }
-    
-    public List<VisitScheduleModel> getSchedulesByPropertyId(Long propertyId) {
+
+    private void validateSchedule(PropertyModel property, LocalDateTime startDate, LocalDateTime endDate) {
+        boolean existsConflict = visitSchedulePersistencePort.existsByPropertyAndScheduleOverlap(
+                property.getId(), startDate, endDate
+        );
+
+        if (existsConflict) {
+            throw new ScheduleConflictException(SCHEDULE_ALL_EXIST);
+        }
+    }
+
+        public List<VisitScheduleModel> getSchedulesByPropertyId(Long propertyId) {
         return visitSchedulePersistencePort.findByPropertyId(propertyId);
     }
     

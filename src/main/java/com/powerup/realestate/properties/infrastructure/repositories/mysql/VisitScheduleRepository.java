@@ -57,4 +57,14 @@ public interface VisitScheduleRepository extends JpaRepository<VisitScheduleEnti
            countQuery = "SELECT COUNT(*) FROM visit_schedule_entity v",
            nativeQuery = true)
     Page<VisitScheduleEntity> findAllVisitsSimple(Pageable pageable);
+
+    @Query("SELECT COUNT(v) > 0 FROM VisitScheduleEntity v " +
+            "WHERE v.property.id = :propertyId " +
+            "AND (:startDate < v.endDate AND :endDate > v.startDate)")
+    boolean existsByPropertyAndScheduleOverlap(
+            @Param("propertyId") Long propertyId,
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate
+    );
+
 } 
