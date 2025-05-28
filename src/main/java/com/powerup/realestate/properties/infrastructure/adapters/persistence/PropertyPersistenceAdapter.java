@@ -32,7 +32,7 @@ public class PropertyPersistenceAdapter implements PropertyPersistencePort {
     }
 
     @Override
-    public PageResult<PropertyModel> getProperties(Integer page, Integer size, String location, String category, Integer rooms, Integer bathrooms, Double minPrice, Double maxPrice, String sortBy, boolean orderAsc) {
+    public PageResult<PropertyModel> getProperties(Long sellerId, Integer page, Integer size, String location, String category, Integer rooms, Integer bathrooms, Double minPrice, Double maxPrice, String sortBy, boolean orderAsc) {
 
         Sort sort = orderAsc
                 ? Sort.by(sortBy).ascending()
@@ -40,6 +40,7 @@ public class PropertyPersistenceAdapter implements PropertyPersistencePort {
         Pageable pagination = PageRequest.of(page, size, sort);
 
         Page<PropertyEntity> propertyEntityPage = propertyRepository.findPropertiesWithFiltersAndOrder(
+                sellerId,
                 location,
                 category,
                 rooms,

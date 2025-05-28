@@ -49,10 +49,11 @@ public class PropertyUseCase implements PropertyServicePort {
     }
 
     @Override
-    public PageResult<PropertyModel> getProperties(Integer page, Integer size, String location,
+    public PageResult<PropertyModel> getProperties(Long sellerId, Integer page, Integer size, String location,
                                                    String category, Integer rooms, Integer bathrooms,
                                                    Double minPrice, Double maxPrice, String sortBy, boolean orderAsc) {
         return propertyPersistencePort.getProperties(
+                sellerId,
                 page,
                 size,
                 location,
@@ -61,8 +62,7 @@ public class PropertyUseCase implements PropertyServicePort {
                 bathrooms,
                 minPrice,
                 maxPrice,
-                sortBy,
-                orderAsc);
+                sortBy, orderAsc);
     }
 
     @Override

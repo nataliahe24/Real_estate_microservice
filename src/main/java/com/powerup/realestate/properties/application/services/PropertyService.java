@@ -11,6 +11,7 @@ import com.powerup.realestate.properties.domain.utils.page.PageResult;
 public interface PropertyService {
     SavePropertyResponse save(SavePropertyRequest request);
     PageResult<PropertyResponse> getPropertiesByFiltersAndOrder(
+            Long sellerId,
             Integer page,
             Integer size,
             String location,

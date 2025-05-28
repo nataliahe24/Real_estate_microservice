@@ -20,6 +20,7 @@ public interface PropertyRepository extends JpaRepository<PropertyEntity, Long> 
             "JOIN city_entity ci ON l.city_id = ci.id " +
             "JOIN department_entity d ON ci.department_id = d.id " +
             "WHERE p.publication_status = 'PUBLISHED' " +
+            "AND (:sellerId IS NULL OR p.seller_id = :sellerId) " +
             "AND (:location IS NULL OR " +
             "     LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
             "     LOWER(ci.name) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
@@ -48,6 +49,7 @@ public interface PropertyRepository extends JpaRepository<PropertyEntity, Long> 
 
             nativeQuery = true)
     Page<PropertyEntity> findPropertiesWithFiltersAndOrder(
+            @Param("sellerId") Long sellerId,
             @Param("location") String location,
             @Param("propertyCategory") String category,
             @Param("rooms") Integer rooms,

@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface PropertyPersistencePort {
     void save(PropertyModel propertyModel);
     PageResult<PropertyModel> getProperties(
+            Long sellerId,
             Integer page,
             Integer size,
             String location,
