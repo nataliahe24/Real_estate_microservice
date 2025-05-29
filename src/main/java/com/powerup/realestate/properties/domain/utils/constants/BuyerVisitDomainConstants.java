@@ -11,7 +11,7 @@ public class BuyerVisitDomainConstants {
     public static final String PAST_SCHEDULE_ERROR = "No se puede agendar una visita en un horario que ya pasó";
     public static final String INVALID_EMAIL_FORMAT_MESSAGE = "El formato del correo electrónico no es válido";
     
-    // Constantes para validación de email
+
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
     public static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX);
 } 

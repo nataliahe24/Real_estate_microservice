@@ -1,11 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.exceptionshandler;
 
-import com.powerup.realestate.properties.domain.exceptions.BuyerEmailNotNullException;
-import com.powerup.realestate.properties.domain.exceptions.InvalidVisitScheduleException;
-import com.powerup.realestate.properties.domain.exceptions.MaxVisistException;
-import com.powerup.realestate.properties.domain.exceptions.ScheduleIdNotNullException;
-import com.powerup.realestate.properties.domain.exceptions.ScheduleNotFountExceptions;
-import com.powerup.realestate.properties.domain.exceptions.InvalidEmailFormatException;
+import com.powerup.realestate.properties.domain.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,9 +19,17 @@ public class BuyerVisitControllerAdvisor {
                         BuyerVisitExceptionConstants.VISIT_SCHEDULE_NOT_FOUND_EXCEPTION,
                         LocalDateTime.now()));
     }
+    @ExceptionHandler(VisitAlreadyScheduled.class)
+    public ResponseEntity<BuyerVisitExceptionResponse> VisitAlreadyScheduledException (VisitAlreadyScheduled exception) {
+        return ResponseEntity
+                .badRequest()
+                .body(new BuyerVisitExceptionResponse(
+                        BuyerVisitExceptionConstants.BUYER_ALREADY_SCHEDULED,
+                        LocalDateTime.now()));
+    }
 
-    @ExceptionHandler(MaxVisistException.class)
-    public ResponseEntity<BuyerVisitExceptionResponse> handleMaxVisistException(MaxVisistException exception) {
+    @ExceptionHandler(MaxVisitException.class)
+    public ResponseEntity<BuyerVisitExceptionResponse> handleMaxVisitException(MaxVisitException exception) {
         return ResponseEntity
                 .badRequest()
                 .body(new BuyerVisitExceptionResponse(
