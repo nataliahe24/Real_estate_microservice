@@ -3,12 +3,10 @@ package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 import com.powerup.realestate.properties.application.dto.request.ScheduleBuyerVisitRequest;
 import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerVisitResponse;
 import com.powerup.realestate.properties.application.services.BuyerVisitService;
-import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +39,7 @@ public class BuyerVisitController {
     )
     public ResponseEntity<List<ScheduleBuyerVisitResponse>> getBuyerVisitsByScheduleId(
             @RequestParam String buyerEmail) {
-        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByScheduleId(buyerEmail));
+        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByEmail(buyerEmail));
     }
     
     @DeleteMapping("/{visitId}")

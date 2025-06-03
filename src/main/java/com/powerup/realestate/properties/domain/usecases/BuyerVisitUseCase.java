@@ -31,7 +31,7 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
     @Override
     public void scheduleBuyerVisit(BuyerVisitModel buyerVisit) {
 
-        Long scheduleId = buyerVisit.getVisitScheduleId();
+        Long scheduleId = buyerVisit.getVisitSchedule().getId();
         if (scheduleId == null) {
             throw new ScheduleIdNotNullException(FIELD_VISIT_SCHEDULE_ID_NULL_MESSAGE);
         }
@@ -91,7 +91,7 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
     @Override
     public void cancelBuyerVisit(Long visitId) {
         buyerVisitPersistencePort.findById(visitId).ifPresent(visit -> {
-            Long scheduleId = visit.getVisitScheduleId();
+            Long scheduleId = visit.getId();
             buyerVisitPersistencePort.delete(visitId);
             syncScheduledBuyersCounter(scheduleId);
         });

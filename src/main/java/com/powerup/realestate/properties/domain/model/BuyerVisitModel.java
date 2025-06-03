@@ -13,18 +13,18 @@ import static com.powerup.realestate.properties.domain.utils.constants.BuyerVisi
 public class BuyerVisitModel {
     @Setter
     private Long id;
-    private Long visitScheduleId;
+    private VisitScheduleModel visitSchedule;
     private String buyerEmail;
     
     // Constructor personalizado con validaciones
-    public BuyerVisitModel(Long id, Long visitScheduleId, String buyerEmail) {
+    public BuyerVisitModel(Long id, VisitScheduleModel visitSchedule, String buyerEmail) {
         this.id = id;
-        this.visitScheduleId = Objects.requireNonNull(visitScheduleId, FIELD_VISIT_SCHEDULE_ID_NULL_MESSAGE);
+        this.visitSchedule = Objects.requireNonNull(visitSchedule, FIELD_VISIT_SCHEDULE_ID_NULL_MESSAGE);
         this.buyerEmail = Objects.requireNonNull(buyerEmail, FIELD_BUYER_EMAIL_NULL_MESSAGE);
     }
     
-    public void setVisitScheduleId(Long visitScheduleId) {
-        this.visitScheduleId = Objects.requireNonNull(visitScheduleId, FIELD_VISIT_SCHEDULE_ID_NULL_MESSAGE);
+    public void setVisitSchedule(VisitScheduleModel visitSchedule) {
+        this.visitSchedule = Objects.requireNonNull(visitSchedule, FIELD_VISIT_SCHEDULE_ID_NULL_MESSAGE);
     }
     
     public void setBuyerEmail(String buyerEmail) {

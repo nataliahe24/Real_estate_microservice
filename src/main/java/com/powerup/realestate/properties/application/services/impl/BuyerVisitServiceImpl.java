@@ -36,7 +36,7 @@ public class BuyerVisitServiceImpl implements BuyerVisitService {
     
     @Override
     @Transactional(readOnly = true)
-    public List<ScheduleBuyerVisitResponse> getBuyerVisitsByScheduleId(String buyerEmail) {
+    public List<ScheduleBuyerVisitResponse> getBuyerVisitsByEmail(String buyerEmail) {
         List<BuyerVisitModel> visits = buyerVisitServicePort.getBuyerVisitsByScheduleId(buyerEmail);
         return buyerVisitDtoMapper.modelListToResponseList(visits);
     }

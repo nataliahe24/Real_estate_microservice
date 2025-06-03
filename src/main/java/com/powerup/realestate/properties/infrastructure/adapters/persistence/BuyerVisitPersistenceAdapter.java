@@ -37,33 +37,31 @@ public class BuyerVisitPersistenceAdapter implements BuyerVisitPersistencePort {
     @Transactional
     public void save(BuyerVisitModel buyerVisit) {
         try {
-            // Verificar que el horario existe
-            Long scheduleId = buyerVisit.getVisitScheduleId();
+
+            Long scheduleId = buyerVisit.getVisitSchedule().getId();
             if (!visitScheduleRepository.existsById(scheduleId)) {
                 throw new PropertyNotFoundException("El horario de visita no existe");
             }
-            
-            // Verificar si ya se alcanzó el límite de agendamientos
+
             int currentCount = countByVisitScheduleId(scheduleId);
             if (currentCount >= 2) {
                 throw new IllegalStateException("Este horario ya tiene el máximo de 2 compradores agendados");
             }
-            
-            // Crear la entidad BuyerVisit
+
             BuyerVisitEntity entity = buyerVisitEntityMapper.toEntity(buyerVisit);
             
-            // Obtener la entidad VisitSchedule
+
             VisitScheduleEntity visitSchedule = visitScheduleRepository
                     .findById(scheduleId)
                     .orElseThrow(() -> new PropertyNotFoundException("El horario de visita no existe"));
             
-            // Establecer la relación
+
             entity.setVisitSchedule(visitSchedule);
             
-            // Guardar la entidad BuyerVisit
+
             BuyerVisitEntity savedEntity = buyerVisitRepository.save(entity);
             
-            // Actualizar el ID en el modelo
+
             buyerVisit.setId(savedEntity.getId());
             
         } catch (Exception e) {

@@ -1,20 +1,26 @@
 package com.powerup.realestate.properties.infrastructure.mappers;
 
-import com.powerup.realestate.properties.domain.model.PropertyModel;
 import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
-import com.powerup.realestate.properties.infrastructure.entities.PropertyEntity;
 import com.powerup.realestate.properties.infrastructure.entities.VisitScheduleEntity;
-import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface VisitScheduleEntityMapper {
-
-    VisitScheduleEntity toEntity(VisitScheduleModel model);
+    
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "startDate", source = "startDate")
+    @Mapping(target = "endDate", source = "endDate")
     VisitScheduleModel toModel(VisitScheduleEntity entity);
-   List<VisitScheduleModel> toModelList(List<VisitScheduleEntity> entities);
+    
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "startDate", source = "startDate")
+    @Mapping(target = "endDate", source = "endDate")
+    VisitScheduleEntity toEntity(VisitScheduleModel model);
+    
+    List<VisitScheduleModel> toModelList(List<VisitScheduleEntity> entities);
 }
