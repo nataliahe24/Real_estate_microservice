@@ -36,7 +36,7 @@ public class PropertyController {
     )
     public ResponseEntity<PageResult<PropertyResponse>> getProperties(@RequestParam(defaultValue = "0") Integer page,
                                                                       @RequestParam Integer size,
-                                                                      @RequestParam Long sellerId,
+                                                                      @RequestParam (required = false) Long sellerId,
                                                                       @RequestParam(required = false) String location,
                                                                       @RequestParam(required = false) String category,
                                                                       @RequestParam(required = false) Integer rooms,
