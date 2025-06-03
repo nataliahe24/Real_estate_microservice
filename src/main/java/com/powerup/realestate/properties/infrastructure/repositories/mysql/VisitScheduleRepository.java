@@ -22,8 +22,8 @@ public interface VisitScheduleRepository extends JpaRepository<VisitScheduleEnti
             "JOIN location_entity l ON p.location_id = l.id " +
             "JOIN city_entity ci ON l.city_id = ci.id " +
             "JOIN department_entity d ON ci.department_id = d.id " +
-            "WHERE " +
-            "(:startDate IS NULL OR v.start_date >= :startDate) " +
+            "WHERE v.start_date >= CURRENT_TIMESTAMP " + // ✅ NUEVA CONDICIÓN AQUÍ
+            "AND (:startDate IS NULL OR v.start_date >= :startDate) " +
             "AND (:endDate IS NULL OR v.end_date <= :endDate) " +
             "AND (:location IS NULL OR ( " +
             "     LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
@@ -37,8 +37,8 @@ public interface VisitScheduleRepository extends JpaRepository<VisitScheduleEnti
                     "JOIN location_entity l ON p.location_id = l.id " +
                     "JOIN city_entity ci ON l.city_id = ci.id " +
                     "JOIN department_entity d ON ci.department_id = d.id " +
-                    "WHERE " +
-                    "(:startDate IS NULL OR v.start_date >= :startDate) " +
+                    "WHERE v.start_date >= CURRENT_TIMESTAMP " +
+                    "AND (:startDate IS NULL OR v.start_date >= :startDate) " +
                     "AND (:endDate IS NULL OR v.end_date <= :endDate) " +
                     "AND (:location IS NULL OR ( " +
                     "     LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :location, '%')) OR " +
