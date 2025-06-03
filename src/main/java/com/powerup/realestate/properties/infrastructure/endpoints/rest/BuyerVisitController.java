@@ -1,6 +1,7 @@
 package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 
 import com.powerup.realestate.properties.application.dto.request.ScheduleBuyerVisitRequest;
+import com.powerup.realestate.properties.application.dto.response.SaveScheduleBuyerResponse;
 import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerVisitResponse;
 import com.powerup.realestate.properties.application.services.BuyerVisitService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -25,7 +26,7 @@ public class BuyerVisitController {
             summary = "Agendar una visita de comprador",
             security = @SecurityRequirement(name = "bearerAuth")
     )
-    public ResponseEntity<ScheduleBuyerVisitResponse> scheduleBuyerVisit(
+    public ResponseEntity<SaveScheduleBuyerResponse> scheduleBuyerVisit(
             @Valid @RequestBody ScheduleBuyerVisitRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)

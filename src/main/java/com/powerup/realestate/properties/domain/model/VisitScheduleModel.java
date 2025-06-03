@@ -25,7 +25,7 @@ public class VisitScheduleModel {
     public VisitScheduleModel(Long id, Long sellerId, PropertyModel property, 
                              LocalDateTime startDate, LocalDateTime endDate, Integer scheduledBuyers) {
         this.id = id;
-        this.sellerId = Objects.requireNonNull(sellerId, FIELD_SELLER_ID_NULL_MESSAGE);
+        this.sellerId = sellerId;
         this.property = Objects.requireNonNull(property, FIELD_PROPERTY_NULL_MESSAGE);
         this.startDate = Objects.requireNonNull(startDate, FIELD_START_DATE_NULL_MESSAGE);
         this.endDate = Objects.requireNonNull(endDate, FIELD_END_DATE_NULL_MESSAGE);

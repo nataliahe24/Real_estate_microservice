@@ -29,6 +29,7 @@ public class PropertyModel {
     private final int bathrooms;
     private BigDecimal price;
     private LocationModel location;
+    @Setter
     private LocalDate activePublicationDate;
     @Setter
     private PublicationStatus publicationStatus;
@@ -66,26 +67,22 @@ public class PropertyModel {
     }
 
     public void setName(String name) {
-        this.name = Objects.requireNonNull(name, FIELD_NAME_NULL_MESSAGE);
+        this.name = name;
     }
 
     public void setAddress(String address) {
-        this.address = Objects.requireNonNull(address, FIELD_ADDRESS_NULL_MESSAGE);
+        this.address = address;
     }
 
     public void setDescription(String description) {
-        this.description = Objects.requireNonNull(description, FIELD_DESCRIPTION_NULL_MESSAGE);
+        this.description = description;
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = Objects.requireNonNull(price, FIELD_PRICE_NULL_MESSAGE);
-    }
-
-    public void setActivePublicationDate(LocalDate activePublicationDate) {
-        this.activePublicationDate = Objects.requireNonNull(activePublicationDate, FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE);
+        this.price = price;
     }
 
     public void setSellerId(Long sellerId) {
-        this.sellerId = Objects.requireNonNull(sellerId, FIELD_SELLER_ID_NULL_MESSAGE);
+        this.sellerId = sellerId;
     }
 }

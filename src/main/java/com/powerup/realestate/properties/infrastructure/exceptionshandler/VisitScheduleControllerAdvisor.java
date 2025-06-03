@@ -81,7 +81,7 @@ public class VisitScheduleControllerAdvisor {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new VisitScheduleExceptionResponse(
-                        "Error interno del servidor: " + exception.getMessage(),
+                        "Error interno del servidor" + exception.getMessage(),
                         LocalDateTime.now()));
     }
 } 

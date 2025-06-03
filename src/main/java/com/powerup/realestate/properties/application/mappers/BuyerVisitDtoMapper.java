@@ -17,7 +17,7 @@ public interface BuyerVisitDtoMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "visitSchedule.id", source = "scheduleId")
     BuyerVisitModel requestToModel(ScheduleBuyerVisitRequest request);
-    
+
     @Mapping(target = "scheduleId", source = "visitSchedule.id")
     @Mapping(target = "startDate", source = "visitSchedule.startDate")
     @Mapping(target = "endDate", source = "visitSchedule.endDate")
