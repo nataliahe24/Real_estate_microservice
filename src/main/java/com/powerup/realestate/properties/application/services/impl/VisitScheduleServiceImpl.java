@@ -1,7 +1,6 @@
 package com.powerup.realestate.properties.application.services.impl;
 
-import com.powerup.realestate.commons.configurations.utils.Constants;
-import com.powerup.realestate.properties.application.dto.request.FilterVisitScheduleRequest;
+import com.powerup.realestate.properties.application.dto.request.VisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.request.SaveVisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.response.SaveVisitScheduleResponse;
 import com.powerup.realestate.properties.application.dto.response.VisitScheduleResponse;
@@ -77,7 +76,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
     }
     
     @Override
-    public PageResult<VisitScheduleResponse> getFilteredSchedules(FilterVisitScheduleRequest request) {
+    public PageResult<VisitScheduleResponse> getFilteredSchedules(VisitScheduleRequest request) {
         PageResult<VisitScheduleModel> pageResult = visitScheduleUseCase.getFilteredSchedules(
                 request.startDate(),
                 request.endDate(),
