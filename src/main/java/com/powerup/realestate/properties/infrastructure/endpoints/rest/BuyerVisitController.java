@@ -3,6 +3,7 @@ package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 import com.powerup.realestate.properties.application.dto.request.ScheduleBuyerVisitRequest;
 import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerVisitResponse;
 import com.powerup.realestate.properties.application.services.BuyerVisitService;
+import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -35,22 +36,12 @@ public class BuyerVisitController {
     
     @GetMapping("/")
     @Operation(
-            summary = "Obtener visitas para un horario específico",
+            summary = "Obtener visitas",
             security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<List<ScheduleBuyerVisitResponse>> getBuyerVisitsByScheduleId(
-            @RequestParam Long scheduleId) {
-        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByScheduleId(scheduleId));
-    }
-    
-    @PostMapping("/sync-counters/{scheduleId}")
-    @Operation(
-            summary = "Sincronizar contador de agendamientos para un horario específico",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    public ResponseEntity<String> syncScheduledBuyersCounter(@RequestParam Long scheduleId) {
-        buyerVisitService.syncScheduledBuyersCounter(scheduleId);
-        return ResponseEntity.ok("Contador sincronizado correctamente");
+            @RequestParam String buyerEmail) {
+        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByScheduleId(buyerEmail));
     }
     
     @DeleteMapping("/{visitId}")

@@ -2,6 +2,7 @@ package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.exceptions.*;
 import com.powerup.realestate.properties.domain.model.BuyerVisitModel;
+import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import com.powerup.realestate.properties.domain.ports.in.BuyerVisitServicePort;
 import com.powerup.realestate.properties.domain.ports.out.BuyerVisitPersistencePort;
 import com.powerup.realestate.properties.domain.ports.out.VisitSchedulePersistencePort;
@@ -77,8 +78,8 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
     }
     
     @Override
-    public List<BuyerVisitModel> getBuyerVisitsByScheduleId(Long scheduleId) {
-        return buyerVisitPersistencePort.findByVisitScheduleId(scheduleId);
+    public List<BuyerVisitModel> getBuyerVisitsByScheduleId(String buyerEmail) {
+        return buyerVisitPersistencePort.findByVisitScheduleId(buyerEmail);
     }
     
     @Override

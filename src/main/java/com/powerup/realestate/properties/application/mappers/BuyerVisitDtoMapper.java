@@ -10,7 +10,9 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = "spring",
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+         uses = {VisitScheduleDtoMapper.class})
+
 public interface BuyerVisitDtoMapper {
 
     @Mapping(target = "id", ignore = true)

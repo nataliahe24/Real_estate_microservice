@@ -5,6 +5,7 @@ import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerV
 import com.powerup.realestate.properties.application.mappers.BuyerVisitDtoMapper;
 import com.powerup.realestate.properties.application.services.BuyerVisitService;
 import com.powerup.realestate.properties.domain.model.BuyerVisitModel;
+import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import com.powerup.realestate.properties.domain.ports.in.BuyerVisitServicePort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,8 @@ public class BuyerVisitServiceImpl implements BuyerVisitService {
     
     @Override
     @Transactional(readOnly = true)
-    public List<ScheduleBuyerVisitResponse> getBuyerVisitsByScheduleId(Long scheduleId) {
-        List<BuyerVisitModel> visits = buyerVisitServicePort.getBuyerVisitsByScheduleId(scheduleId);
+    public List<ScheduleBuyerVisitResponse> getBuyerVisitsByScheduleId(String buyerEmail) {
+        List<BuyerVisitModel> visits = buyerVisitServicePort.getBuyerVisitsByScheduleId(buyerEmail);
         return buyerVisitDtoMapper.modelListToResponseList(visits);
     }
     

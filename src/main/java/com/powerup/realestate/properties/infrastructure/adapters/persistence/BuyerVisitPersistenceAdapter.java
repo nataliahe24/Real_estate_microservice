@@ -2,6 +2,7 @@ package com.powerup.realestate.properties.infrastructure.adapters.persistence;
 
 import com.powerup.realestate.properties.domain.exceptions.PropertyNotFoundException;
 import com.powerup.realestate.properties.domain.model.BuyerVisitModel;
+import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import com.powerup.realestate.properties.domain.ports.out.BuyerVisitPersistencePort;
 import com.powerup.realestate.properties.infrastructure.entities.BuyerVisitEntity;
 import com.powerup.realestate.properties.infrastructure.entities.VisitScheduleEntity;
@@ -71,8 +72,8 @@ public class BuyerVisitPersistenceAdapter implements BuyerVisitPersistencePort {
     }
     
     @Override
-    public List<BuyerVisitModel> findByVisitScheduleId(Long visitScheduleId) {
-        List<BuyerVisitEntity> entities = buyerVisitRepository.findByVisitScheduleId(visitScheduleId);
+    public List<BuyerVisitModel> findByVisitScheduleId(String buyerEmail) {
+        List<BuyerVisitEntity> entities = buyerVisitRepository.findByVisitScheduleId(buyerEmail);
         return buyerVisitEntityMapper.toModelList(entities);
     }
     
