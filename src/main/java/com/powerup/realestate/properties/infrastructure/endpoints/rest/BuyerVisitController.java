@@ -42,7 +42,7 @@ public class BuyerVisitController {
         return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByEmail(buyerEmail));
     }
     
-    @DeleteMapping("/{visitId}")
+    @DeleteMapping("/cancel")
     @Operation(
             summary = "Cancelar una visita agendada",
             security = @SecurityRequirement(name = "bearerAuth")
