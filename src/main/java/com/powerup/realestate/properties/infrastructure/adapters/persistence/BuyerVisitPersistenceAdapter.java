@@ -95,6 +95,6 @@ public class BuyerVisitPersistenceAdapter implements BuyerVisitPersistencePort {
     @Override
     @Transactional
     public void delete(Long visitId) {
-        buyerVisitRepository.deleteById(visitId);
+        buyerVisitRepository.deleteVisitById(visitId);
     }
 } 

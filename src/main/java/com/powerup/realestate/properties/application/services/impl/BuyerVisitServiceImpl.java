@@ -17,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.powerup.realestate.properties.domain.utils.constants.BuyerVisitDomainConstants.*;
-
 @Service
 public class BuyerVisitServiceImpl implements BuyerVisitService {
     
@@ -58,7 +56,7 @@ public class BuyerVisitServiceImpl implements BuyerVisitService {
     @Override
     @Transactional(readOnly = true)
     public List<ScheduleBuyerVisitResponse> getBuyerVisitsByEmail(String buyerEmail) {
-        List<BuyerVisitModel> visits = buyerVisitServicePort.getBuyerVisitsByScheduleId(buyerEmail);
+        List<BuyerVisitModel> visits = buyerVisitServicePort.getBuyerVisitsByEmail(buyerEmail);
         return buyerVisitDtoMapper.modelListToResponseList(visits);
     }
     

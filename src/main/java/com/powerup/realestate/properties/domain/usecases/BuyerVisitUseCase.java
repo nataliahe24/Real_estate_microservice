@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.time.LocalDateTime;
-
+import java.util.stream.Collectors;
 
 import static com.powerup.realestate.properties.domain.utils.constants.BuyerVisitDomainConstants.*;
 
@@ -30,27 +30,22 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
     
     @Override
     public void scheduleBuyerVisit(BuyerVisitModel buyerVisit) {
-
         Long scheduleId = buyerVisit.getVisitSchedule().getId();
         if (scheduleId == null) {
             throw new ScheduleIdNotNullException(FIELD_VISIT_SCHEDULE_ID_NULL_MESSAGE);
         }
-
 
         String buyerEmail = buyerVisit.getBuyerEmail();
         if (buyerEmail == null || buyerEmail.trim().isEmpty()) {
             throw new BuyerEmailNotNullException(FIELD_BUYER_EMAIL_NULL_MESSAGE);
         }
         
-
         validateEmailFormat(buyerEmail);
-
 
         if (!visitSchedulePersistencePort.existsById(scheduleId)) {
             throw new ScheduleNotFountExceptions(SCHEDULE_NOT_FOUND);
         }
         
-
         visitSchedulePersistencePort.findById(scheduleId)
             .ifPresent(schedule -> {
                 LocalDateTime now = LocalDateTime.now();
@@ -64,22 +59,24 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
             throw new VisitAlreadyScheduled(BUYER_ALREADY_SCHEDULED);
         }
         
-
         int visitsCount = buyerVisitPersistencePort.countByVisitScheduleId(scheduleId);
         if (visitsCount >= 2) {
             throw new MaxVisitException(MAX_VISITORS_EXCEEDED);
         }
 
-
         buyerVisitPersistencePort.save(buyerVisit);
         
-
         syncScheduledBuyersCounter(scheduleId);
     }
     
     @Override
-    public List<BuyerVisitModel> getBuyerVisitsByScheduleId(String buyerEmail) {
-        return buyerVisitPersistencePort.findByVisitScheduleId(buyerEmail);
+    public List<BuyerVisitModel> getBuyerVisitsByEmail(String buyerEmail) {
+        List<BuyerVisitModel> allVisits = buyerVisitPersistencePort.findByVisitScheduleId(buyerEmail);
+        LocalDateTime now = LocalDateTime.now();
+        
+        return allVisits.stream()
+                .filter(visit -> visit.getVisitSchedule().getStartDate().isAfter(now))
+                .collect(Collectors.toList());
     }
     
     @Override
@@ -95,13 +92,11 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
             buyerVisitPersistencePort.delete(visitId);
             syncScheduledBuyersCounter(scheduleId);
         });
-
     }
 
-        private void validateEmailFormat(String email) {
-            if (email == null || !EMAIL_PATTERN.matcher(email).matches()) {
-                throw new InvalidEmailFormatException(INVALID_EMAIL_FORMAT_MESSAGE);
-            }
-
+    private void validateEmailFormat(String email) {
+        if (email == null || !EMAIL_PATTERN.matcher(email).matches()) {
+            throw new InvalidEmailFormatException(INVALID_EMAIL_FORMAT_MESSAGE);
+        }
     }
 } 
