@@ -103,6 +103,9 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
                 model.getSellerId(),
                 model.getProperty().getId(),
                 model.getProperty().getName(),
+                model.getProperty().getLocation().getNeighborhood(),
+                model.getProperty().getLocation().getCityName().getName(),
+                model.getProperty().getAddress(),
                 model.getStartDate(),
                 model.getEndDate()
         );
