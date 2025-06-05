@@ -1,6 +1,5 @@
 package com.powerup.realestate.properties.infrastructure.repositories.mysql;
 
-import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import com.powerup.realestate.properties.infrastructure.entities.BuyerVisitEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
