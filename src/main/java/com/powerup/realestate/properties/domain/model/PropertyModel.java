@@ -21,12 +21,16 @@ public class PropertyModel {
 
     @Setter
     private Long id;
+    @Setter
     private String name;
+    @Setter
     private String address;
+    @Setter
     private String description;
     private CategoryModel category;
     private final int rooms;
     private final int bathrooms;
+    @Setter
     private BigDecimal price;
     private LocationModel location;
     @Setter
@@ -66,23 +70,4 @@ public class PropertyModel {
 
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
-    }
 }
