@@ -27,6 +27,5 @@ public interface PropertyPersistencePort {
     Optional<PropertyModel> findById(Long id);
     List<PropertyModel> findBySellerId(Long sellerId);
 
-    PageResult<PropertyModel> getAllProperties(Integer page, Integer size, String location, String category, boolean orderAsc);
 }
 
