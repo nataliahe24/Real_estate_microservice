@@ -25,13 +25,5 @@ public interface PropertyService {
 
 
     );
-
-    PageResult<PropertyResponse> getProperties(
-            Integer page,
-            Integer size,
-            String location,
-            String category,
-            boolean orderAsc
-    );
 }
 
