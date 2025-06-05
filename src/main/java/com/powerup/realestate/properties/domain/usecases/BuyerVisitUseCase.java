@@ -2,31 +2,25 @@ package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.exceptions.*;
 import com.powerup.realestate.properties.domain.model.BuyerVisitModel;
-import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import com.powerup.realestate.properties.domain.ports.in.BuyerVisitServicePort;
 import com.powerup.realestate.properties.domain.ports.out.BuyerVisitPersistencePort;
 import com.powerup.realestate.properties.domain.ports.out.VisitSchedulePersistencePort;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.time.LocalDateTime;
-import java.util.stream.Collectors;
+
 
 import static com.powerup.realestate.properties.domain.utils.constants.BuyerVisitDomainConstants.*;
 
 @Component
+@RequiredArgsConstructor
 public class BuyerVisitUseCase implements BuyerVisitServicePort {
     
     private final BuyerVisitPersistencePort buyerVisitPersistencePort;
     private final VisitSchedulePersistencePort visitSchedulePersistencePort;
-    
-    @Autowired
-    public BuyerVisitUseCase(BuyerVisitPersistencePort buyerVisitPersistencePort,
-                             VisitSchedulePersistencePort visitSchedulePersistencePort) {
-        this.buyerVisitPersistencePort = buyerVisitPersistencePort;
-        this.visitSchedulePersistencePort = visitSchedulePersistencePort;
-    }
     
     @Override
     public void scheduleBuyerVisit(BuyerVisitModel buyerVisit) {
@@ -76,7 +70,7 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
         
         return allVisits.stream()
                 .filter(visit -> visit.getVisitSchedule().getStartDate().isAfter(now))
-                .collect(Collectors.toList());
+                .toList();
     }
     
     @Override
