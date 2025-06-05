@@ -1,7 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 
 import com.powerup.realestate.properties.application.dto.request.SaveCategoryRequest;
-import com.powerup.realestate.properties.application.dto.response.CategoryNamesResponse;
 import com.powerup.realestate.properties.application.dto.response.CategoryResponse;
 import com.powerup.realestate.properties.application.dto.response.SaveCategoryResponse;
 import com.powerup.realestate.properties.application.services.CategoryService;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+
 
 
 @RestController

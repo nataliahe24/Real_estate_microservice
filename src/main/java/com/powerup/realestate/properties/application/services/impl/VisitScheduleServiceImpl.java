@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+
 import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.SAVE_VISIT_SCHEDULE_RESPONSE_MESSAGE;
 
 @Service
@@ -48,7 +48,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         List<VisitScheduleModel> schedules = visitScheduleUseCase.getSchedulesByPropertyId(propertyId);
         return schedules.stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
     
     @Override
@@ -56,7 +56,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         List<VisitScheduleModel> schedules = visitScheduleUseCase.getSchedulesBySellerId(sellerId);
         return schedules.stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
     
     @Override
@@ -65,7 +65,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         
         List<VisitScheduleResponse> responseList = pageResult.getContent().stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
         
         return new PageResult<>(
                 responseList,
@@ -87,7 +87,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         
         List<VisitScheduleResponse> responseList = pageResult.getContent().stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
         
         return new PageResult<>(
                 responseList,

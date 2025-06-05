@@ -26,9 +26,9 @@ public class VisitScheduleModel {
                              LocalDateTime startDate, LocalDateTime endDate, Integer scheduledBuyers) {
         this.id = id;
         this.sellerId = sellerId;
-        this.property = Objects.requireNonNull(property, FIELD_PROPERTY_NULL_MESSAGE);
-        this.startDate = Objects.requireNonNull(startDate, FIELD_START_DATE_NULL_MESSAGE);
-        this.endDate = Objects.requireNonNull(endDate, FIELD_END_DATE_NULL_MESSAGE);
+        this.property = property;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.scheduledBuyers = scheduledBuyers != null ? scheduledBuyers : 0;
         
         if (startDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3)) ||

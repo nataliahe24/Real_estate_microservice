@@ -9,7 +9,6 @@ public final class PropertyDomainContants {
     public static final String FIELD_PRICE_NULL_MESSAGE = "El campo 'Precio' no puede estar vacío.";
     public static final String FIELD_LOCATION_NULL_MESSAGE = "El campo 'Ubicación' no puede estar vacío.";
     public static final String FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE = "El campo 'description' no puede estar vacío.";
-    public static final String FIELD_PUBLICATION_STATUS_NULL_MESSAGE = "El campo 'description' no puede estar vacío.";
-    public static final String FIELD_PUBLICATION_DATE_NULL_MESSAGE = "El campo 'description' no puede estar vacío.";
     public static final String FIELD_SELLER_ID_NULL_MESSAGE = "El ID del vendedor no puede ser nulo.";
+    public static final String PROPERTY_NOT_FOUND ="Propiedad no encontrada con ID: ";
 }

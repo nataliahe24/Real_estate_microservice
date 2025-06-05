@@ -10,19 +10,16 @@ import com.powerup.realestate.properties.domain.ports.out.LocationPersistencePor
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import com.powerup.realestate.properties.domain.utils.validation.ValidateLocation;
 import com.powerup.realestate.properties.infrastructure.entities.CityEntity;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-
+@Component
+@RequiredArgsConstructor
 public class LocationUseCase implements LocationServicePort {
     private final LocationPersistencePort locationPersistencePort;
     private final CityServicePort cityServicePort;
-
-    public LocationUseCase(LocationPersistencePort locationPersistencePort, CityServicePort cityServicePort) {
-        this.locationPersistencePort = locationPersistencePort;
-        this.cityServicePort = cityServicePort;
-
-    }
 
     @Override
     public void save(LocationModel locationModel) {

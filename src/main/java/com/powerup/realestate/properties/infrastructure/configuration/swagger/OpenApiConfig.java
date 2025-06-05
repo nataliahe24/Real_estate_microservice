@@ -1,4 +1,4 @@
-package com.powerup.realestate.properties.infrastructure.config;
+package com.powerup.realestate.properties.infrastructure.configuration.swagger;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;

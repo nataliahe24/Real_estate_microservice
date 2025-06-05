@@ -26,7 +26,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public PageResult<LocationResponse> getLocations(String searchText,Integer page, Integer size, boolean orderAsc) {
+    public PageResult<LocationResponse> getLocations(String searchText, Integer page, Integer size, boolean orderAsc) {
         return locationDtoMapper.modelListToResponseList(locationServicePort.getLocations(searchText, page, size, orderAsc));
     }
 }

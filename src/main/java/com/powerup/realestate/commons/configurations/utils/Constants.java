@@ -14,5 +14,5 @@ public final class Constants {
     public static final String SAVE_PROPERTY_RESPONSE_MESSAGE = "Publicación creada con éxito.";
     public static final String SAVE_VISIT_SCHEDULE_RESPONSE_MESSAGE = "visita programada con éxito";
     public static final String VISIT_SCHEDULE_NO_FOUND = "visita no encontrada";
-
+    public static final String ALREADY_MAX_VISITOR ="Este horario ya tiene el máximo de 2 compradores agendados";
 }

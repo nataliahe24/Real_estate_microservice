@@ -1,8 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.exceptionshandler;
 
-import com.powerup.realestate.properties.domain.exceptions.CategoryAlreadyExistsException;
-import com.powerup.realestate.properties.domain.exceptions.DescriptionMaxSizeExceededException;
-import com.powerup.realestate.properties.domain.exceptions.NameMaxSizeExceededException;
+import com.powerup.realestate.properties.domain.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,5 +36,16 @@ public class CategoryControllerAdvisor {
                 new ExceptionResponse(DESCRIPTION_MAX_SIZE_EXCEEDED, LocalDateTime.now()),
                 HttpStatus.BAD_REQUEST
         );
+    }
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleCategoryNotFoundException(CategoryNotFoundException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(CategoryExceptionConstants.CATEGORY_NON_EXISTS_EXCEPTION,
+                LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(LocationNotFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleLocationNotFoundException(LocationNotFoundException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(CategoryExceptionConstants.LOCATION_NON_EXISTS_EXCEPTION,
+                LocalDateTime.now()));
     }
 }

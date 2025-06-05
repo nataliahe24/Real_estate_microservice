@@ -1,6 +1,7 @@
 package com.powerup.realestate.properties.infrastructure.exceptionshandler;
 
 public class VisitScheduleExceptionConstants {
+
     private VisitScheduleExceptionConstants() {
         throw new IllegalStateException("Utility class");
     }
@@ -12,4 +13,6 @@ public class VisitScheduleExceptionConstants {
     public static final String UNAUTHORIZED_SCHEDULE_ACCESS_EXCEPTION = "No tienes permiso para acceder a esta agenda de visita";
     public static final String INVALID_SCHEDULE_TIME_EXCEPTION = "El horario de visita debe ser entre las 8:00 AM y 6:00 PM";
     public static final String SCHEDULE_EXIST = "El horario ya se encuentra disponible";
+    public static final String GENERIC_INTERNAL_SERVER_ERROR = "Ha ocurrido un error inesperado. Por favor, contacte al soporte.";
+    public static final String GENERIC_BAD_REQUEST = "Datos de solicitud incorrectos.";
 } 
