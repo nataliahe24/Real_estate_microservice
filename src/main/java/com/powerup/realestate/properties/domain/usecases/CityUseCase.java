@@ -4,15 +4,13 @@ import com.powerup.realestate.properties.domain.exceptions.CityNonExistentExcept
 import com.powerup.realestate.properties.domain.ports.in.CityServicePort;
 import com.powerup.realestate.properties.domain.ports.out.CityPersistencePort;
 import com.powerup.realestate.properties.infrastructure.entities.CityEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
+@RequiredArgsConstructor
 public class CityUseCase implements CityServicePort {
     private final CityPersistencePort cityPersistencePort;
-
-    @Autowired
-    public CityUseCase(CityPersistencePort cityPersistencePort) {
-        this.cityPersistencePort = cityPersistencePort;
-    }
 
     @Override
     public CityEntity findCityByNameIgnoreCaseAndTrim(String cityName) {
