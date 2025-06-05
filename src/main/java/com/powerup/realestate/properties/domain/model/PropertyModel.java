@@ -11,9 +11,6 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
-
-import static com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants.*;
 
 @Getter
 @Builder
