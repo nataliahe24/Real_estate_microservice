@@ -30,28 +30,14 @@ public class VisitScheduleModel {
         this.startDate = startDate;
         this.endDate = endDate;
         this.scheduledBuyers = scheduledBuyers != null ? scheduledBuyers : 0;
-        
-        if (startDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3)) ||
-            endDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3))) {
-            throw new InvalidVisitDateException();
-        }
-        
-        if (endDate.isBefore(startDate)) {
-            throw new IllegalArgumentException(INVALID_END_DATE_MESSAGE);
-        }
+
     }
     
     public void setStartDate(LocalDateTime startDate) {
-        if (startDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3))) {
-            throw new InvalidVisitDateException();
-        }
         this.startDate = Objects.requireNonNull(startDate, FIELD_START_DATE_NULL_MESSAGE);
     }
     
     public void setEndDate(LocalDateTime endDate) {
-        if (endDate.toLocalDate().isAfter(LocalDate.now().plusWeeks(3))) {
-            throw new InvalidVisitDateException();
-        }
         this.endDate = Objects.requireNonNull(endDate, FIELD_END_DATE_NULL_MESSAGE);
     }
 } 
