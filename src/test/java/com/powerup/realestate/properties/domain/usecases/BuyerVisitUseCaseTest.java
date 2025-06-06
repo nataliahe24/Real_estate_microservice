@@ -1,5 +1,4 @@
 package com.powerup.realestate.properties.domain.usecases;
-
 import com.powerup.realestate.properties.domain.exceptions.*;
 import com.powerup.realestate.properties.domain.model.*;
 import com.powerup.realestate.properties.domain.ports.out.BuyerVisitPersistencePort;
@@ -52,53 +51,53 @@ class BuyerVisitUseCaseTest {
         location = new LocationModel(1L, city, "Centro");
 
         property = new PropertyModel(
-            1L,
-            "Test Property",
-            "Description",
-            "Address",
-            category,
-            3,
-            2,
-            new BigDecimal("250000"),
-            location,
-            LocalDate.now(),
-            PublicationStatus.PUBLISHED,
-            LocalDate.now(),
-            1L
+                1L,
+                "Test Property",
+                "Description",
+                "Address",
+                category,
+                3,
+                2,
+                new BigDecimal("250000"),
+                location,
+                LocalDate.now(),
+                PublicationStatus.PUBLISHED,
+                LocalDate.now(),
+                1L
         );
 
 
         LocalDateTime startDate = LocalDateTime.now().plusDays(1);
         LocalDateTime endDate = startDate.plusHours(1);
-        
+
         visitSchedule = new VisitScheduleModel(
-            1L,
-            1L,
-            property,
-            startDate,
-            endDate,
-            0
+                1L,
+                1L,
+                property,
+                startDate,
+                endDate,
+                0
         );
 
 
         buyerVisit = new BuyerVisitModel(
-            1L,
-            visitSchedule,
-            "test@example.com"
+                1L,
+                visitSchedule,
+                "test@example.com"
         );
 
 
         when(visitSchedulePersistencePort.existsById(1L)).thenReturn(true);
         when(visitSchedulePersistencePort.findById(1L)).thenReturn(Optional.of(visitSchedule));
         when(buyerVisitPersistencePort.findByBuyerEmailAndVisitScheduleId(anyString(), anyLong()))
-            .thenReturn(Optional.empty());
+                .thenReturn(Optional.empty());
         when(buyerVisitPersistencePort.countByVisitScheduleId(1L)).thenReturn(1);
     }
 
     @Test
     void scheduleBuyerVisit_Success() {
         assertDoesNotThrow(() -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
-        
+
         verify(buyerVisitPersistencePort).save(buyerVisit);
         verify(visitSchedulePersistencePort).updateScheduledBuyersCount(1L, 1);
     }
@@ -106,44 +105,44 @@ class BuyerVisitUseCaseTest {
     @Test
     void scheduleBuyerVisit_InvalidEmail_ThrowsException() {
         buyerVisit.setBuyerEmail("invalid-email");
-        
-        assertThrows(InvalidEmailFormatException.class, 
-            () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
+
+        assertThrows(InvalidEmailFormatException.class,
+                () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
     }
 
     @Test
     void scheduleBuyerVisit_ScheduleNotFound_ThrowsException() {
         when(visitSchedulePersistencePort.existsById(1L)).thenReturn(false);
-        
-        assertThrows(ScheduleNotFountExceptions.class, 
-            () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
+
+        assertThrows(ScheduleNotFountExceptions.class,
+                () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
     }
 
     @Test
     void scheduleBuyerVisit_PastSchedule_ThrowsException() {
         LocalDateTime pastDate = LocalDateTime.now().minusDays(1);
         visitSchedule = new VisitScheduleModel(
-            1L,
-            1L,
-            property,
-            pastDate,
-            pastDate.plusHours(1),
-            0
+                1L,
+                1L,
+                property,
+                pastDate,
+                pastDate.plusHours(1),
+                0
         );
         buyerVisit.setVisitSchedule(visitSchedule);
-        
+
         when(visitSchedulePersistencePort.existsById(1L)).thenReturn(true);
         when(visitSchedulePersistencePort.findById(1L)).thenReturn(Optional.of(visitSchedule));
-        
-        assertThrows(InvalidVisitScheduleException.class, 
-            () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
+
+        assertThrows(InvalidVisitScheduleException.class,
+                () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
     }
 
     @Test
     void scheduleBuyerVisit_MaxVisitorsExceeded_ThrowsException() {
         when(buyerVisitPersistencePort.countByVisitScheduleId(1L)).thenReturn(2);
-        
-        assertThrows(MaxVisitException.class, 
-            () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
+
+        assertThrows(MaxVisitException.class,
+                () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
     }
 } 
