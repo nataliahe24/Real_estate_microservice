@@ -11,30 +11,23 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+@Setter
 @Getter
 @Builder
 public class PropertyModel {
 
     @Setter
     private Long id;
-    @Setter
     private String name;
-    @Setter
     private String address;
-    @Setter
     private String description;
     private CategoryModel category;
     private final int rooms;
     private final int bathrooms;
-    @Setter
     private BigDecimal price;
     private LocationModel location;
-    @Setter
     private LocalDate activePublicationDate;
-    @Setter
     private PublicationStatus publicationStatus;
-    @Setter
     private LocalDate publicationDate;
     private Long sellerId;
 
