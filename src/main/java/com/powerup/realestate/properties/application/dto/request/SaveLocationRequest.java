@@ -1,4 +1,9 @@
 package com.powerup.realestate.properties.application.dto.request;
 
-public record SaveLocationRequest(String cityName, String neighborhood ) {
+import jakarta.validation.constraints.NotBlank;
+
+public record SaveLocationRequest(
+        @NotBlank String cityName,
+        @NotBlank String neighborhood
+) {
 }

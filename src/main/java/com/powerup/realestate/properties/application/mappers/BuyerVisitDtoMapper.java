@@ -10,14 +10,17 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = "spring",
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {VisitScheduleDtoMapper.class})
 public interface BuyerVisitDtoMapper {
 
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "visitScheduleId", source = "scheduleId")
+    @Mapping(target = "visitSchedule.id", source = "scheduleId")
     BuyerVisitModel requestToModel(ScheduleBuyerVisitRequest request);
-    
-    @Mapping(target = "scheduleId", source = "visitScheduleId")
+
+    @Mapping(target = "scheduleId", source = "visitSchedule.id")
+    @Mapping(target = "startDate", source = "visitSchedule.startDate")
+    @Mapping(target = "endDate", source = "visitSchedule.endDate")
     @Mapping(target = "timestamp", expression = "java(java.time.LocalDateTime.now())")
     ScheduleBuyerVisitResponse modelToResponse(BuyerVisitModel model);
     

@@ -9,13 +9,18 @@ import org.mapstruct.ReportingPolicy;
 import java.util.List;
 
 @Mapper(componentModel = "spring", 
-        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        uses = {VisitScheduleEntityMapper.class})
 public interface BuyerVisitEntityMapper {
     
-    @Mapping(target = "visitScheduleId", source = "visitSchedule.id")
+    @Mapping(target = "visitSchedule.id", source = "visitSchedule.id")
+    @Mapping(target = "visitSchedule.startDate", source = "visitSchedule.startDate")
+    @Mapping(target = "visitSchedule.endDate", source = "visitSchedule.endDate")
     BuyerVisitModel toModel(BuyerVisitEntity entity);
     
-    @Mapping(target = "visitSchedule", ignore = true)
+    @Mapping(target = "visitSchedule.id", source = "visitSchedule.id")
+    @Mapping(target = "visitSchedule.startDate", source = "visitSchedule.startDate")
+    @Mapping(target = "visitSchedule.endDate", source = "visitSchedule.endDate")
     BuyerVisitEntity toEntity(BuyerVisitModel model);
     
     List<BuyerVisitModel> toModelList(List<BuyerVisitEntity> entities);

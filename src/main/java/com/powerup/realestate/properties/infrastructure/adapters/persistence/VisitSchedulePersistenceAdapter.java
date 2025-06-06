@@ -6,7 +6,7 @@ import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import com.powerup.realestate.properties.infrastructure.entities.VisitScheduleEntity;
 import com.powerup.realestate.properties.infrastructure.mappers.VisitScheduleEntityMapper;
 import com.powerup.realestate.properties.infrastructure.repositories.mysql.VisitScheduleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,16 +19,10 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class VisitSchedulePersistenceAdapter implements VisitSchedulePersistencePort {
     private final VisitScheduleRepository visitScheduleRepository;
     private final VisitScheduleEntityMapper visitScheduleEntityMapper;
-
-    @Autowired
-    public VisitSchedulePersistenceAdapter(VisitScheduleRepository visitScheduleRepository,
-                                         VisitScheduleEntityMapper visitScheduleEntityMapper) {
-        this.visitScheduleRepository = visitScheduleRepository;
-        this.visitScheduleEntityMapper = visitScheduleEntityMapper;
-    }
 
     @Override
     public void save(VisitScheduleModel visitScheduleModel) {

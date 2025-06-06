@@ -8,6 +8,9 @@ public record VisitScheduleResponse (
      Long sellerId,
      Long propertyId,
      String propertyName,
+     String neighborhood,
+     String city,
+     String address,
      LocalDateTime startDate,
      LocalDateTime endDate){
 }

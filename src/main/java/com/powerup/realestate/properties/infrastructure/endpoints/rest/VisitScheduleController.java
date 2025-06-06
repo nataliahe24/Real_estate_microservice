@@ -1,6 +1,6 @@
 package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 
-import com.powerup.realestate.properties.application.dto.request.FilterVisitScheduleRequest;
+import com.powerup.realestate.properties.application.dto.request.VisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.request.SaveVisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.response.SaveVisitScheduleResponse;
 import com.powerup.realestate.properties.application.dto.response.VisitScheduleResponse;
@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/visit")
@@ -32,35 +31,6 @@ public class VisitScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(visitScheduleService.save(request));
     }
 
-    @GetMapping("/property")
-    @Operation(
-            summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    public ResponseEntity<List<VisitScheduleResponse>> getSchedulesByPropertyId(@RequestParam Long propertyId) {
-        return ResponseEntity.ok(visitScheduleService.getSchedulesByPropertyId(propertyId));
-    }
-
-    @GetMapping("/seller")
-    @Operation(
-            summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    public ResponseEntity<List<VisitScheduleResponse>> getSchedulesBySellerId(@RequestParam Long sellerId) {
-        return ResponseEntity.ok(visitScheduleService.getSchedulesBySellerId(sellerId));
-    }
-
-    @GetMapping("/visit")
-    @Operation(
-            summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    public ResponseEntity<PageResult<VisitScheduleResponse>> getSchedules(
-            @RequestParam(defaultValue = "0") Integer page,
-            @RequestParam Integer size) {
-        return ResponseEntity.ok(visitScheduleService.getSchedules(page, size));
-    }
-
     @GetMapping("/")
     @Operation(
             summary = "Filtrar horarios de visita disponibles",
@@ -73,7 +43,7 @@ public class VisitScheduleController {
             @RequestParam(defaultValue = "0") Integer page,
             @RequestParam Integer size) {
         
-        FilterVisitScheduleRequest request = new FilterVisitScheduleRequest(
+        VisitScheduleRequest request = new VisitScheduleRequest(
                 startDate,
                 endDate,
                 location,

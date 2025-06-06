@@ -50,7 +50,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/v1/properties/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET,"/api/v1/visit/").permitAll()
-                        .requestMatchers("/api/v1/visit/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST,"/api/v1/visit/**").hasRole("SELLER")
+
+                        .requestMatchers("/api/v1/buyer-visits/**").hasRole("BUYER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

@@ -6,5 +6,7 @@ public record ScheduleBuyerVisitResponse(
     Long id,
     String buyerEmail,
     Long scheduleId,
+    LocalDateTime startDate,
+    LocalDateTime endDate,
     LocalDateTime timestamp
 ) {} 

@@ -2,8 +2,8 @@ package com.powerup.realestate.properties.application.dto.response;
 
 import java.time.LocalDateTime;
 
-public record SavePropertyResponse(
+public record SaveScheduleBuyerResponse(
         String message,
-        LocalDateTime time
+        LocalDateTime timestamp
 ) {
 }

@@ -15,73 +15,72 @@ import java.time.LocalDateTime;
 public class VisitScheduleControllerAdvisor {
 
     @ExceptionHandler(InvalidVisitDateException.class)
-    public ResponseEntity<VisitScheduleExceptionResponse> handleInvalidVisitDateException(InvalidVisitDateException exception) {
+    public ResponseEntity<ExceptionResponse> handleInvalidVisitDateException(InvalidVisitDateException exception) {
         return ResponseEntity
-                .badRequest()
-                .body(new VisitScheduleExceptionResponse(
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionResponse(
                         VisitScheduleExceptionConstants.INVALID_VISIT_DATE_EXCEPTION,
                         LocalDateTime.now()));
     }
-    @ExceptionHandler (ScheduleConflictException.class)
-    public ResponseEntity<VisitScheduleExceptionResponse> handleInvalidSchedule(ScheduleConflictException exception) {
+
+    @ExceptionHandler(ScheduleConflictException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidSchedule(ScheduleConflictException exception) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new VisitScheduleExceptionResponse(
+                .body(new ExceptionResponse(
                         VisitScheduleExceptionConstants.SCHEDULE_EXIST,
                         LocalDateTime.now()));
     }
-    
+
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<VisitScheduleExceptionResponse> handleIllegalArgumentException(IllegalArgumentException exception) {
+    public ResponseEntity<ExceptionResponse> handleIllegalArgumentException(IllegalArgumentException exception) {
         String message = exception.getMessage();
-        
+
 
         if (message != null && message.contains("fecha de fin")) {
             return ResponseEntity
                     .badRequest()
-                    .body(new VisitScheduleExceptionResponse(
+                    .body(new ExceptionResponse(
                             VisitScheduleExceptionConstants.INVALID_END_DATE_EXCEPTION,
                             LocalDateTime.now()));
         } else if (message != null && message.contains("horario")) {
             return ResponseEntity
                     .badRequest()
-                    .body(new VisitScheduleExceptionResponse(
+                    .body(new ExceptionResponse(
                             VisitScheduleExceptionConstants.INVALID_SCHEDULE_TIME_EXCEPTION,
                             LocalDateTime.now()));
         }
 
         return ResponseEntity
                 .badRequest()
-                .body(new VisitScheduleExceptionResponse(
-                        message != null ? message : "Error en los datos de la solicitud",
+                .body(new ExceptionResponse(VisitScheduleExceptionConstants.GENERIC_BAD_REQUEST,
                         LocalDateTime.now()));
     }
-    
+
     @ExceptionHandler(PropertyNotFoundException.class)
-    public ResponseEntity<VisitScheduleExceptionResponse> handlePropertyNotFoundException(PropertyNotFoundException exception) {
+    public ResponseEntity<ExceptionResponse> handlePropertyNotFoundException(PropertyNotFoundException exception) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(new VisitScheduleExceptionResponse(
+                .body(new ExceptionResponse(
                         PropertyExceptionConstants.PROPERTY_NOT_FOUND_EXCEPTION,
                         LocalDateTime.now()));
     }
-    
+
     @ExceptionHandler(UnauthorizedSellerException.class)
-    public ResponseEntity<VisitScheduleExceptionResponse> handleUnauthorizedSellerException(UnauthorizedSellerException exception) {
+    public ResponseEntity<ExceptionResponse> handleUnauthorizedSellerException(UnauthorizedSellerException exception) {
         return ResponseEntity
                 .status(HttpStatus.FORBIDDEN)
-                .body(new VisitScheduleExceptionResponse(
+                .body(new ExceptionResponse(
                         VisitScheduleExceptionConstants.UNAUTHORIZED_SCHEDULE_ACCESS_EXCEPTION,
                         LocalDateTime.now()));
     }
 
-    
+
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<VisitScheduleExceptionResponse> handleGeneralException(Exception exception) {
+    public ResponseEntity<ExceptionResponse> handleGeneralException(Exception exception) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new VisitScheduleExceptionResponse(
-                        "Error interno del servidor: " + exception.getMessage(),
+                .body(new ExceptionResponse(VisitScheduleExceptionConstants.GENERIC_INTERNAL_SERVER_ERROR,
                         LocalDateTime.now()));
     }
 } 

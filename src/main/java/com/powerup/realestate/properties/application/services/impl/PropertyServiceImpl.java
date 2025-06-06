@@ -7,10 +7,10 @@ import com.powerup.realestate.properties.application.dto.response.SavePropertyRe
 import com.powerup.realestate.properties.application.mappers.PropertyDtoMapper;
 import com.powerup.realestate.properties.application.services.PropertyService;
 import com.powerup.realestate.properties.domain.ports.in.PropertyServicePort;
-
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 
 
@@ -28,7 +28,19 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PageResult<PropertyResponse> getPropertiesByFiltersAndOrder(Long sellerId, Integer page, Integer size, String location, String category, Integer rooms, Integer bathrooms, Double minPrice, Double maxPrice, String sortBy, boolean orderAsc) {
+    public PageResult<PropertyResponse> getPropertiesByFiltersAndOrder(
+            Long sellerId,
+            Integer page,
+            Integer size,
+            String location,
+            String category,
+            Integer rooms,
+            Integer bathrooms,
+            Double minPrice,
+            Double maxPrice,
+            String sortBy,
+            boolean orderAsc) {
+
         return propertyDtoMapper.modelListToResponseList(
                 propertyServicePort.getProperties(
                         sellerId,
@@ -41,17 +53,6 @@ public class PropertyServiceImpl implements PropertyService {
                         minPrice,
                         maxPrice,
                         sortBy,
-                        orderAsc)
-        );
-    }
-
-    @Override
-    public PageResult<PropertyResponse> getProperties(Integer page, Integer size, String location, String category, boolean orderAsc) {
-        return  propertyDtoMapper.modelListToResponseList(
-                propertyServicePort.getAllProperties(page,
-                        size,
-                        location,
-                        category,
                         orderAsc)
         );
     }

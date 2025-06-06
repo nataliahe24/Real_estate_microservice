@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BuyerVisitServicePort {
     void scheduleBuyerVisit(BuyerVisitModel buyerVisit);
-    List<BuyerVisitModel> getBuyerVisitsByScheduleId(Long scheduleId);
+    List<BuyerVisitModel> getBuyerVisitsByEmail(String buyerEmail);
     void syncScheduledBuyersCounter(Long scheduleId);
     void cancelBuyerVisit(Long visitId);
 } 

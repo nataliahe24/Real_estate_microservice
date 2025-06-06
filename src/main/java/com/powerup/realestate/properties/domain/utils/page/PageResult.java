@@ -1,13 +1,16 @@
 package com.powerup.realestate.properties.domain.utils.page;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class PageResult <T> {
-    private List<T> content;
-    private int page;
-    private int size;
-    private int totalPages;
-    private int totalElements;
+    private final List<T> content;
+    private final int page;
+    private final int size;
+    private final int totalPages;
+    private final int totalElements;
 
     public PageResult(List<T> content, int page, int size, int totalElements) {
         this.content = content;
@@ -15,26 +18,6 @@ public class PageResult <T> {
         this.size = size;
         this.totalElements = totalElements;
         this.totalPages = (int) Math.ceil((double) totalElements/size);
-    }
-
-    public List<T> getContent() {
-        return content;
-    }
-
-    public int getPage() {
-        return page;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public int getTotalElements() {
-        return totalElements;
     }
 
     @Override

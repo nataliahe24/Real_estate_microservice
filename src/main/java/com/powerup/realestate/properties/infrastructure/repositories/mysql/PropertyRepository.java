@@ -62,38 +62,4 @@ public interface PropertyRepository extends JpaRepository<PropertyEntity, Long> 
     );
 
     List<PropertyEntity> findAllBySellerId(Long sellerId);
-
-    @Query(value = """
-    SELECT p.* FROM property_entity p
-    JOIN category_entity c ON p.category_id = c.id
-    JOIN location_entity l ON p.location_id = l.id
-    JOIN city_entity ci ON l.city_id = ci.id
-    JOIN department_entity d ON ci.department_id = d.id
-    WHERE p.publication_status = 'PUBLISHED'
-      AND (:location IS NULL OR 
-           LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :location, '%')) OR
-           LOWER(ci.name) LIKE LOWER(CONCAT('%', :location, '%')) OR
-           LOWER(d.name) LIKE LOWER(CONCAT('%', :location, '%')))
-      AND (:category IS NULL OR LOWER(c.name) LIKE LOWER(CONCAT('%', :category, '%')))
-    """,
-            countQuery = """
-    SELECT COUNT(*) FROM property_entity p
-    JOIN category_entity c ON p.category_id = c.id
-    JOIN location_entity l ON p.location_id = l.id
-    JOIN city_entity ci ON l.city_id = ci.id
-    JOIN department_entity d ON ci.department_id = d.id
-    WHERE p.publication_status = 'PUBLISHED'
-      AND (:location IS NULL OR 
-           LOWER(l.neighborhood) LIKE LOWER(CONCAT('%', :location, '%')) OR
-           LOWER(ci.name) LIKE LOWER(CONCAT('%', :location, '%')) OR
-           LOWER(d.name) LIKE LOWER(CONCAT('%', :location, '%')))
-      AND (:category IS NULL OR LOWER(c.name) LIKE LOWER(CONCAT('%', :category, '%')))
-    """,
-            nativeQuery = true)
-    Page<PropertyEntity> findAllProperties(
-            @Param("location") String location,
-            @Param("category") String category,
-            @Param("orderAsc") boolean orderAsc,
-            Pageable pageable
-    );
 }

@@ -11,10 +11,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Objects;
-
-import static com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants.*;
-
+@Setter
 @Getter
 @Builder
 public class PropertyModel {
@@ -30,9 +27,7 @@ public class PropertyModel {
     private BigDecimal price;
     private LocationModel location;
     private LocalDate activePublicationDate;
-    @Setter
     private PublicationStatus publicationStatus;
-    @Setter
     private LocalDate publicationDate;
     private Long sellerId;
 
@@ -65,27 +60,4 @@ public class PropertyModel {
 
     }
 
-    public void setName(String name) {
-        this.name = Objects.requireNonNull(name, FIELD_NAME_NULL_MESSAGE);
-    }
-
-    public void setAddress(String address) {
-        this.address = Objects.requireNonNull(address, FIELD_ADDRESS_NULL_MESSAGE);
-    }
-
-    public void setDescription(String description) {
-        this.description = Objects.requireNonNull(description, FIELD_DESCRIPTION_NULL_MESSAGE);
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = Objects.requireNonNull(price, FIELD_PRICE_NULL_MESSAGE);
-    }
-
-    public void setActivePublicationDate(LocalDate activePublicationDate) {
-        this.activePublicationDate = Objects.requireNonNull(activePublicationDate, FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE);
-    }
-
-    public void setSellerId(Long sellerId) {
-        this.sellerId = Objects.requireNonNull(sellerId, FIELD_SELLER_ID_NULL_MESSAGE);
-    }
 }

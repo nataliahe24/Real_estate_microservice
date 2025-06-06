@@ -1,7 +1,6 @@
 package com.powerup.realestate.properties.application.services.impl;
 
 import com.powerup.realestate.properties.application.dto.request.SaveCategoryRequest;
-import com.powerup.realestate.properties.application.dto.response.CategoryNamesResponse;
 import com.powerup.realestate.properties.application.dto.response.CategoryResponse;
 import com.powerup.realestate.properties.application.dto.response.SaveCategoryResponse;
 import com.powerup.realestate.properties.application.mappers.CategoryDtoMapper;
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 @Service

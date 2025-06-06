@@ -14,6 +14,8 @@ import org.mapstruct.ReportingPolicy;
         uses = {CategoryDtoMapper.class, LocationDtoMapper.class})
 public interface PropertyDtoMapper {
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(source = "category", target = "category.id")
     PropertyModel  requestToModel(SavePropertyRequest savePropertyRequest);
     @Mapping(source = "location.neighborhood", target = "neighborhood")
     @Mapping(source = "location.cityName.name", target = "city")

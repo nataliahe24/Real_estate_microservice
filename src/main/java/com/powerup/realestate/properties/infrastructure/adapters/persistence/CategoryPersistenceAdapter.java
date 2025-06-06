@@ -1,6 +1,5 @@
 package com.powerup.realestate.properties.infrastructure.adapters.persistence;
 
-import com.powerup.realestate.properties.application.dto.response.CategoryNamesResponse;
 import com.powerup.realestate.properties.domain.model.CategoryModel;
 import com.powerup.realestate.properties.domain.ports.out.CategoryPersistencePort;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
@@ -50,7 +49,7 @@ public class CategoryPersistenceAdapter implements CategoryPersistencePort {
 
         Page<CategoryEntity> pageCategories = categoryRepository.findAll(pagination);
         List<CategoryModel> pageModel = categoryEntityMapper.entityListToModelList(pageCategories.getContent());
-        return new PageResult<>(pageModel, page, size, (int)  pageCategories.getTotalElements());
+        return new PageResult<>(pageModel, page, size, (int) pageCategories.getTotalElements());
 
     }
 

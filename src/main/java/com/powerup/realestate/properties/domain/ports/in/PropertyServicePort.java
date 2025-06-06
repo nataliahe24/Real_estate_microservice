@@ -12,6 +12,5 @@ public interface PropertyServicePort {
                                             Double minPrice, Double maxPrice,
                                             String sortBy, boolean orderAsc);
 
-    PageResult<PropertyModel> getAllProperties(Integer page, Integer size, String location, String category, boolean orderAsc);
 }
 

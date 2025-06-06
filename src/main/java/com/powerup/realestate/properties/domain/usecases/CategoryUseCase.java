@@ -1,6 +1,6 @@
 package com.powerup.realestate.properties.domain.usecases;
 
-import com.powerup.realestate.properties.application.dto.response.CategoryNamesResponse;
+
 import com.powerup.realestate.properties.domain.exceptions.CategoryAlreadyExistsException;
 import com.powerup.realestate.properties.domain.exceptions.DescriptionMaxSizeExceededException;
 import com.powerup.realestate.properties.domain.exceptions.NameMaxSizeExceededException;
@@ -8,20 +8,19 @@ import com.powerup.realestate.properties.domain.model.CategoryModel;
 import com.powerup.realestate.properties.domain.ports.in.CategoryServicePort;
 import com.powerup.realestate.properties.domain.ports.out.CategoryPersistencePort;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+
 import java.util.Optional;
 
 import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.DESCRIPTION_MAX_CHARACTERS;
 import static com.powerup.realestate.properties.domain.utils.constants.CategoryDomainConstants.NAME_MAX_CHARACTERS;
 
-
+@Component
+@RequiredArgsConstructor
 public class CategoryUseCase implements CategoryServicePort {
     private final CategoryPersistencePort categoryPersistencePort;
-
-    public CategoryUseCase(CategoryPersistencePort categoryPersistencePort) {
-        this.categoryPersistencePort = categoryPersistencePort;
-    }
 
     @Override
     public void save(CategoryModel categoryModel) {

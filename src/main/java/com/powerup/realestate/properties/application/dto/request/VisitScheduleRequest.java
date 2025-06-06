@@ -4,9 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
-public record SaveVisitScheduleRequest(
-        @NotBlank Long sellerId,
-        @NotBlank Long propertyId,
+public record VisitScheduleRequest(
         @NotBlank LocalDateTime startDate,
-        @NotBlank LocalDateTime endDate
-   ) {}
+        @NotBlank LocalDateTime endDate,
+        @NotBlank String location,
+        @NotBlank Integer page,
+        @NotBlank Integer size
+) {} 

@@ -1,13 +1,13 @@
 package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 
 import com.powerup.realestate.properties.application.dto.request.ScheduleBuyerVisitRequest;
+import com.powerup.realestate.properties.application.dto.response.SaveScheduleBuyerResponse;
 import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerVisitResponse;
 import com.powerup.realestate.properties.application.services.BuyerVisitService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +26,7 @@ public class BuyerVisitController {
             summary = "Agendar una visita de comprador",
             security = @SecurityRequirement(name = "bearerAuth")
     )
-    public ResponseEntity<ScheduleBuyerVisitResponse> scheduleBuyerVisit(
+    public ResponseEntity<SaveScheduleBuyerResponse> scheduleBuyerVisit(
             @Valid @RequestBody ScheduleBuyerVisitRequest request) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -35,25 +35,15 @@ public class BuyerVisitController {
     
     @GetMapping("/")
     @Operation(
-            summary = "Obtener visitas para un horario específico",
+            summary = "Obtener visitas",
             security = @SecurityRequirement(name = "bearerAuth")
     )
     public ResponseEntity<List<ScheduleBuyerVisitResponse>> getBuyerVisitsByScheduleId(
-            @RequestParam Long scheduleId) {
-        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByScheduleId(scheduleId));
+            @RequestParam String buyerEmail) {
+        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByEmail(buyerEmail));
     }
     
-    @PostMapping("/sync-counters/{scheduleId}")
-    @Operation(
-            summary = "Sincronizar contador de agendamientos para un horario específico",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    public ResponseEntity<String> syncScheduledBuyersCounter(@RequestParam Long scheduleId) {
-        buyerVisitService.syncScheduledBuyersCounter(scheduleId);
-        return ResponseEntity.ok("Contador sincronizado correctamente");
-    }
-    
-    @DeleteMapping("/{visitId}")
+    @DeleteMapping("/cancel")
     @Operation(
             summary = "Cancelar una visita agendada",
             security = @SecurityRequirement(name = "bearerAuth")

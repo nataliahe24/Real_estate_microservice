@@ -1,7 +1,6 @@
 package com.powerup.realestate.properties.application.services.impl;
 
-import com.powerup.realestate.commons.configurations.utils.Constants;
-import com.powerup.realestate.properties.application.dto.request.FilterVisitScheduleRequest;
+import com.powerup.realestate.properties.application.dto.request.VisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.request.SaveVisitScheduleRequest;
 import com.powerup.realestate.properties.application.dto.response.SaveVisitScheduleResponse;
 import com.powerup.realestate.properties.application.dto.response.VisitScheduleResponse;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+
 import static com.powerup.realestate.properties.domain.utils.constants.VisitScheduleDomainConstants.SAVE_VISIT_SCHEDULE_RESPONSE_MESSAGE;
 
 @Service
@@ -49,7 +48,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         List<VisitScheduleModel> schedules = visitScheduleUseCase.getSchedulesByPropertyId(propertyId);
         return schedules.stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
     
     @Override
@@ -57,7 +56,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         List<VisitScheduleModel> schedules = visitScheduleUseCase.getSchedulesBySellerId(sellerId);
         return schedules.stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
     
     @Override
@@ -66,7 +65,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         
         List<VisitScheduleResponse> responseList = pageResult.getContent().stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
         
         return new PageResult<>(
                 responseList,
@@ -77,7 +76,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
     }
     
     @Override
-    public PageResult<VisitScheduleResponse> getFilteredSchedules(FilterVisitScheduleRequest request) {
+    public PageResult<VisitScheduleResponse> getFilteredSchedules(VisitScheduleRequest request) {
         PageResult<VisitScheduleModel> pageResult = visitScheduleUseCase.getFilteredSchedules(
                 request.startDate(),
                 request.endDate(),
@@ -88,7 +87,7 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
         
         List<VisitScheduleResponse> responseList = pageResult.getContent().stream()
                 .map(this::mapToResponse)
-                .collect(Collectors.toList());
+                .toList();
         
         return new PageResult<>(
                 responseList,
@@ -104,6 +103,9 @@ public class VisitScheduleServiceImpl implements VisitScheduleService {
                 model.getSellerId(),
                 model.getProperty().getId(),
                 model.getProperty().getName(),
+                model.getProperty().getLocation().getNeighborhood(),
+                model.getProperty().getLocation().getCityName().getName(),
+                model.getProperty().getAddress(),
                 model.getStartDate(),
                 model.getEndDate()
         );

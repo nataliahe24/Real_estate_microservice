@@ -9,6 +9,7 @@ import com.powerup.realestate.properties.domain.ports.in.PropertyServicePort;
 import com.powerup.realestate.properties.domain.ports.out.CategoryPersistencePort;
 import com.powerup.realestate.properties.domain.ports.out.PropertyPersistencePort;
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
+import com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import com.powerup.realestate.properties.domain.utils.validation.PropertyValidation;
 import com.powerup.realestate.properties.domain.exceptions.PropertyNotFoundException;
@@ -65,19 +66,10 @@ public class PropertyUseCase implements PropertyServicePort {
                 sortBy, orderAsc);
     }
 
-    @Override
-    public PageResult<PropertyModel> getAllProperties(Integer page, Integer size, String location, String category, boolean orderAsc) {
-        return propertyPersistencePort.getAllProperties(
-                page,
-                size,
-                location,
-                category,
-                orderAsc);
-    }
 
     public PropertyModel getPropertyById(Long id) {
         return propertyPersistencePort.findById(id)
-                .orElseThrow(() -> new PropertyNotFoundException("Propiedad no encontrada con ID: " + id));
+                .orElseThrow(() -> new PropertyNotFoundException(PropertyDomainContants.PROPERTY_NOT_FOUND + id));
     }
     
     public List<PropertyModel> getPropertiesBySellerId(Long sellerId) {

@@ -15,21 +15,21 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class LocationControllerAdvisor {
     @ExceptionHandler(CityNonExistentException.class)
-    public ResponseEntity<LocationExceptionResponse> handleCityNonExistentException(CityNonExistentException exception) {
-        return ResponseEntity.badRequest().body(new LocationExceptionResponse(
+    public ResponseEntity<ExceptionResponse> handleCityNonExistentException(CityNonExistentException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(
                 LocationExceptionConstants.CITY_NON_EXISTS_EXCEPTION, LocalDateTime.now()));
     }
 
     @ExceptionHandler(NeighborhoodNonNullException.class)
-    public ResponseEntity<LocationExceptionResponse> handleNeighborhoodNonNullException(NeighborhoodNonNullException exception) {
-        return ResponseEntity.badRequest().body(new LocationExceptionResponse(
+    public ResponseEntity<ExceptionResponse> handleNeighborhoodNonNullException(NeighborhoodNonNullException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(
                 LocationDomainConstants.FIELD_NEIGHBORHOOD_NULL_MESSAGE, LocalDateTime.now()));
     }
 
     @ExceptionHandler(LocationAlreadyExist.class)
-    public ResponseEntity<LocationExceptionResponse> handleLocationAlreadyExist(LocationAlreadyExist exception) {
+    public ResponseEntity<ExceptionResponse> handleLocationAlreadyExist(LocationAlreadyExist exception) {
         return ResponseEntity.badRequest().body(
-                new LocationExceptionResponse(LocationDomainConstants.FIELD_LOCATION_ALREADY_EXIST_MESSAGE, LocalDateTime.now())
+                new ExceptionResponse(LocationDomainConstants.FIELD_LOCATION_ALREADY_EXIST_MESSAGE, LocalDateTime.now())
         );
     }
 }

@@ -36,7 +36,7 @@ public class PropertyController {
     )
     public ResponseEntity<PageResult<PropertyResponse>> getProperties(@RequestParam(defaultValue = "0") Integer page,
                                                                       @RequestParam Integer size,
-                                                                      @RequestParam Long sellerId,
+                                                                      @RequestParam (required = false) Long sellerId,
                                                                       @RequestParam(required = false) String location,
                                                                       @RequestParam(required = false) String category,
                                                                       @RequestParam(required = false) Integer rooms,
@@ -63,25 +63,4 @@ public class PropertyController {
         );
     }
 
-    @GetMapping("/list")
-    @Operation(
-            summary = "Endpoint protegido",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
-    public ResponseEntity<PageResult<PropertyResponse>> getAllProperties(@RequestParam(defaultValue = "0") Integer page,
-                                                                      @RequestParam Integer size,
-                                                                      @RequestParam(required = false) String location,
-                                                                      @RequestParam(required = false) String category,
-                                                                      @RequestParam boolean orderAsc) {
-
-        return ResponseEntity.ok(
-                propertyService.getProperties(
-                        page,
-                        size,
-                        location,
-                        category,
-                        orderAsc
-                )
-        );
-    }
 }
