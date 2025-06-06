@@ -1,4 +1,4 @@
-package com.powerup.realestate.properties.infrastructure.config;
+package com.powerup.realestate.properties.infrastructure.configuration.cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
