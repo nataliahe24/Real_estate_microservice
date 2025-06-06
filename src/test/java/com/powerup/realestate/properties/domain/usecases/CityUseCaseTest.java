@@ -1,4 +1,4 @@
-package com.powerup.realestate.location.domain.usecases;
+package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.exceptions.CityNonExistentException;
 
@@ -7,7 +7,6 @@ import com.powerup.realestate.properties.domain.ports.out.CityPersistencePort;
 
 import com.powerup.realestate.properties.infrastructure.entities.CityEntity;
 
-import com.powerup.realestate.properties.domain.usecases.CityUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

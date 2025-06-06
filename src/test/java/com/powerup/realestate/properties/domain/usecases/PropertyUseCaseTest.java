@@ -61,7 +61,7 @@ class PropertyUseCaseTest {
 
         validLocationModel = new LocationModel(10L, cityMock, "Centro");
 
-        // Crear PropertyModel con todos los parámetros requeridos, incluyendo sellerId
+
         propertyModel = new PropertyModel(
                 1L,
                 "Casa Familiar",
@@ -78,7 +78,7 @@ class PropertyUseCaseTest {
                 sellerId
         );
 
-        // Configurar comportamiento de mocks
+
         when(locationPersistencePort.findByLocationId(10L))
                 .thenReturn(Optional.of(validLocationModel));
         when(categoryPersistencePort.getCategoryById(20L))
@@ -91,10 +91,10 @@ class PropertyUseCaseTest {
 
     @Test
     void savePropertyProperty_validInput_savesSuccessfully() {
-        // Act
+
         propertyUseCase.saveProperty(propertyModel);
 
-        // Assert
+
         verify(locationPersistencePort, times(1)).findByLocationId(10L);
         verify(categoryPersistencePort, times(1)).getCategoryById(20L);
         verify(propertyPersistencePort, times(1)).save(propertyModel);
@@ -122,29 +122,28 @@ class PropertyUseCaseTest {
     
     @Test
     void getPropertyById_existingId_returnsProperty() {
-        // Act
+
         PropertyModel result = propertyUseCase.getPropertyById(1L);
-        
-        // Assert
+
         assertNotNull(result);
         assertEquals(propertyModel, result);
     }
     
     @Test
     void getPropertyById_nonExistingId_throwsPropertyNotFoundException() {
-        // Arrange
+
         when(propertyPersistencePort.findById(999L)).thenReturn(Optional.empty());
         
-        // Act & Assert
+
         assertThrows(PropertyNotFoundException.class, () -> propertyUseCase.getPropertyById(999L));
     }
     
     @Test
     void getPropertiesBySellerId_validSellerId_returnsListOfProperties() {
-        // Act
+
         var result = propertyUseCase.getPropertiesBySellerId(sellerId);
         
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals(propertyModel, result.get(0));

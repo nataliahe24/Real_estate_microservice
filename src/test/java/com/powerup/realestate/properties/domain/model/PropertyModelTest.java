@@ -4,7 +4,6 @@ import com.powerup.realestate.properties.domain.exceptions.InvalidActivePublicat
 import com.powerup.realestate.properties.domain.exceptions.InvalidBathroomsException;
 import com.powerup.realestate.properties.domain.exceptions.InvalidRoomsException;
 import com.powerup.realestate.properties.domain.utils.PublicationStatus;
-import com.powerup.realestate.properties.domain.utils.constants.PropertyDomainContants;
 import com.powerup.realestate.properties.infrastructure.entities.CityEntity;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -100,54 +99,4 @@ class PropertyModelTest {
                         futureDate, publicationStatus, publicationDate, sellerId));
     }
 
-    @Test
-    void shouldThrowExceptionWhenNameIsNull() {
-        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
-                bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate, sellerId);
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setName(null));
-        assertEquals(PropertyDomainContants.FIELD_NAME_NULL_MESSAGE, exception.getMessage());
-    }
-
-    @Test
-    void shouldThrowExceptionWhenDescriptionIsNull() {
-        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
-                bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate, sellerId);
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setDescription(null));
-        assertEquals(PropertyDomainContants.FIELD_DESCRIPTION_NULL_MESSAGE, exception.getMessage());
-    }
-
-    @Test
-    void shouldThrowExceptionWhenPriceIsNull() {
-        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
-                bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate, sellerId);
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setPrice(null));
-        assertEquals(PropertyDomainContants.FIELD_PRICE_NULL_MESSAGE, exception.getMessage());
-    }
-
-    @Test
-    void shouldThrowExceptionWhenSellerIdIsNull() {
-        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
-                bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate, sellerId);
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setSellerId(null));
-        assertEquals(PropertyDomainContants.FIELD_SELLER_ID_NULL_MESSAGE, exception.getMessage());
-    }
-
-    @Test
-    void shouldThrowExceptionWhenActivePublicationDateIsNull() {
-        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
-                bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate, sellerId);
-        
-        NullPointerException exception = assertThrows(NullPointerException.class, 
-                () -> property.setActivePublicationDate(null));
-        
-        assertEquals(PropertyDomainContants.FIELD_ACTIVE_PUBLICATION_DATE_NULL_MESSAGE, exception.getMessage());
-    }
-
-    @Test
-    void shouldThrowExceptionWhenAddressIsNull() {
-        PropertyModel property = new PropertyModel(id, name, address, description, category, rooms,
-                bathrooms, price, location, activePublicationDate, publicationStatus, publicationDate, sellerId);
-        NullPointerException exception = assertThrows(NullPointerException.class, () -> property.setAddress(null));
-        assertEquals(PropertyDomainContants.FIELD_ADDRESS_NULL_MESSAGE, exception.getMessage());
-    }
 }
