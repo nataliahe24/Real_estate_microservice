@@ -13,11 +13,7 @@ import org.mapstruct.ReportingPolicy;
 public interface CategoryDtoMapper {
     CategoryModel requestToModel(SaveCategoryRequest saveCategoryRequest);
 
-    default CategoryModel toCategoryModel(Long id) {return CategoryModel.builder().id(id).build();
-    }
-    default Long toCategoryId(CategoryModel categoryModel) {
-        return categoryModel.getId();
-    }
+  CategoryModel toCategoryModel(Long id);
 
     PageResult<CategoryResponse> modelListToResponseList(PageResult<CategoryModel> categories);
 }
