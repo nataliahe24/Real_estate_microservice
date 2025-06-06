@@ -16,15 +16,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -49,47 +46,47 @@ class VisitScheduleUseCaseTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         
-        // Preparar CityEntity mock
+
         CityEntity cityMock = Mockito.mock(CityEntity.class);
         when(cityMock.getId()).thenReturn(1L);
         when(cityMock.getName()).thenReturn("TestCity");
         
-        // Crear LocationModel
+
         LocationModel location = new LocationModel(1L, cityMock, "Centro");
         
-        // Crear CategoryModel
+
         CategoryModel category = new CategoryModel(1L, "Casa", "Residencial");
         
-        // Crear PropertyModel
+
         property = new PropertyModel(
-            propertyId,                     // id
-            "Casa Bonita",                 // name
-            "Calle Principal 123",         // address
-            "Hermosa casa en buen barrio", // description
-            category,                      // category
-            3,                             // rooms
-            2,                             // bathrooms
-            new BigDecimal("250000"),      // price
-            location,                      // location
-            LocalDate.now(),               // activePublicationDate
-            null,                          // publicationStatus
-            LocalDate.now(),               // publicationDate
-            sellerId                       // sellerId
+            propertyId,
+            "Casa Bonita",
+            "Calle Principal 123",
+            "Hermosa casa en buen barrio",
+            category,
+            3,
+            2,
+            new BigDecimal("250000"),
+            location,
+            LocalDate.now(),
+            null,
+            LocalDate.now(),
+            sellerId
         );
         
-        // Crear VisitScheduleModel
+
         LocalDateTime startDate = LocalDateTime.now().plusDays(1);
         LocalDateTime endDate = startDate.plusHours(2);
         visitSchedule = new VisitScheduleModel(
-            null,       // id
-            sellerId,   // sellerId
-            property,   // property
-            startDate,  // startDate
-            endDate,    // endDate
-            0           // scheduledBuyers
+            null,
+            sellerId,
+            property,
+            startDate,
+            endDate,
+            0
         );
         
-        // Configurar mocks
+
         when(propertyPersistencePort.findById(propertyId)).thenReturn(Optional.of(property));
         
         List<VisitScheduleModel> schedulesByProperty = Collections.singletonList(visitSchedule);
@@ -111,10 +108,10 @@ class VisitScheduleUseCaseTest {
 
     @Test
     void createSchedule_validData_shouldSaveAndReturnSchedule() {
-        // Act
+
         VisitScheduleModel result = visitScheduleUseCase.createSchedule(visitSchedule);
         
-        // Assert
+
         assertNotNull(result);
         verify(propertyPersistencePort).findById(property.getId());
         verify(visitSchedulePersistencePort).save(visitSchedule);
@@ -122,17 +119,17 @@ class VisitScheduleUseCaseTest {
     
     @Test
     void createSchedule_nonExistingProperty_shouldThrowPropertyNotFoundException() {
-        // Arrange
+
         when(propertyPersistencePort.findById(propertyId)).thenReturn(Optional.empty());
         
-        // Act & Assert
+
         assertThrows(PropertyNotFoundException.class, () -> visitScheduleUseCase.createSchedule(visitSchedule));
         verify(visitSchedulePersistencePort, never()).save(any());
     }
     
     @Test
     void createSchedule_unauthorizedSeller_shouldThrowUnauthorizedSellerException() {
-        // Arrange
+
         Long differentSellerId = 999L;
         PropertyModel propertyWithDifferentSeller = new PropertyModel(
             propertyId,
@@ -147,22 +144,22 @@ class VisitScheduleUseCaseTest {
             LocalDate.now(),
             null,
             LocalDate.now(),
-            differentSellerId  // Otro vendedor
+            differentSellerId
         );
         
         when(propertyPersistencePort.findById(propertyId)).thenReturn(Optional.of(propertyWithDifferentSeller));
         
-        // Act & Assert
+
         assertThrows(UnauthorizedSellerException.class, () -> visitScheduleUseCase.createSchedule(visitSchedule));
         verify(visitSchedulePersistencePort, never()).save(any());
     }
     
     @Test
     void getSchedulesByPropertyId_shouldReturnSchedulesForProperty() {
-        // Act
+
         List<VisitScheduleModel> result = visitScheduleUseCase.getSchedulesByPropertyId(propertyId);
         
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.size());
         verify(visitSchedulePersistencePort).findByPropertyId(propertyId);
@@ -170,10 +167,10 @@ class VisitScheduleUseCaseTest {
     
     @Test
     void getSchedulesBySellerId_shouldReturnSchedulesForSeller() {
-        // Act
+
         List<VisitScheduleModel> result = visitScheduleUseCase.getSchedulesBySellerId(sellerId);
         
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.size());
         verify(visitSchedulePersistencePort).findBySellerId(sellerId);
@@ -181,10 +178,10 @@ class VisitScheduleUseCaseTest {
     
     @Test
     void getSchedules_shouldReturnPaginatedSchedules() {
-        // Act
+
         PageResult<VisitScheduleModel> result = visitScheduleUseCase.getSchedules(0, 10);
         
-        // Assert
+
         assertNotNull(result);
         assertEquals(1, result.getTotalElements());
         assertEquals(0, result.getPage());

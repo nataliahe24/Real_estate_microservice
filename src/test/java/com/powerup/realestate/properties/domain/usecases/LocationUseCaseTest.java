@@ -1,4 +1,4 @@
-package com.powerup.realestate.location.domain.usecases;
+package com.powerup.realestate.properties.domain.usecases;
 
 import com.powerup.realestate.properties.domain.model.LocationModel;
 import com.powerup.realestate.properties.domain.ports.in.CityServicePort;
@@ -7,7 +7,6 @@ import com.powerup.realestate.properties.domain.utils.page.PageResult;
 import com.powerup.realestate.properties.infrastructure.entities.CityEntity;
 import com.powerup.realestate.properties.infrastructure.entities.DepartmentEntity;
 import com.powerup.realestate.properties.infrastructure.entities.LocationEntity;
-import com.powerup.realestate.properties.domain.usecases.LocationUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
