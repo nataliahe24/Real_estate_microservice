@@ -22,10 +22,6 @@ public class BuyerVisitController {
     private final BuyerVisitService buyerVisitService;
     
     @PostMapping("/")
-    @Operation(
-            summary = "Agendar una visita de comprador",
-            security = @SecurityRequirement(name = "bearerAuth")
-    )
     public ResponseEntity<SaveScheduleBuyerResponse> scheduleBuyerVisit(
             @Valid @RequestBody ScheduleBuyerVisitRequest request) {
         return ResponseEntity
