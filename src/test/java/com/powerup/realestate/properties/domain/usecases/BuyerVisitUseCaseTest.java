@@ -16,6 +16,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -144,5 +145,22 @@ class BuyerVisitUseCaseTest {
 
         assertThrows(MaxVisitException.class,
                 () -> buyerVisitUseCase.scheduleBuyerVisit(buyerVisit));
+    }
+    
+    @Test
+    void getBuyerVisitsBySellerId_ShouldReturnVisitsForSeller() {
+        // Given
+        Long sellerId = 1L;
+        List<BuyerVisitModel> expectedVisits = List.of(buyerVisit);
+        when(buyerVisitPersistencePort.findBySellerId(sellerId)).thenReturn(expectedVisits);
+        
+        // When
+        List<BuyerVisitModel> result = buyerVisitUseCase.getBuyerVisitsBySellerId(sellerId);
+        
+        // Then
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals(buyerVisit, result.get(0));
+        verify(buyerVisitPersistencePort).findBySellerId(sellerId);
     }
 } 

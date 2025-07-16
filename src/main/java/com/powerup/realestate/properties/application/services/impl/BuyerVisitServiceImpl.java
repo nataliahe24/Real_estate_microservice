@@ -4,6 +4,7 @@ import com.powerup.realestate.commons.configurations.utils.Constants;
 import com.powerup.realestate.properties.application.dto.request.ScheduleBuyerVisitRequest;
 import com.powerup.realestate.properties.application.dto.response.SaveScheduleBuyerResponse;
 import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerVisitResponse;
+import com.powerup.realestate.properties.application.dto.response.SellerBuyerVisitResponse;
 import com.powerup.realestate.properties.application.mappers.BuyerVisitDtoMapper;
 import com.powerup.realestate.properties.application.services.BuyerVisitService;
 import com.powerup.realestate.properties.domain.model.BuyerVisitModel;
@@ -62,5 +63,30 @@ public class BuyerVisitServiceImpl implements BuyerVisitService {
     @Transactional
     public void cancelBuyerVisit(Long visitId) {
         buyerVisitServicePort.cancelBuyerVisit(visitId);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<SellerBuyerVisitResponse> getBuyerVisitsBySellerId(Long sellerId) {
+        List<BuyerVisitModel> visits = buyerVisitServicePort.getBuyerVisitsBySellerId(sellerId);
+        return visits.stream()
+                .map(this::mapToSellerResponse)
+                .toList();
+    }
+    
+    private SellerBuyerVisitResponse mapToSellerResponse(BuyerVisitModel model) {
+        return new SellerBuyerVisitResponse(
+                model.getId(),
+                model.getBuyerEmail(),
+                model.getVisitSchedule().getId(),
+                model.getVisitSchedule().getProperty().getId(),
+                model.getVisitSchedule().getProperty().getName(),
+                model.getVisitSchedule().getProperty().getAddress(),
+                model.getVisitSchedule().getProperty().getLocation().getNeighborhood(),
+                model.getVisitSchedule().getProperty().getLocation().getCityName().getName(),
+                model.getVisitSchedule().getStartDate(),
+                model.getVisitSchedule().getEndDate(),
+                LocalDateTime.now()
+        );
     }
 } 

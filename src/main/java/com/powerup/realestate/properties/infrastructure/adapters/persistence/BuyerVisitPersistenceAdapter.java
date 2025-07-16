@@ -85,4 +85,10 @@ public class BuyerVisitPersistenceAdapter implements BuyerVisitPersistencePort {
     public void delete(Long visitId) {
         buyerVisitRepository.deleteVisitById(visitId);
     }
+    
+    @Override
+    public List<BuyerVisitModel> findBySellerId(Long sellerId) {
+        List<BuyerVisitEntity> entities = buyerVisitRepository.findBySellerId(sellerId);
+        return buyerVisitEntityMapper.toModelList(entities);
+    }
 } 

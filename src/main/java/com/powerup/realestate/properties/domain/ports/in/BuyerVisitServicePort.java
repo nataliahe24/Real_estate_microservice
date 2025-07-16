@@ -9,4 +9,5 @@ public interface BuyerVisitServicePort {
     List<BuyerVisitModel> getBuyerVisitsByEmail(String buyerEmail);
     void syncScheduledBuyersCounter(Long scheduleId);
     void cancelBuyerVisit(Long visitId);
+    List<BuyerVisitModel> getBuyerVisitsBySellerId(Long sellerId);
 } 

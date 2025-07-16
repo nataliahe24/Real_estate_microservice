@@ -3,6 +3,7 @@ package com.powerup.realestate.properties.infrastructure.endpoints.rest;
 import com.powerup.realestate.properties.application.dto.request.ScheduleBuyerVisitRequest;
 import com.powerup.realestate.properties.application.dto.response.SaveScheduleBuyerResponse;
 import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerVisitResponse;
+import com.powerup.realestate.properties.application.dto.response.SellerBuyerVisitResponse;
 import com.powerup.realestate.properties.application.services.BuyerVisitService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -29,14 +30,15 @@ public class BuyerVisitController {
                 .body(buyerVisitService.scheduleBuyerVisit(request));
     }
     
-    @GetMapping("/")
+    @GetMapping("/seller/{sellerId}")
     @Operation(
-            summary = "Obtener visitas",
+            summary = "Obtener visitas agendadas por vendedor",
+            description = "Lista todas las visitas agendadas para propiedades del vendedor especificado",
             security = @SecurityRequirement(name = "bearerAuth")
     )
-    public ResponseEntity<List<ScheduleBuyerVisitResponse>> getBuyerVisitsByScheduleId(
-            @RequestParam String buyerEmail) {
-        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsByEmail(buyerEmail));
+    public ResponseEntity<List<SellerBuyerVisitResponse>> getBuyerVisitsBySellerId(
+            @PathVariable Long sellerId) {
+        return ResponseEntity.ok(buyerVisitService.getBuyerVisitsBySellerId(sellerId));
     }
     
     @DeleteMapping("/cancel")

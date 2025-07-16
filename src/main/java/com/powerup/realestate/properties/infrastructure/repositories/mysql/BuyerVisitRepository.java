@@ -24,6 +24,10 @@ public interface BuyerVisitRepository extends JpaRepository<BuyerVisitEntity, Lo
     @Query("SELECT COUNT(b) FROM BuyerVisitEntity b WHERE b.visitSchedule.id = :scheduleId")
     int countByVisitScheduleId(@Param("scheduleId") Long scheduleId);
 
+    @Query("SELECT b FROM BuyerVisitEntity b " +
+           "WHERE b.visitSchedule.sellerId = :sellerId")
+    List<BuyerVisitEntity> findBySellerId(@Param("sellerId") Long sellerId);
+
     @Modifying
     @Query(value = "DELETE FROM buyer_visit_entity WHERE id = :visitId", nativeQuery = true)
     void deleteVisitById(@Param("visitId") Long visitId);

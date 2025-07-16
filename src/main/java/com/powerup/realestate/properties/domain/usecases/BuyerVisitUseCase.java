@@ -93,4 +93,9 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
             throw new InvalidEmailFormatException(INVALID_EMAIL_FORMAT_MESSAGE);
         }
     }
+    
+    @Override
+    public List<BuyerVisitModel> getBuyerVisitsBySellerId(Long sellerId) {
+        return buyerVisitPersistencePort.findBySellerId(sellerId);
+    }
 } 

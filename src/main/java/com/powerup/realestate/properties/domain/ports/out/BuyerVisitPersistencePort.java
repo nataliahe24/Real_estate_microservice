@@ -13,4 +13,5 @@ public interface BuyerVisitPersistencePort {
     int countByVisitScheduleId(Long visitScheduleId);
     Optional<BuyerVisitModel> findById(Long visitId);
     void delete(Long visitId);
+    List<BuyerVisitModel> findBySellerId(Long sellerId);
 } 
