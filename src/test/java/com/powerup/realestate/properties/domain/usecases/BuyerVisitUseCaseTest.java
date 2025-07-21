@@ -149,15 +149,15 @@ class BuyerVisitUseCaseTest {
     
     @Test
     void getBuyerVisitsBySellerId_ShouldReturnVisitsForSeller() {
-        // Given
+
         Long sellerId = 1L;
         List<BuyerVisitModel> expectedVisits = List.of(buyerVisit);
         when(buyerVisitPersistencePort.findBySellerId(sellerId)).thenReturn(expectedVisits);
         
-        // When
+
         List<BuyerVisitModel> result = buyerVisitUseCase.getBuyerVisitsBySellerId(sellerId);
         
-        // Then
+
         assertNotNull(result);
         assertEquals(1, result.size());
         assertEquals(buyerVisit, result.get(0));
