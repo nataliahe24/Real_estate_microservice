@@ -1,0 +1,16 @@
+package com.powerup.realestate.properties.application.services;
+
+import com.powerup.realestate.properties.application.dto.request.ScheduleBuyerVisitRequest;
+import com.powerup.realestate.properties.application.dto.response.SaveScheduleBuyerResponse;
+import com.powerup.realestate.properties.application.dto.response.ScheduleBuyerVisitResponse;
+import com.powerup.realestate.properties.application.dto.response.SellerBuyerVisitResponse;
+
+import java.util.List;
+
+public interface BuyerVisitService {
+    SaveScheduleBuyerResponse scheduleBuyerVisit(ScheduleBuyerVisitRequest request);
+    List<ScheduleBuyerVisitResponse> getBuyerVisitsByEmail(String buyerEmail);
+    void syncScheduledBuyersCounter(Long scheduleId);
+    void cancelBuyerVisit(Long visitId);
+    List<SellerBuyerVisitResponse> getBuyerVisitsBySellerId(Long sellerId);
+} 

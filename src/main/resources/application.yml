@@ -1,13 +1,21 @@
 server:
   port: 8090
 
+  security:
+    jwt:
+      key:
+        private: ${SECURITY_JWT_KEY_PRIVATE}
+        user-generator: ${SECURITY_JWT_KEY_USER_GENERATOR}
 spring:
   application:
     name: realestate
   datasource:
-    url: jdbc:mysql://localhost/realestate
+    url: jdbc:mysql://localhost:3306/realestate
     username: root
-    password:
+    password: admin
   jpa:
     hibernate:
       ddl-auto: update
+logging:
+  level:
+    root: debug
