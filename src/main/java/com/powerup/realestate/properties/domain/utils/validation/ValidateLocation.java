@@ -6,6 +6,7 @@ import com.powerup.realestate.properties.domain.model.LocationModel;
 import com.powerup.realestate.properties.domain.ports.out.LocationPersistencePort;
 
 public class ValidateLocation {
+
     private ValidateLocation() {
         throw new UnsupportedOperationException();
     }
