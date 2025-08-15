@@ -73,7 +73,7 @@ class CategoryUseCaseTest {
 
          Integer page = 1;
          Integer size = 2;
-         Integer totalElements = 3;
+         int totalElements = 3;
          boolean orderAsc = true;
          List<CategoryModel> categoryPaginationMock = List.of(categoryModel1, categoryModel2);
          PageResult<CategoryModel> pageResultMock = new PageResult<>(categoryPaginationMock, page, size, totalElements);
