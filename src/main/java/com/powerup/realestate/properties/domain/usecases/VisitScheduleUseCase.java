@@ -6,6 +6,7 @@ import com.powerup.realestate.properties.domain.model.VisitScheduleModel;
 import com.powerup.realestate.properties.domain.ports.out.PropertyPersistencePort;
 import com.powerup.realestate.properties.domain.ports.out.VisitSchedulePersistencePort;
 import com.powerup.realestate.properties.domain.utils.page.PageResult;
+import com.powerup.realestate.properties.domain.utils.validation.VisitScheduleValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,7 @@ public class VisitScheduleUseCase {
         validateSellerOwnsProperty(visitSchedule.getSellerId(), property);
         validateVisitDates(visitSchedule.getStartDate(), visitSchedule.getEndDate());
         validateSchedule(property, visitSchedule.getStartDate(), visitSchedule.getEndDate());
+        VisitScheduleValidation.validateVisitScheduleIsFuture(visitSchedulePersistencePort,visitSchedule.getId());
         
         visitSchedulePersistencePort.save(visitSchedule);
         return visitSchedule;

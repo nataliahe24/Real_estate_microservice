@@ -9,13 +9,16 @@ import java.time.LocalDateTime;
 
 public class VisitScheduleValidation {
 
+    private VisitScheduleValidation() {
+        throw new UnsupportedOperationException();
+    }
+
     public static void validateVisitScheduleIsFuture(VisitSchedulePersistencePort visitSchedulePersistencePort, Long scheduleId) {
-        visitSchedulePersistencePort.findById(scheduleId)
-                .ifPresent(schedule -> {
-                    LocalDateTime now = LocalDateTime.now();
-                    if (schedule.getStartDate().isBefore(now)) {
-                        throw new InvalidVisitScheduleException(VisitScheduleDomainConstants.SCHEDULE_INVALID);
-                    }
-                });
+        visitSchedulePersistencePort.findById(scheduleId).ifPresent(schedule -> {
+            LocalDateTime now = LocalDateTime.now();
+            if (schedule.getStartDate().isBefore(now)) {
+                throw new InvalidVisitScheduleException(VisitScheduleDomainConstants.SCHEDULE_INVALID);
+            }
+        });
     }
 } 
