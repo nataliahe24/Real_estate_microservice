@@ -5,6 +5,7 @@ import com.powerup.realestate.properties.domain.model.BuyerVisitModel;
 import com.powerup.realestate.properties.domain.ports.in.BuyerVisitServicePort;
 import com.powerup.realestate.properties.domain.ports.out.BuyerVisitPersistencePort;
 import com.powerup.realestate.properties.domain.ports.out.VisitSchedulePersistencePort;
+import com.powerup.realestate.properties.domain.utils.validation.VisitScheduleValidation;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Component;
@@ -61,6 +62,8 @@ public class BuyerVisitUseCase implements BuyerVisitServicePort {
         buyerVisitPersistencePort.save(buyerVisit);
         
         syncScheduledBuyersCounter(scheduleId);
+
+        VisitScheduleValidation.validateVisitScheduleIsFuture(visitSchedulePersistencePort,scheduleId);
     }
     
     @Override
