@@ -1,4 +1,4 @@
-package com.powerup.realestate.properties.domain.utils.validation;
+package com.powerup.realestate.properties.domain.utils.scheduler;
 
 import com.powerup.realestate.properties.domain.model.PropertyModel;
 import com.powerup.realestate.properties.domain.ports.out.PropertyPersistencePort;

@@ -1,6 +1,6 @@
 package com.powerup.realestate.properties.domain.utils;
 import com.powerup.realestate.properties.domain.ports.out.PropertyPersistencePort;
-import com.powerup.realestate.properties.domain.utils.validation.PublicationScheduler;
+import com.powerup.realestate.properties.domain.utils.scheduler.PublicationScheduler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
